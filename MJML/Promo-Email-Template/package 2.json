@@ -1,0 +1,20 @@
+{
+  "name": "corporate-master-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "mjml -r input.mjml -o index.html",
+    "changeBrand": "cd scripts && node changeBrand.mjs",
+    "build": "npm run changeBrand && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "handlebars": "^4.7.8"
+  },
+  "devDependencies": {
+    "mjml": "^4.15.3"
+  }
+}

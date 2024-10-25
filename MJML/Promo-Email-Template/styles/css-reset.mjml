@@ -1,0 +1,60 @@
+ <mj-style>
+         /*DARK MODE*/
+
+:root { 
+
+Color-scheme: light dark; 
+
+supported-color-schemes:light dark; 
+
+} 
+      /*CSS RESET*/
+        span.MsoHyperlink {
+          color: inherit !important;
+          mso-style-priority: 99 !important;
+          }
+        span.MsoHyperlinkFollowed {
+          color: inherit !important;
+          mso-style-priority: 99 !important;
+              }
+        /* normalise link attributes in Apple Mail / iOS Mail apps - to match the parent element */
+        #root [x-apple-data-detectors=true],
+        a[x-apple-data-detectors=true]{
+          color: inherit !important;
+          text-decoration: inherit !important;
+        }
+        /* normalise link attributes in Apple Mail / iOS Mail apps for the date calendar event- to match the parent element */
+        [x-apple-data-detectors-type="calendar-event"] {
+              color: inherit !important;
+              -webkit-text-decoration-color: inherit !important;
+        }
+        /* normalise link attributes in Gmail - to match the parent element. NOTE: Need to add class="body" to the body element and a DOCTYPE must be present. */
+        u + .body a {
+          color: inherit;
+          text-decoration: none;
+          font-size: inherit;
+          font-weight: inherit;
+          line-height: inherit;
+          }
+
+        .body {
+          word-wrap: normal;
+          word-spacing:normal;
+          }
+        /* centre email on Android 4.4 - margin reset */
+        div[style*="margin: 16px 0"] {
+          margin: 0!important;
+          }
+        /* revert all styles for LaPoste webmail */
+        #message *{
+          all:revert
+        }
+        /* outlook.com 'celebrations' highlight removal - this doesn't stop the animation, just the highlight and color */
+        [data-markjs]{
+          color:inherit;
+          padding:0;
+          background:none;
+        }
+
+
+  </mj-style>

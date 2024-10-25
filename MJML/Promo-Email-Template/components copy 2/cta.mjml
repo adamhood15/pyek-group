@@ -1,0 +1,8 @@
+ <!-- CTA -->
+ <mj-wrapper css-class="bg-white" padding="40px 40px 60px">
+  <mj-section padding="0px">
+    <mj-column padding="0px">
+        <mj-button padding="0px" href="http://onelink.to/xpxtfg" css-class="btn">Download and Save</mj-button>
+    </mj-column>
+  </mj-section>
+  </mj-wrapper>

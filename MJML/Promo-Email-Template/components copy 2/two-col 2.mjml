@@ -1,0 +1,18 @@
+<!-- 2 columns section - text then image-->
+<mj-wrapper css-class="bg-white" padding="40px 0px ">
+  <mj-section direction="rtl" padding="0px">
+    <mj-column vertical-align="top" padding="0px" css-class="no-stack-outlook two-col-img">
+      <mj-image css-class="two-column-hero" padding="0" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/Corporate/COE%20Newsletter/2024/February/CON-EV-Charger-minified.jpg" alt="EV Charger" />
+    </mj-column>
+    <mj-column css-class="col_padding no-stack-outlook" vertical-align="top" padding="0px">
+      <!--Paragraph Text-->
+      <mj-text padding="15px 25px 0px" css-class="head3 title-style align-center mobile-col-title-p">
+        Charge Up at Conoco<sup>&reg;</sup>
+      </mj-text>
+      <!--Paragraph Text-->
+      <mj-text padding="15px 25px" css-class="head4 txt-dark align-left mobile-col-copy-p">
+        In January, the Conoco brand went live with its first pair of branded chargers. Located at a site in Center, Colorado, these ultrafast EV chargers can provide up to 200 miles of range in just 15 minutes. The site provides a convenient location to charge EVs for locals and road trippers alike.
+      </mj-text>
+    </mj-column>
+  </mj-section>
+</mj-wrapper>

@@ -1,0 +1,15 @@
+<mj-section padding="0px">
+  <mj-column padding="0px">
+    <mj-text align="right" padding="10px" css-class="head7 txt-dark">
+      Having trouble viewing this email? <a href="%%view_email_url%%" class="txt-color"> Click here.</a>
+    </mj-text>
+  </mj-column>
+  </mj-group>
+</mj-section>
+<mj-section padding="25px 0px" css-class="bg-white">
+  <mj-column>
+    <mj-image css-class="header-image-p66" href="https://www.phillips66gas.com/?utm_source=sfmc&utm_medium=email&utm_campaign=P66-0712-Labor-Day-Promo-Email-August24" width="263px" padding="0px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0634%20P66%20Cardinals%20Ticket%20Promo%20Email/P66-header-logo.png" alt="Phillips 66&reg; - GO GO GO" />
+    <mj-image href="https://www.76.com/?utm_source=sfmc&utm_medium=email&utm_campaign=P66-0712-Labor-Day-Promo-Email-August24" width="300px" padding="20px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0635%20Dodgers%20Tickets%20Promo/76-header-logo.png" alt="76&reg; - GO GO GO" />
+    <mj-image css-class="header-image-con" href="https://www.conoco.com/?utm_source=sfmc&utm_medium=email&utm_campaign=P66-0712-Labor-Day-Promo-Email-August24" width="400px" padding="30px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0710%20Cinco%20de%20Mayo%20Email/Conoco_GOGOGO_red-min.png" alt="Conoco&reg; GO GO GO" />
+  </mj-column>
+</mj-section>

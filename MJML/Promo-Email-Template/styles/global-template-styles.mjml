@@ -1,0 +1,541 @@
+<mj-style>
+  @font-face {
+  font-family: 'Gotham';
+  src: url("https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/Corporate/gotham-ssm-bold.otf") format("opentype");
+  font-weight: bolder;
+  font-style: normal;
+  }
+  @font-face {
+  font-family: 'Gotham';
+  src: url("https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/Corporate/gotham-ssm-medium.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+  }
+
+  @font-face {
+  font-family: 'Gotham';
+  src: url("https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/Corporate/gotham-ssm-book.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  }
+  @font-face {
+  font-family: 'Gotham';
+  src: url("https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/Corporate/gotham-ssm-light.otf") format("opentype");
+  font-weight: lighter;
+  font-style: normal;
+  }
+
+  body{
+  background-color: #EBECEE !important;
+  }
+
+
+  /* DARK MODE QUERIES*/
+  @media (prefers-color-scheme: light ) {
+  body{
+  background-color: #EBECEE !important;
+  }
+  .bg-body{
+  background-color: #EBECEE !important;
+  }
+
+  [data-ogsc] .bg-body{background-color: #EBECEE !important;}
+
+  .bg-header{
+  background-color: #ffffff !important;
+  }
+
+  [data-ogsc] .bg-header{background-color: #ffffff !important;}
+
+  .bg-con > table {
+  background: #ed1b2d !important;
+  background-color: #ed1b2d !important;
+  }
+  [data-ogsc] .bg-con > table {background: #ed1b2d !important;
+  background-color: #ed1b2d !important;}
+
+
+
+  .bg-blue > table {
+  background: #003893 !important;
+  background-color: #003893 !important;
+  }
+  [data-ogsc] .bg-blue > table{background: #003893 !important;
+  background-color: #003893 !important;}
+
+
+
+
+  .bg-white > table {
+  background: white !important;
+  background-color: white !important;
+  }
+  [data-ogsc] .bg-white > table{background: white !important;
+  background-color: white !important;}
+
+  .btn > table > tbody > tr > td {
+  background-color: white !important;
+  background: white !important;
+  }
+
+  [data-ogsc] .btn > table > tbody > tr > td {
+  background-color: white !important;
+  background: white !important;
+  }
+
+  .bg-footer > table {
+  background: #262626 !important;
+  background-color: #262626 !important;
+  }
+  [data-ogsc] .bg-footer > table{background: #262626!important;
+  background-color: #262626 !important;}
+
+
+
+  .bg-black > div > table {
+  background: #262626 !important;
+  background-color:#262626 !important;
+  }
+  [data-ogsc] .bg-black > div > table {background: #262626!important;
+  background-color: #262626 !important;}
+
+  .bg-gray > table {
+  background: #f8f9fa !important;
+  background-color: #f8f9fa !important;
+  }
+  [data-ogsc] .bg-gray > table { background: #f8f9fa !important;
+  background-color: #f8f9fa !important;}
+
+  .txt-dark,
+  .txt-dark > div{
+  color: #1E1E1E !important;
+  }
+  [data-ogsc] .txt-dark,
+  [data-ogsc] .txt-dark > div
+  {color: #1E1E1E!important;}
+
+  .txt-dark.special,
+  .txt-dark.special > div{
+  color: white !important;
+  }
+  [data-ogsc] .txt-dark.special,
+  [data-ogsc] .txt-dark.special > div
+  {color: white !important;}
+
+
+  .txt-light.special,
+  .txt-light.special > div{
+  color: white !important;
+  }
+  [data-ogsc] .txt-light.special,
+  [data-ogsc] .txt-light.special > div
+  {color: white !important;}
+
+  .txt-red,
+  .txt-red > div{
+  color: #ed1c24 !important;
+  }
+  [data-ogsc] .txt-red,
+  [data-ogsc] .txt-red > div
+  {color: #ed1c24 !important;}
+
+
+  .txt-cardinal,
+  .txt-cardinal > div{
+  color: #EE3E42 !important;
+  }
+
+  [data-ogsc] .txt-cardinal,
+  [data-ogsc] .txt-cardinal > div
+  {color: #EE3E42 !important;}
+
+
+
+
+  .txt-76,
+  .txt-76 > div{
+  color: #F16639 !important;
+  }
+  [data-ogsc] .txt-76,
+  [data-ogsc] .txt-76 > div
+  {color: #F16639!important;}
+
+
+
+
+  }
+  @media (prefers-color-scheme: dark ) {
+
+  .bg-body{
+  background-color: #262626 !important;
+  }
+  [data-ogsc] .bg-body{ background-color: #262626 !important;}
+
+  .bg-header{
+  background-color: #000000 !important;
+  }
+
+  [data-ogsc] .bg-header{background-color: #000000 !important;}
+
+  .bg-p66 > table {
+  background: #ed1c24 !important;
+  background-color: #ed1c24 !important;
+  }
+  [data-ogsc] .bg-p66 > table{background: #ed1c24 !important;
+  background-color: #ed1c24 !important;}
+
+  .bg-76 > table {
+  background: #F16639 !important;
+  background-color: #F16639 !important;
+  }
+  [data-ogsc] .bg-76 > table{background: #F16639 !important;
+  background-color: #F16639 !important;}
+
+  .bg-blue > table {
+  background: #003893 !important;
+  background-color: #003893 !important;
+  }
+  [data-ogsc] .bg-blue > table{background: #003893 !important;
+  background-color: #003893 !important;}
+
+.bg-con > table {
+  background: #ed1b2d !important;
+  background-color: #ed1b2d !important;
+  }
+  [data-ogsc] .bg-con > table {background: #ed1b2d !important;
+  background-color: #ed1b2d !important;}
+
+
+
+  .bg-white > table{
+  background: #000000 !important;
+  background-color: #000000 !important;
+  }
+  [data-ogsc] .bg-white > table{ background: #000000 !important;
+  background-color: #000000 !important;}
+
+  .btn > table > tbody > tr > td {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  }
+
+  [data-ogsc] .btn > table > tbody > tr > td {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  }
+
+  .bg-black > div > table {
+  background: #262626 !important;
+  background-color: #262626!important;
+  }
+  [data-ogsc] .bg-black > div > table { background: #262626 !important;
+  background-color: #262626 !important;}
+
+  .bg-footer > table {
+  background: #262626 !important;
+  background-color: #262626 !important;
+  }
+  [data-ogsc] .bg-footer > table{background: #262626!important;
+  background-color: #262626 !important;}
+
+
+
+  .bg-gray > table{
+  background: #2b2b2b !important;
+  background-color: #2b2b2b !important;
+  }
+  [data-ogsc] .bg-gray > table { background: #2b2b2b !important;
+  background-color: #2b2b2b !important;}
+
+  .txt-dark,
+  .txt-dark > div{
+  color: white !important;
+  }
+  [data-ogsc] .txt-dark,
+  [data-ogsc] .txt-dark > div
+  {color: white !important;}
+
+  .txt-red,
+  .txt-red > div{
+  color: #ed1c24 !important;
+  }
+  [data-ogsc] .txt-red,
+  [data-ogsc] .txt-red > div
+  {color: #ed1c24 !important;}
+
+  .txt-76,
+  .txt-76 > div{
+  color: #F16639 !important;
+  }
+  [data-ogsc] .txt-76,
+  [data-ogsc] .txt-76 > div
+  {color: #F16639!important;}
+
+
+
+  .tc-link{
+  color: #ffffff !important;
+  text-decoration: underline !important;
+  }
+  .btn-white > table> tbody > tr > td {
+  background: white !important;
+  }
+  }
+
+
+  @media only screen and (min-width: 480px) {
+  /* FONT QUERIES*/
+  .head1 > div{
+  font-size: 36px !important;
+  }
+  .head1-76 > div {
+  font-size: 36px !important;
+  line-height: 44px !important;
+  }
+  .head2 > div{
+  font-size: 32px
+  }
+  .head3 > div{
+  font-size: 24px
+  }
+  .head4 > div{
+  font-size: 22px
+  }
+  .head5 > div{
+  font-size: 16px
+  }
+  .head6 > div{
+  font-size: 14px
+  }
+
+
+
+  }
+
+
+  @media all and (max-width: 480px) {
+
+
+  .w-padding > div > table > tbody > tr > td,
+  .w-padding > table > tbody > tr > td{
+  padding: 20px 30px !important;
+  }
+
+  .w-padding-large > div > table > tbody > tr > td,
+  .w-padding-large > table > tbody > tr > td{
+  padding: 40px 30px !important;
+  }
+
+  .col-padding > table > tbody > tr > td {
+  padding: 20px 20px !important;
+  }
+
+  .mobile-clear > table > tbody> tr > td{
+  padding: 0px !important;
+  }
+
+  .headline-clear {
+  padding: 0px !important;
+  }
+
+  .mobile-p-40 > table > tbody > tr > td {
+    padding: 40px !important;
+  }
+
+  .mobile-px10 > table > tbody> tr > td{
+  padding: 10px 0px !important;
+  }
+
+  .mobile-pt20 > table > tbody> tr > td{
+  padding: 20px !important;
+  }
+
+  .mobile-pb35 > table > tbody> tr > td{
+  padding: 0px 0px 35px 0px !important;
+  }
+
+  .mobile-py15 > table > tbody> tr > td{
+  padding: 15px 0px !important;
+  }
+
+  .mobile-py20 > table > tbody> tr > td{
+  padding: 20px 0px !important;
+  }
+
+  .mobile-pt20 > table > tbody> tr > td{
+  padding: 20px 0px 0px 0px !important;
+  }
+
+  .mobile-stores {
+  padding: 7px 2px !important;
+  }
+  .mobile-stores.last {
+  padding: 7px 2px 15px 2px !important;
+  }
+
+  .mobile-border{
+  width: 100% !important;
+  padding: 0 0 15px 0
+  }
+
+  .mobile-border > table{
+  border: none !important;
+  }
+
+  .no-stack-outlook,
+  .no-stack-outlook-60,
+  .no-stack-outlook-40,
+  .no-stack-outlook-30,
+  .no-stack-outlook-45,
+  .no-stack-outlook-55{
+  width: 100% !important;
+  }
+
+  .no-stack-outlook-45 > table > tbody > tr > td {
+  padding: 0px !important;
+  padding-top: 20px !important
+  }
+
+
+  .mobile-social{
+  width: 15% !important;
+  }
+  .mobile-social.clear{
+  width: 0% !important;
+  }
+
+  .mobile-social > table > tbody> tr > td > table > tbody> tr > td{
+  width: 30px !important;
+
+  }
+
+  .mobile-center> div,
+  .callout > div{
+  text-align: center !important;
+  }
+
+  .callout {
+  padding: 35px 20px !important;
+
+  }
+
+  .head1 > div{
+  font-size: 30px !important;
+  line-height: 38px !important;
+  }
+
+
+
+
+  .primary {
+  padding: 40px 0px 40px 20px !important;
+  }
+
+  td.btn.primary {
+  padding: 40px 20px 40px 20px !important;
+  }
+
+  .list-align > div {
+  text-align: center;
+  }
+
+  .mobile-col-title-p {
+    padding: 40px 40px 0px !important;
+  }
+
+  .mobile-col-copy-p {
+    padding: 20px 40px 0px !important;
+  }
+
+
+  }
+
+  @media all and (max-width: 390px) {
+  .head1 > div{
+  font-size: 30px !important;
+  }
+
+  .head1-76 > div {
+  font-size: 30px !important;
+  line-height: 38px !important;
+  }
+
+  .head1-97 > div {
+  font-size: 30px !important;
+  line-height: 38px !important;
+  }
+
+  }
+
+  @media screen and (max-width: 480px) {
+  u + .body .no-stack-outlook{
+  width: 100% !important;
+  }
+  u + .body .no-stack-outlook-60{
+  width: 100% !important;
+  }
+  u + .body .no-stack-outlook-40{
+  width: 100% !important;
+  }
+  }
+
+  /* EOA code for hiding and displaying fallbacks if necessary*/
+        .video-wrapper {
+            display: none;
+        }
+
+        @media (-webkit-min-device-pixel-ratio: 0) and (min-device-width:1024px) {
+            .video-wrapper {
+                display: block !important;
+            }
+
+            .video-fallback {
+                display: none !important;
+            }
+        }
+
+        @supports (-webkit-overflow-scrolling:touch) and (color:#ffffffff) {
+            div[class^=video-wrapper] {
+                display: block !important;
+            }
+
+            div[class^=video-fallback] {
+                display: none !important;
+            }
+        }
+
+        #MessageViewBody .video-wrapper {
+            display: block !important;
+        }
+
+        #MessageViewBody .video-fallback {
+            display: none !important;
+        }
+        /* Targets outlook.com */
+        [class~="x_video-wrapper"] {
+            display: none !important;
+        }
+
+        [class~="x_video-fallback"] {
+            display: block !important;
+        }
+
+        /* Targets outlook on android and mac */
+        #converted-body .video-wrapper {
+            display: none !important;
+            }
+
+            #converted-body .video-fallback {
+            display: block !important;
+            }
+</mj-style>
+<mj-style>
+/* Targets samsung email with microsoft account */
+    # #MessageViewBody .video-wrapper {
+    display: none !important;
+    }
+
+    # #MessageViewBody .video-fallback {
+    display: block !important;
+    }
+</mj-style>
