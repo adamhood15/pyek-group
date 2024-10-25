@@ -1,9 +1,0 @@
-
-<mj-wrapper css-class="bg-white mobile-p-40" padding="60px 40px 40px">
-  <mj-section padding="0px">
-    <mj-column padding="0px">
-      <mj-text css-class="head1 title-style align-center" padding="0 0 30px 0">The More You Stack, The More You Save</mj-text>
-      <mj-text css-class="head4 txt-dark align-center" padding="0 ">Fuel up for less when you pay with the <span style="white-space:nowrap">Fuel Forward<span style="font-size:.6em;vertical-align:5px">&trade;</span> App.</span> Stack a First Time Discount with the Every Day Savings. Maybe pay with Direct Pay or a Phillips 66<span style="font-size:.6em;vertical-align:5px">&reg;</span>, Conoco<span style="font-size:.6em;vertical-align:5px">&reg;</span> or 76<span style="font-size:.6em;vertical-align:5px">&reg;</span> credit card to stack even more and make your fuel price go low. Promos vary from day to day, so stay tuned for what you can stack and when. Download the app, set up your payment method and start stacking discounts today! Terms and conditions apply.</mj-text>
-    </mj-column>
-  </mj-section>
-</mj-wrapper>
