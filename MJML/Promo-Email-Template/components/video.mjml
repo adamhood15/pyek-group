@@ -1,0 +1,38 @@
+<mj-section padding="0px" css-class="bg-white">
+  <mj-column padding="0px">
+    <mj-raw>
+      <!-- VIDEO SECTION-->
+      <tr>
+        <td width="100%" height="auto" style="width: 100%;height: auto;background-image:url('https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0802%20Fuel%20Forward%20Email/poster.png')">
+          <!-- hero text -->
+          <!--[if !mso]><!-->
+          <div class="video-wrapper" style="display:none;mso-hide:all;overflow:hidden;">
+            <center>
+              <video style="text-decoration:none;line-height:0;font-size:1px;display:block;width:100%;height: auto;" width="100%" height="auto" controls="controls" poster="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0802%20Fuel%20Forward%20Email/poster.png" src="https://www.youtube.com/watch?v=wg0dctCJsTM" align="center" bgcolor="">
+                <!-- fallback 1 -->
+                <a href="https://www.youtube.com/watch?v=wg0dctCJsTM" target="_blank">
+                  <img style="text-decoration:none;line-height:0;font-size:1px;display:block!important;width:100%;height:auto;" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0802%20Fuel%20Forward%20Email/poster.png" width="100%" height="auto" alt="Play Video" border="0"></a>
+              </video>
+            </center>
+          </div>
+          <!--<![endif]-->
+          <!-- fallback section -->
+          <!--[if mso]>
+               <div class="video-fallback" style="display: block;">
+               <a href="https://www.youtube.com/watch?v=wg0dctCJsTM" target="_blank">
+                    <img class="video-fallback" style="text-decoration: none; line-height: 0; font-size: 1px; display: block; width: 100%; height: auto;"
+                         src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0802%20Fuel%20Forward%20Email/poster.png"
+                         width="100%" height="auto" alt="Play the Video" border="0">
+               </a>
+               </div>
+               <![endif]-->
+          <!--[if mso]><!-->
+          <div class="video-fallback" style="display: block;">
+            <a href="https://www.youtube.com/watch?v=wg0dctCJsTM" target="_blank"><img class="video-fallback" style="text-decoration:none;line-height:0;font-size:1px;display:block;width:100%;height: auto;" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0802%20Fuel%20Forward%20Email/poster.png" width="100%" height="auto" alt="Play the Video" border="0"></a>
+          </div>
+          <!--<![endif]-->
+        </td>
+      </tr>
+    </mj-raw>
+  </mj-column>
+</mj-section>

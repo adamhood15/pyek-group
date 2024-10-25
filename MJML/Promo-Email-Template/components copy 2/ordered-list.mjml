@@ -1,0 +1,52 @@
+<mj-wrapper css-class="bg-white" padding="40px 60px">
+  <mj-section padding="0px " css-class="display-show">
+    <mj-column padding="0px" width="10%" css-class="col-10">
+      <mj-text align="center" padding="0px 0 0 0" css-class="txt-color txt-bold align-center mobile_pt20 head4  ">
+        1.
+      </mj-text>
+    </mj-column>
+    <mj-column padding="0px" width="90%" css-class="col-90">
+      <mj-text align="left" font-weight="normal" padding="0px 0 0 0" css-class="txt-dark mobile_pt20 head4 ordered-list-1">Open your phone download the app, never look back.</mj-text>
+    </mj-column>
+  </mj-section>
+  <mj-section padding="0px 0px" css-class="display-show">
+    <mj-column padding="0px" width="10%" css-class="col-10">
+      <mj-text align="center" padding="30px 0 0 0" css-class="txt-color txt-bold align-center mobile_pt20 head4  ">
+        2.
+      </mj-text>
+    </mj-column>
+    <mj-column padding="0px" width="90%" css-class="col-90">
+      <mj-text align="left" font-weight="normal" padding="30px 0 0 0" css-class="txt-dark mobile_pt20 head4 ordered-list-2">Download the app</mj-text>
+    </mj-column>
+  </mj-section>
+  <mj-section padding="0px 0px" css-class="display-show">
+    <mj-column padding="0px" width="10%" css-class="col-10">
+      <mj-text align="center" padding="30px 0 0 0" css-class="txt-color txt-bold align-center mobile_pt20 head4 ">
+        3.
+      </mj-text>
+    </mj-column>
+    <mj-column padding="0px" width="90%" css-class="col-90">
+      <mj-text align="left" font-weight="normal" padding="30px 0 0 0" css-class="txt-dark mobile_pt20 head4 ordered-list-3">Consider your life choices</mj-text>
+    </mj-column>
+  </mj-section>
+  <mj-section padding="0px 0px" css-class="display-show">
+    <mj-column padding="0px" width="10%" css-class="col-10">
+      <mj-text align="center" padding="30px 0 0 0" css-class="txt-color txt-bold align-center mobile_pt20 head4 ">
+        4.
+      </mj-text>
+    </mj-column>
+    <mj-column padding="0px" width="90%" css-class="col-90">
+      <mj-text align="left" font-weight="normal" padding="30px 0 0 0" css-class="txt-dark mobile_pt20 head4 ordered-list-4">Buy gas</mj-text>
+    </mj-column>
+  </mj-section>
+  <mj-section padding="0px 0px" css-class="display-show">
+    <mj-column padding="0px" width="10%" css-class="col-10">
+      <mj-text align="center" padding="30px 0 0 0" css-class="txt-color txt-bold align-center mobile_pt20 head4 ">
+        5.
+      </mj-text>
+    </mj-column>
+    <mj-column padding="0px 0px 0px 0px" width="90%" css-class="col-90">
+      <mj-text align="left" font-weight="normal" padding="30px 0 0 0" css-class="txt-dark mobile_pt20 head4 ordered-list-5">Have a mid-life crisis</mj-text>
+    </mj-column>
+  </mj-section>
+</mj-wrapper>

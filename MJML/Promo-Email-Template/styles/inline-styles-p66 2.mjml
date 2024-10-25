@@ -1,0 +1,59 @@
+ <mj-style inline="inline">
+ 
+   .title-style > div {
+   font-family: 'Gotham', 'Open Sans', Calibri, sans-serif !important;
+   font-weight: 700 !important;
+   color: #ed1c24 !important;
+   }
+
+   a{
+   color: #ed1c24;
+   }
+
+   .bg-color-footer > table{
+   background: #262626;
+   background-color: #262626
+   }
+
+  .txt-color,
+   .txt-color > div,
+   .a-color > div > a{
+   color: #ed1c24 !important;
+   }
+
+   /*Button classes*/
+   .btn > table > tbody > tr > td > a {
+   background-color: #ed1c24 !important;
+   font: 700 18px/22px 'Gotham', Arial, Helvetica Neue, Helvetica, sans-serif !important;
+   color: #ffffff !important;
+   border-radius: 8px !important;
+   padding: 16px 35px !important;
+   }
+
+   .btn > table > tbody > tr > td {
+    background: #ed1c24 !important;
+    background-color: #ed1c24 !important;
+    border-radius: 8px !important;
+   }
+
+   /*Hides brand specific content*/
+   .header-image-76, 
+  .fb-76,
+  .insta-76,
+  .e-76,
+  .header-image-con, 
+  .fb-con,
+  .insta-con,
+  .e-con,
+  .header-image-p97, 
+  .ca-link {
+    display: none !important;
+    mso-hide: all !important;
+  } 
+
+.ca-link {
+    display: none !important;
+  }
+
+
+ </mj-style>

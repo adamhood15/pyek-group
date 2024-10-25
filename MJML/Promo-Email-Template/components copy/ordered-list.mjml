@@ -1,0 +1,67 @@
+<mj-wrapper css-class="bg-white" padding="0px 20px 30px 20px">
+ <mj-section padding="0px 20px 0px 20px">
+        <mj-column width="100%" css-class="no-stack-outlook-90">
+            <mj-text padding="0px"  css-class="txt-dark mobile_pt20 head4 left-align">
+                INSTRUCTIONS:
+            </mj-text>
+        </mj-column>
+        
+    </mj-section>
+    <mj-section padding="30px 20px 0px 20px">
+        <mj-column width="10%" css-class="no-stack-outlook-10">
+            <mj-text padding="0px" font-weight="bold"  css-class="align-center txt-orange mobile_pt20 head4" >
+                1. 
+            </mj-text>
+        </mj-column>
+        <mj-column width="90%" css-class="no-stack-outlook-90">
+            <mj-text padding="0px"  css-class="txt-dark mobile_pt20 head4 left-align">
+                Download the <span style="white-space:nowrap">Fuel Forward&trade; App.</span>
+            </mj-text>
+        </mj-column>
+    </mj-section>
+     <mj-section padding="30px 20px 0px 20px">
+        <mj-column width="10%" css-class="no-stack-outlook-10">
+            <mj-text padding="0px" font-weight="bold"  css-class="align-center txt-orange mobile_pt20 head4" >
+                2. 
+            </mj-text>
+        </mj-column>
+        <mj-column width="90%" css-class="no-stack-outlook-90">
+            <mj-text padding="0px"  css-class="txt-dark mobile_pt20 head4 left-align">
+                After filling up at a participating station, scroll horizontally through the deals on the <span style="white-space:nowrap">Fuel Forward&trade; App</span> home screen. 
+            </mj-text>
+        </mj-column>
+    </mj-section>
+     <mj-section padding="30px 20px 0px 20px">
+        <mj-column width="10%" css-class="no-stack-outlook-10">
+            <mj-text padding="0px" font-weight="bold"  css-class="align-center txt-orange mobile_pt20 head4" >
+                3. 
+            </mj-text>
+        </mj-column>
+        <mj-column width="90%" css-class="no-stack-outlook-90">
+            <mj-text padding="0px"  css-class="txt-dark mobile_pt20 head4 left-align">
+                Tap on the Dodger Pin deal. 
+            </mj-text>
+        </mj-column>
+    </mj-section>
+     <mj-section padding="30px 20px 0px 20px">
+        <mj-column width="10%" css-class="no-stack-outlook-10">
+            <mj-text padding="0px" font-weight="bold"  css-class="align-center txt-orange mobile_pt20 head4" >
+                4. 
+            </mj-text>
+        </mj-column>
+        <mj-column width="90%" css-class="no-stack-outlook-90">
+            <mj-text padding="0px"  css-class="txt-dark mobile_pt20 head4 left-align">
+                Follow the on-screen instructions to score your collectible Dodger Pin. 
+            </mj-text>
+        </mj-column>
+    </mj-section>
+     <mj-section padding="30px 20px 0px 20px">
+        <mj-column width="100%" css-class="no-stack-outlook-90">
+            <mj-text padding="0px"  css-class="txt-dark mobile_pt20 head4 left-align">
+                It’s the only drop in L.A. that’s not for blue checkmarks – only for true blue fans. 
+            </mj-text>
+        </mj-column>
+        
+    </mj-section>
+</mj-wrapper>
+

@@ -1,0 +1,79 @@
+<mj-wrapper padding="20px 40px" css-class=" bg-color-footer">
+  <!--APP STORES SECTION-->
+  <mj-section css-class="mobile-py15">
+    <mj-column>
+      <mj-text font-weight="bold" padding="5px 0px" css-class="head5 txt-light special align-center">
+        Start Saving With the Fuel Forward<span style="font-size:.6em;vertical-align:5px">TM</span> App
+      </mj-text>
+    </mj-column>
+  </mj-section>
+  <mj-section padding="0px" css-class="mobile-clear stores">
+    <mj-column css-class="no-stack-outlook" width="25%">
+      <mj-image css-class="mobile-stores" padding="10px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0600%20Big%20XII%20Activation%20Email/P66-0599-apple-store.png" href="https://apps.apple.com/us/app/fuel-forward/id922282104" alt="Apple App Store" />
+    </mj-column>
+    <mj-column css-class="no-stack-outlook" width="25%">
+      <mj-image css-class="mobile-stores last" padding="10px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0600%20Big%20XII%20Activation%20Email/P66-0599-google-play-store.png" alt="Google Play Store" href="https://play.google.com/store/apps/details?id=com.p66.b2c.stationfinder.p66" />
+    </mj-column>
+  </mj-section>
+  <!-- SOCIAL -->
+  <mj-section padding="30px 0px 0px 0px">
+    <mj-column border-right="1px solid #ffffff" vertical-align="middle" width="35%" css-class="mobile-border">
+      <mj-text font-weight="bold" padding="10px" css-class="head5 txt-light special mobile-center align-center">
+        Follow Us
+      </mj-text>
+    </mj-column>
+    <mj-column vertical-align="middle" width="5%" css-class="mobile-social clear">
+    </mj-column>
+    <mj-column vertical-align="middle" width="10%" css-class="mobile-social">
+      <mj-image css-class="mobile-stores fb-p66" padding="5px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0600%20Big%20XII%20Activation%20Email/P66-0599-facebook-white.png" href="https://www.facebook.com/Phillips66Gas" width="25px" alt="Facebook" />
+      <mj-image css-class="mobile-stores fb-76" padding="5px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0600%20Big%20XII%20Activation%20Email/P66-0599-facebook-white.png" href="https://www.facebook.com/76gas" width="25px" alt="Facebook" />
+      <mj-image css-class="mobile-stores fb-con" padding="5px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0600%20Big%20XII%20Activation%20Email/P66-0599-facebook-white.png" href="https://www.facebook.com/conoco" width="25px" alt="Facebook" />
+    </mj-column>
+    <mj-column vertical-align="middle" width="10%" css-class="mobile-social">
+      <mj-image css-class="mobile-stores insta-p66" padding="5px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0600%20Big%20XII%20Activation%20Email/P66-0599-instagram-white.png" href="https://www.instagram.com/phillips66gas" width="25px" alt="Instagram" />
+      <mj-image css-class="mobile-stores insta-76" padding="5px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0600%20Big%20XII%20Activation%20Email/P66-0599-instagram-white.png" href="https://www.instagram.com/76" width="25px" alt="Instagram" />
+      <mj-image css-class="mobile-stores insta-con" padding="5px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0600%20Big%20XII%20Activation%20Email/P66-0599-instagram-white.png" href="https://www.instagram.com/conoco" width="25px" alt="Instagram" />
+    </mj-column>
+    <mj-column vertical-align="middle" width="10%" css-class="mobile-social">
+      <mj-image css-class="mobile-stores" padding="5px" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0600%20Big%20XII%20Activation%20Email/P66-0599-youtube-white.png" href="https://www.youtube.com/@Phillips66Co/featured" width="25px" alt="Youtube" />
+    </mj-column>
+  </mj-section>
+  <!--DISCLAIMER-->
+  <mj-section padding="40px 0px 0px 0px">
+    <mj-column>
+      <mj-text font-weight="500" padding="6px 0px" css-class="txt-light special head7 align-center legal">*Save extra money</mj-text>
+      <mj-text css-class="txt-light special head7 align-center" font-weight="500" padding="6px 0px">
+        Phillips 66 Company &bull; 2331 CityWest Blvd, Houston, TX 77042
+      </mj-text>
+      <mj-text font-family="Arial,Helvetica Neue,Helvetica,sans-serif" css-class="txt-light special align-center head7" font-weight="500" padding="6px 0px">
+        Phillips 66<sup>&reg;</sup>, Conoco<sup>&reg;</sup>, 76<sup>&reg;</sup>, GO GO GO<span style="font-size:.6em;vertical-align:5px">TM</span> and Fuel Forward<span style="font-size:.6em;vertical-align:5px">TM</span> are trademarks owned by Phillips 66 Company. Other products and logos mentioned herein may be trademarks of their respective owners. &copy; 2024 Phillips 66 Company. All rights reserved.<br /><br />
+      </mj-text>
+      <mj-text css-class="txt-light special head7 align-center" font-weight="500" padding="6px 0px">
+        Don't forget to add <a href="mailto:enews@email.phillips66gas.com" class="txt-light special e-p66">enews@email.phillips66gas.com</a><a href="mailto:enews@email.conoco.com" class="txt-light special e-con">enews@email.conoco.com</a><a href="mailto:enews@email.76.com" class="txt-light special e-76">enews@email.76.com</a> to your safe senders list and keep an eye out for our updates.
+      </mj-text>
+      <mj-text css-class="txt-light special head7 align-center" font-weight="500" padding="6px 0px">
+        Not about the GO life? You just got here! Visit our <a href="%%=CloudPagesURL(4448)=%%" class="txt-light special">profile center</a> to unsubscribe or update your profile information.
+      </mj-text>
+      <mj-text css-class="txt-light special head7 align-center" font-weight="500" padding="6px 0px">
+        &copy;%%xtyear%% Phillips 66 Company. All rights reserved.
+      </mj-text>
+    </mj-column>
+  </mj-section>
+  <mj-section padding="10px 0px 20px 0px" css-class="mobile-clear">
+    <mj-column css-class="no-stack-outlook" width="25%">
+      <mj-text css-class="txt-light special head7 align-center" font-weight="500" padding="6px 10px">
+        <a href="https://www.phillips66.com/terms-and-conditions/?utm_source=sfmc&utm_medium=email&utm_campaign=P66-0780-happy-birthday" class="txt-white">Terms &amp; Conditions</a>
+      </mj-text>
+    </mj-column>
+    <mj-column css-class="no-stack-outlook" width="25%">
+      <mj-text css-class="txt-light special head7 align-center" font-weight="500" padding="6px 10px">
+        <a href="https://www.phillips66.com/privacy-statement/?utm_source=sfmc&utm_medium=email&utm_campaign=P66-0780-happy-birthday" class="txt-white">Privacy Statement</a>
+      </mj-text>
+    </mj-column>
+    <mj-column css-class="no-stack-outlook ca-link" width="25%">
+      <mj-text css-class="txt-light special head7 align-center" font-weight="500" padding="6px 0">
+        <a href="https://www.phillips66.com/california-transparency-in-supply-chains-disclosure/?utm_source=sfmc&utm_medium=email&utm_campaign=P66-0780-happy-birthday" class="txt-white">CA Transparency</a>
+      </mj-text>
+    </mj-column>
+  </mj-section>
+</mj-wrapper>

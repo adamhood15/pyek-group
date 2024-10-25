@@ -1,0 +1,40 @@
+<mj-wrapper css-class="padding-20" background-color="#d1d1d1">
+  <!--APP STORES SECTION-->
+ <mj-section>
+  <mj-column>
+        <mj-image css-class="g-img" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/p97/NoTransactionEmail/tribrand-lockup.png" alt="Phillips 66, Conoco and 76 logo" width="226px" padding="0 20px 20px 20px" />
+  </mj-column>
+ </mj-section>
+  <!--DISCLAIMER-->
+  <mj-section padding="0px 20px 0px 20px">
+    <mj-column>
+      <mj-text font-weight="500" padding="0 10px 6px 10px" css-class=" special head7 align-center" color="#000000">
+        *Save an extra 10¢ per gallon for using the <span style="white-space:nowrap">Fuel Forward<span style="font-size:.6em;vertical-align:5px">TM</span> App</span> plus the 5¢ off per gallon Everyday Savings offer (up to 30 gallons). Offer valid only from 9/2/2024 12:01AM CST to 9/2/2024 11:59PM CST. Participating locations only. Can be combined with other offers.
+        <br /><br />
+      </mj-text>
+      <mj-text css-class=" special head7 align-center" font-weight="500" padding="6px 10px" color="#000000">
+        Phillips 66 Company &bull; 2331 CityWest Blvd, Houston, TX 77042
+      </mj-text>
+      <mj-text font-family="Arial,Helvetica Neue,Helvetica,sans-serif" css-class=" special align-center head7" font-weight="500" padding="6px 10px" color="#000000">
+        Phillips 66<sup>&reg;</sup>, Conoco<sup>&reg;</sup>, 76<sup>&reg;</sup>, and Fuel Forward<span style="font-size:.6em;vertical-align:5px">TM</span> are trademarks owned by Phillips 66 Company. Other products and logos mentioned herein may be trademarks of their respective owners.
+      </mj-text>
+     
+    
+      <mj-text css-class=" special head7 align-center" font-weight="500" padding="6px 10px" color="#000000">
+        &copy;2024 Phillips 66 Company. All rights reserved.
+      </mj-text>
+    </mj-column>
+  </mj-section>
+  <mj-section padding="10px 100px 20px 100px" css-class="mobile-clear">
+    <mj-column css-class="no-stack-outlook">
+      <mj-text css-class=" special head7 align-center" font-weight="500" padding="6px 10px">
+        <a href="https://www.phillips66.com/terms-and-conditions/?utm_source=fuel_forward&utm_medium=email&utm_campaign=P66-0712-Labor-Day-Promo-Email-August24" class="txt-white">Terms &amp; Conditions</a>
+      </mj-text>
+    </mj-column>
+    <mj-column css-class="no-stack-outlook">
+      <mj-text css-class=" special head7 align-center" font-weight="500" padding="6px 10px">
+        <a href="https://www.phillips66.com/privacy-statement/?utm_source=fuel_forward&utm_medium=email&utm_campaign=P66-0712-Labor-Day-Promo-Email-August24" class="txt-white">Privacy Statement</a>
+      </mj-text>
+    </mj-column>
+  </mj-section>
+</mj-wrapper>

@@ -1,0 +1,206 @@
+ <mj-style inline="inline">
+   body{
+   margin: 0;
+   }
+
+   /*Fonts*/
+   img, a, div, td {
+   font-family: Arial, Helvetica Neue, Helvetica, sans-serif !important;
+   }
+
+
+   img {
+   color: #000000 !important;
+   text-decoration: underline !important;;
+   font-size: 16px !important;
+   }
+
+   .btn > table > tbody > tr > td {
+    background-color: #ffffff !important;
+   }
+
+   .align-center > div {
+   text-align: center !important;
+   }
+
+   .align-left > div {
+   text-align: left !important;
+   }
+
+   .align-right > div {
+   text-align: right !important;
+   }
+
+   /*FONT SIZES*/
+   .head1 > div{
+   font-size: 36px !important;
+   line-height: 44px !important;
+   }
+
+   .head2 > div{
+   font-size: 32px !important;
+   line-height: 38px !important;
+   }
+   .head3 > div{
+   font-size: 24px !important;
+   line-height: 32px !important;
+   }
+   .head4 > div{
+   font-size: 20px !important;
+   line-height: 28px !important;
+   }
+   .head5 > div{
+   font-size: 16px !important;
+   line-height: 24px !important;
+   }
+   .head6 > div{
+   font-size: 14px !important;
+   line-height: 22px !important;
+   }
+
+   .head7 > div {
+   font-size: 10px !important;
+   line-height: 18px !important;
+   }
+
+   .txt-bold > div {
+    font-weight: 700 !important;
+   }
+
+   .padding-0 > table > tbody > tr > td {
+   padding: 0px !important;
+   }
+
+   .padding-20 > table > tbody > tr > td
+   {
+   padding: 20px;
+   }
+
+   .two-column-hero > * {
+   width: 100%;
+   padding: 0px 0px;
+   }
+
+   .two-up > * {
+   width: 100%;
+   padding: 0px 0px;
+   }
+
+   .two-column-hero.right{
+   padding: 0px 0px 0px 10px !important;
+
+   }
+   .two-column-hero.left{
+   padding: 0px 10px 0px 0px !important;
+   }
+
+   /*DARK MODE FALLBACK COLORS*/
+   /*Background colors*/
+   .bg-body{
+   background-color: #EBECEE !important;
+   }
+   .bg-white > table {
+   background: white;
+   background-color: white;
+   }
+
+   .bg-gray > table {
+   background: #f8f9fa;
+   background-color: #f8f9fa;
+   }
+   .bg-blue > table {
+   background: #003893 !important;
+   background-color: #003893 !important;
+   }
+   .bg-black > table {
+   background: #262626 !important;
+   background-color: #262626 !important;
+   }
+   /*Font Colors*/
+   .txt-dark,
+   .txt-dark > div{
+   color: #1E1E1E;
+   }
+
+   .txt-dark.special,
+   .txt-dark.special > div{
+   color: black !important;
+   }
+
+   .txt-light.special,
+   .txt-light.special > div,
+   .txt-light.special >div > a{
+   color: white !important;
+   }
+
+   /*Layout*/
+   .no-stack-outlook-10,
+   .mobile-social{
+   width: 10% !important;
+   }
+
+   .mobile-social.clear{
+    width: 5% !important;
+   }
+
+   .no-stack-outlook-20 {
+   width: 20% !important;
+   }
+
+   .no-stack-outlook-33,
+   .mobile-border,
+   .mobile-border-outlook{
+   width: 30% !important;
+   }
+
+   .no-stack-outlook-33{
+   width: 33.33% !important;
+   }
+
+   .no-stack-outlook-40{
+   width: 40% !important;
+   }
+   .no-stack-outlook-45{
+   width: 45% !important;
+   }
+
+   .no-stack-outlook-50{
+   width: 50% !important;
+   }
+
+   .no-stack-outlook-55{
+   width: 50% !important;
+   }
+
+   .no-stack-outlook-60{
+   width: 60% !important;
+   }
+   .no-stack-outlook-70{
+   width: 70% !important;
+   }
+   .no-stack-outlook-80{
+   width: 80% !important;
+   }
+
+   .no-stack-outlook-90{
+   width: 90% !important;
+   }
+
+   .col-10 {
+    width: 10% !important;
+   }
+
+   .col-90 {
+    width: 90% !important;
+   }
+
+   .display-none {
+    display: none !important;
+   }
+
+  .mobile-stores > table > tbody > tr > td > a {
+    text-decoration: none;
+  }
+
+
+ </mj-style>

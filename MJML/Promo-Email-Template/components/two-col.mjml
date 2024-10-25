@@ -1,0 +1,14 @@
+<!-- 2 columns section - text then image-->
+<mj-wrapper css-class="bg-white" padding="40px 0px ">
+  <mj-section direction="rtl" padding="0px">
+    <mj-column vertical-align="top" padding="0px" css-class="no-stack-outlook two-col-img">
+      <mj-image css-class="two-column-hero" padding="0" src="https://531b51d89436e7b37a11-05201760ac2cafb1744b21ae1246f625.ssl.cf1.rackcdn.com/B2C/Promo%20Emails/P66-0717-Seahawks-Promo/P66_Seahawks_Email%20Header_sm1.gif" alt="EV Charger" />
+    </mj-column>
+    <mj-column css-class="col_padding no-stack-outlook" vertical-align="top" padding="0px">
+      <!--Paragraph Text-->
+      <mj-text padding="15px 25px 0px" css-class="head3 title-style align-center mobile-col-title-p">shhh shhh</mj-text>
+      <!--Paragraph Text-->
+      <mj-text padding="15px 25px" css-class="head4 txt-dark align-left mobile-col-copy-p">shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh shhh</mj-text>
+    </mj-column>
+  </mj-section>
+</mj-wrapper>
