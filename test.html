@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+    <style>
+        .tab-parent-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .tab-container {
+            background-color: blue;
+            width: 50%;
+            padding: 10px;
+            border: 1px solid #000;
+            text-align: center;
+        }
+        .selected {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab-parent-container">
+        <div class="tab-container selected">
+            <h1>Tab 1</h1>
+        </div>
+        <div class="tab-container">
+            <h1>Tab 2</h1>
+        </div>
+    </div>
+</body>
+<script>
+   //loop through each tab container, add click event listener that will remove selected class from all tab containers and add selected class to the clicked tab container
+    document.querySelectorAll('.tab-container').forEach(tabContainer => {
+         tabContainer.addEventListener('click', () => {
+              document.querySelectorAll('.tab-container').forEach(tabContainer => {
+                tabContainer.classList.remove('selected');
+              });
+              tabContainer.classList.add('selected');
+         });
+    });
+</script>
+</html>
