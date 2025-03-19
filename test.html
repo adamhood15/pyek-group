@@ -1,24 +1,72 @@
-<div class="wsf-extra-small-12 wsf-small-6 wsf-tile wsf-field-wrapper" id="wsf-1-field-wrapper-39" data-id="39"
-    data-type="select"><label id="wsf-1-label-39" for="wsf-1-field-39" class="wsf-label">Division<span
-            class="wsf-required-wrapper"> <strong class="wsf-text-danger">*</strong></span></label>
-            <select
-        id="wsf-1-field-39" name="field_39[]" size="3" required="" data-required="" aria-required="true"
-        autocomplete="off" data-wsf-select2="" class="wsf-field select2-hidden-accessible"
-        aria-labelledby="wsf-1-label-39" tabindex="-1" aria-hidden="true" data-init-required=""
-        data-init-validate-real-time="">
-        <option data-id="0" value="" data-placeholder="">Select...</option>
-        <option id="wsf-1-field-39-row-1" data-id="1" value="Management">Management</option>
-        <option id="wsf-1-field-39-row-2" data-id="2" value="Capital">Capital</option>
-        <option id="wsf-1-field-39-row-3" data-id="3" value="Financial">Financial</option>
-    </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 260px;"><span
-            class="selection"><span class="select2-selection select2-selection--single" role="combobox"
-                aria-haspopup="true" aria-expanded="false" tabindex="0"
-                aria-labelledby="select2-wsf-1-field-39-container"><span class="select2-selection__rendered"
-                    id="select2-wsf-1-field-39-container"><span
-                        class="select2-selection__placeholder">Select...</span></span><span
-                    class="select2-selection__arrow" role="presentation"><b
-                        role="presentation"></b></span></span></span><span class="dropdown-wrapper"
-            aria-hidden="true"></span></span>
-    <div id="wsf-1-invalid-feedback-39" class="wsf-invalid-feedback" aria-hidden="true">Please select a valid division.
-    </div>
-</div>
+<DOCTYPE html>
+    <html>
+
+    <head>
+        <title>Test</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />        
+        <style>
+            body {
+                color:#fff;
+            }
+
+            .nz-jobs-position-dropdown-container {
+                background-color:#7a7a7a;
+                padding: 25px;
+                display: none;
+            }
+
+            button {
+                background-color: red;
+            }
+        </style>
+        
+    </head>
+
+    <body>
+
+
+        <button class="nz-jobs-carousel-button" data-trigger="lifeguard">
+            Click Lifeguard
+        </button>
+        <div class="nz-jobs-position-dropdown-container"> 
+            <i class="fas fa-cloud close-icon"></i><br><br>
+            Dropdown Lifeguard Container
+        </div> 
+        <button class="nz-jobs-carousel-button" data-trigger="admissions">
+            Click Admissions
+        </button>
+        <div class="nz-jobs-position-dropdown-container"> 
+            <i class="fas fa-cloud close-icon"></i><br><br>
+            Dropdown Admissions Container
+        </div>
+      <script>
+        const buttons = document.querySelectorAll('.nz-jobs-carousel-button');
+        const dropdowns = document.querySelectorAll('.nz-jobs-position-dropdown-container');
+        const closeIcons = document.querySelectorAll('.close-icon');
+
+        //Opens the dropdown for each button
+        buttons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                dropdowns[index].style.display = 'flex';
+
+                //Closes all other dropdowns if a different one is clicked
+                if(dropdowns[index].style.display === 'flex') {
+                    dropdowns.forEach((dropdown, i) => {
+                        if(i !== index) {
+                            dropdown.style.display = 'none';
+                        }
+                    });
+                }
+            });
+        });
+        //Closes the dropdown via the close icon
+        closeIcons.forEach((icon, index) => {
+            icon.addEventListener('click', () => {
+                dropdowns[index].style.display = 'none';
+            });
+        });
+
+      </script>  
+    </body>
+
+    </html>

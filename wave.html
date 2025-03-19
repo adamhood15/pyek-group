@@ -1,0 +1,60 @@
+<DOCTYPE html>
+    <html>
+
+    <head>
+        <title>Test</title>
+        <style>
+            body {
+                color:#fff;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Logo" style="width: 100vw; height: 25vh;">
+        <div class="wave-container" style="margin: -100px 0 0 0;"> 
+        </div>
+        <div style="background-color: red;width:100vw;height:50px"></div>
+
+        <div class="wave-container">
+
+        </div>
+      <script>
+         function waveCreator() {
+            const svgWidth = window.innerWidth;
+            const svgHeight = 200;
+
+            const frequency = 0.03; // Controls the wave frequency
+            const amplitude = 20; // Wave height
+            const phase = 0; // Shift left/right
+
+            document.querySelectorAll('.wave-container').forEach(waveContainer => {
+                // Create a new SVG for each container
+                const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+                svg.setAttribute("width", svgWidth);
+                svg.setAttribute("height", svgHeight);
+
+                let pathData = `M 0 ${svgHeight / 2}`;
+                for (let x = 0; x < svgWidth; x++) {
+                    const y = amplitude * Math.sin(frequency * x + phase) + svgHeight / 2;
+                    pathData += ` L ${x} ${y}`;
+                }
+
+                path.setAttribute('d', pathData);
+                path.setAttribute('fill', 'transparent');
+                path.setAttribute('stroke', '#21e0e3');
+                path.setAttribute('stroke-width', '4');
+
+                svg.appendChild(path);
+                waveContainer.appendChild(svg); // Append new SVG to the container
+            });
+        }
+
+        waveCreator();
+      </script>  
+    </body>
+
+    </html>

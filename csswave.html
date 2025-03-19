@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <style>
+          .wave {
+            width: 100vw;
+            height: 252px;
+            background: #f06;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translateY(var(--wave-offset));
+            --mask:
+                radial-gradient(98.41px at 50% 138.6px, #000 99%, #0000 101%) calc(50% - 126px) 0/252px 100%,
+                radial-gradient(98.41px at 50% -75.6px, #0000 99%, #000 101%) 50% 63px/252px 100% repeat-x;
+            -webkit-mask: var(--mask);
+                    mask: var(--mask);
+        }
+    </style>
+</head>
+<body style="height: 200vh;">
+
+    <div class="wave"></div>
+    <div class="wave" style="top: 200px;"></div> <!-- Example of a second wave -->
+
+    <script>
+        function updateWavePosition() {
+            let scrollPercentage = window.pageYOffset / (document.body.scrollHeight - window.innerHeight);
+            
+            // Increase motion intensity for up and down movement
+            let offset = (scrollPercentage * 100 - 50).toFixed(2) + "px"; 
+
+            // Apply vertical movement
+            document.body.style.setProperty('--wave-offset', offset);
+
+            // Smooth animation using requestAnimationFrame
+            requestAnimationFrame(updateWavePosition);
+        }
+
+        // Start the animation loop
+        updateWavePosition();
+    </script>
+
+    </body>
+</html>
