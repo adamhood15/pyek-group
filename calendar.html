@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+           
+
+            .calendar-details {
+                margin: 0;
+            }
+
+            .calendar-container {
+                position: relative;
+                width: 100%;
+                max-width: 900px;
+                margin: 0 auto;
+            }
+
+
+            .calendar-nav {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .calendar-nav button {
+                padding: 8px 12px;
+                margin: 0 5px;
+                cursor: pointer;
+                border-radius: 20px;
+            }
+
+            .month-wrapper {
+                display: none;
+                animation: fadeIn 0.3s ease-in-out;
+                padding: 10px 0 0 0;
+                background-color: #209cff;
+               
+            }
+
+            .month-wrapper, 
+            .calendar-day-display {
+                box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+                border-radius: 25px;
+            }
+
+            .calendar-day-display {
+                display: none;
+                flex-direction: column;
+                padding: 15px 25px 25px 25px;
+            }
+
+            .calendar-day-display.show {
+                display: flex;
+            }
+
+            .calendar-date-time-container {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .calendar-event-container {
+                display: flex;
+                flex-direction: row;
+            }
+
+            .calendar-day-text-container {
+                padding: 0 25px 25px 25px;
+             
+            }
+
+           
+
+            .month-wrapper.active {
+                display: block;
+            }
+
+            .month-header {
+                text-align: center;
+                color: #d2d2d2;
+            }
+
+            .calendar-table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                margin-bottom: 2rem;
+                background-color: #ececec;
+                border-radius: 0 0 25px 25px;
+            }
+
+            .calendar-table td {
+                height: 150px;
+                min-height: 150px;
+                max-height: 150px;
+            }
+
+            .calendar-table th,
+            .calendar-table td {
+                width: 14.28%;
+                padding: 0px 15px 15px 15px;
+                vertical-align: top;
+                text-align: left;
+                position: relative;
+            }
+
+            .calendar-table th {
+                text-align: center;
+                text-decoration: underline;
+                background-color: #e98373;
+            }
+
+            .day-cell {
+                position: relative;
+                overflow: visible;
+            }
+
+            .day-number {
+                display: inline-block;
+                padding: 4px 6px;
+                border-radius: 25px;
+                font-weight: bold;
+                font-size: 0.85rem;
+            }
+
+            .day-cell.open .day-number {
+                background-color: #c6f6d5;
+                /* greenish */
+                color: #22543d;
+            }
+
+            .day-cell.closed .day-number {
+                background-color: #fed7d7;
+                /* reddish */
+                color: #742a2a;
+            }
+
+            .day-cell:hover {
+                background-color: rgb(243, 243, 243);
+                cursor:pointer;
+                border-radius: 25px;
+            }
+
+            .day-inner {
+                height: 100%;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                font-size: 0.75rem;
+            }
+
+            /* Park Status */
+            .date-status-container {
+                display: flex;
+            }
+
+            .status {
+                font-weight: bold;
+                text-transform: capitalize;
+                padding: 2px 6px;
+                border-radius: 4px;
+                font-size: 0.75rem;
+                display: inline-block;
+            }
+
+            .status.Open {
+                background: #c6f6d5;
+                color: #22543d;
+            }
+
+            .status.closed {
+                background: #fed7d7;
+                color: #742a2a;
+            }
+
+            /* Operating Hours */
+            .hours {
+                font-size: 0.6rem;
+                color: #555;
+            }
+
+            /* Notes Tooltip */
+            .note-icon {
+                display: inline-block;
+                max-height: 25px;
+                rotate: -45deg;
+                color: #fe1368;
+                width: 30%;
+            }
+
+           
+
+            .note-tooltip {
+                position: absolute;
+                bottom: 60%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #ffffff;
+                color: black;
+                padding: 10px 14px;
+                font-size: 0.7rem;
+                white-space: normal;
+                width: max-content;
+                max-width: 200px;
+                border-radius: 4px;
+                z-index: 10;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            }
+
+            .note-icon:hover+.note-tooltip {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            /* Events */
+            .event-name {
+                color: #000;
+                font-weight: 500;
+            }
+
+            .event-time {
+                font-size: 0.75rem;
+                color: #333;
+            }
+
+            .event-name-wrapper {
+                background-color: #bee3f8;
+                cursor: pointer;
+                border-radius: 5px;
+                padding: 2px 6px;
+            }
+
+            /* Calendar Day Display */
+
+            .calendar-day {
+                position: relative;
+                width: 100%;
+                max-width: 900px;
+                margin: 0 auto;
+                background-color: white;
+                box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+                border-radius: 25px;
+            }
+
+            .calendar-day-content {
+                padding:  25px;
+                display:flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .calendar-day-top-container {
+                display: flex;
+                vertical-align: middle;
+                align-content: center;
+                justify-content: space-between;
+            }
+
+            .calendar-day-title {
+                margin: 0;
+            }
+
+            .calendar-day-hours {
+                margin: 0 0 0 5px;
+            }
+
+            .calendar-day-hours-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 100%;
+            }
+
+            .calendar-day-notes-container
+             {
+                display: none;
+            }
+
+            #calendar-day-note-icon {
+                margin: 15px 10px 0 0;
+                width: auto;
+            }
+
+            .event-container {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                gap: 25px;
+            }
+
+            .event-name {
+                margin: 0;
+            }
+
+            .event-thumbnail {
+                border-radius: 25px;
+                width: 30%;
+                height: auto;
+            }
+
+            
+            
+            
+
+            /* Animation */
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+
+                to {
+                    opacity: 1;
+                }
+            }
+        </style> 
+    </head>
+    <body>
+        <div id="code_block-28-1999" class="ct-code-block"><div class="calendar-nav"><button class="calendar-prev nz-button-blue" aria-label="Previous Month">←</button><button class="calendar-next nz-button-blue" aria-label="Next Month">→</button></div><div class="calendar-container"><div class="month-wrapper active" data-month-index="0"><h2 class="month-header">April 2025</h2><table class="calendar-table"><tbody><tr>
+            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th>
+            <th>Thu</th><th>Fri</th><th>Sat</th>
+        </tr><tr><td class="empty"></td><td class="empty"></td><td data-date="2025-04-01" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>1 closed</strong></p></div></td><td data-date="2025-04-02" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>2 closed</strong></p></div></td><td data-date="2025-04-03" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>3 closed</strong></p></div></td><td data-date="2025-04-04" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>4 closed</strong></p></div></td><td data-date="2025-04-05" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>5 closed</strong></p></div></td></tr><tr><td data-date="2025-04-06" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>6 closed</strong></p></div></td><td data-date="2025-04-07" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>7 closed</strong></p></div></td><td data-date="2025-04-08" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>8 closed</strong></p></div></td><td data-date="2025-04-09" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>9 closed</strong></p></div></td><td data-date="2025-04-10" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>10 closed</strong></p></div></td><td data-date="2025-04-11" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>11 closed</strong></p></div></td><td data-date="2025-04-12" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>12 closed</strong></p></div></td></tr><tr><td data-date="2025-04-13" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>13 closed</strong></p></div></td><td data-date="2025-04-14" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>14 closed</strong></p></div></td><td data-date="2025-04-15" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>15 closed</strong></p></div></td><td data-date="2025-04-16" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>16 closed</strong></p></div></td><td data-date="2025-04-17" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>17 closed</strong></p></div></td><td data-date="2025-04-18" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>18 closed</strong></p></div></td><td data-date="2025-04-19" data-open-time="11:30 AM" data-close-time="5:00 PM" data-open-time-2="3 AM" data-close-time-2="8 AM" data-notes="Today is a special day for everyone. Be on the lookout for more info." data-special-event="[]" class="day-cell open"><div class="day-inner"><p class="day-number"><strong>19 open</strong></p><div class="icon-container">
+                    <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><g fill="none"><g fill="#209cff"><path d="M9 0C14 0 18 4 18 9 18 14 14 18 9 18 4 18 0 14 0 9 0 4 4 0 9 0ZM10 4L7 4 7 4 7 9.7 9.9 13 12 11.2 10 9 10 4 10 4Z"></path></g></g></svg><svg class="note-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="18" height="18">
+                            <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                            <path fill="#ff0482" d="M480 32c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9L381.7 53c-48 48-113.1 75-181 75l-8.7 0-32 0-96 0c-35.3 0-64 28.7-64 64l0 96c0 35.3 28.7 64 64 64l0 128c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-128 8.7 0c67.9 0 133 27 181 75l43.6 43.6c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-147.6c18.6-8.8 32-32.5 32-60.4s-13.4-51.6-32-60.4L480 32zm-64 76.7L416 240l0 131.3C357.2 317.8 280.5 288 200.7 288l-8.7 0 0-96 8.7 0c79.8 0 156.5-29.8 215.3-83.3z"></path>
+                          </svg></div><p class="calendar-details hours"><strong>Operating Hours:</strong></p><p class="calendar-details hours time">11:30 AM – 5:00 PM</p><p class="calendar-details hours">3 AM – 8 AM</p></div></td></tr><tr><td data-date="2025-04-20" data-open-time="11:00 AM" data-close-time="5:00 PM" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell open"><div class="day-inner"><p class="day-number"><strong>20 open</strong></p><div class="icon-container">
+                    <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><g fill="none"><g fill="#209cff"><path d="M9 0C14 0 18 4 18 9 18 14 14 18 9 18 4 18 0 14 0 9 0 4 4 0 9 0ZM10 4L7 4 7 4 7 9.7 9.9 13 12 11.2 10 9 10 4 10 4Z"></path></g></g></svg></div><p class="calendar-details hours"><strong>Operating Hours:</strong></p><p class="calendar-details hours time">11:00 AM – 5:00 PM</p></div></td><td data-date="2025-04-21" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>21 closed</strong></p></div></td><td data-date="2025-04-22" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>22 closed</strong></p></div></td><td data-date="2025-04-23" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>23 closed</strong></p></div></td><td data-date="2025-04-24" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>24 closed</strong></p></div></td><td data-date="2025-04-25" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>25 closed</strong></p></div></td><td data-date="2025-04-26" data-open-time="11:00 AM" data-close-time="5:00 PM" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell open"><div class="day-inner"><p class="day-number"><strong>26 open</strong></p><div class="icon-container">
+                    <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><g fill="none"><g fill="#209cff"><path d="M9 0C14 0 18 4 18 9 18 14 14 18 9 18 4 18 0 14 0 9 0 4 4 0 9 0ZM10 4L7 4 7 4 7 9.7 9.9 13 12 11.2 10 9 10 4 10 4Z"></path></g></g></svg></div><p class="calendar-details hours"><strong>Operating Hours:</strong></p><p class="calendar-details hours time">11:00 AM – 5:00 PM</p></div></td></tr><tr><td data-date="2025-04-27" data-open-time="11:00 AM" data-close-time="5:00 PM" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell open"><div class="day-inner"><p class="day-number"><strong>27 open</strong></p><div class="icon-container">
+                    <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><g fill="none"><g fill="#209cff"><path d="M9 0C14 0 18 4 18 9 18 14 14 18 9 18 4 18 0 14 0 9 0 4 4 0 9 0ZM10 4L7 4 7 4 7 9.7 9.9 13 12 11.2 10 9 10 4 10 4Z"></path></g></g></svg></div><p class="calendar-details hours"><strong>Operating Hours:</strong></p><p class="calendar-details hours time">11:00 AM – 5:00 PM</p></div></td><td data-date="2025-04-28" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>28 closed</strong></p></div></td><td data-date="2025-04-29" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>29 closed</strong></p></div></td><td data-date="2025-04-30" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>30 closed</strong></p></div></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></tbody></table></div><div class="month-wrapper " data-month-index="1"><h2 class="month-header">May 2025</h2><table class="calendar-table"><tbody><tr>
+            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th>
+            <th>Thu</th><th>Fri</th><th>Sat</th>
+        </tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td data-date="2025-05-01" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>1 closed</strong></p></div></td><td data-date="2025-05-02" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>2 closed</strong></p></div></td><td data-date="2025-05-03" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>3 closed</strong></p></div></td></tr><tr><td data-date="2025-05-04" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>4 closed</strong></p></div></td><td data-date="2025-05-05" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>5 closed</strong></p></div></td><td data-date="2025-05-06" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>6 closed</strong></p></div></td><td data-date="2025-05-07" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>7 closed</strong></p></div></td><td data-date="2025-05-08" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>8 closed</strong></p></div></td><td data-date="2025-05-09" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>9 closed</strong></p></div></td><td data-date="2025-05-10" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>10 closed</strong></p></div></td></tr><tr><td data-date="2025-05-11" data-open-time="11:00 AM" data-close-time="5:00 PM" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[{&quot;name&quot;:&quot;Mother's Day&quot;,&quot;image&quot;:&quot;https:\/\/typhoontexas.com\/wp-content\/uploads\/2025\/04\/tth-mothers-day-4x3-1-300x225.png&quot;,&quot;url&quot;:&quot;https:\/\/typhoontexas.com\/events\/tth-mothers-day\/&quot;,&quot;start_time&quot;:&quot;11:00 AM&quot;,&quot;end_time&quot;:&quot;5:00 PM&quot;}]" class="day-cell open"><div class="day-inner"><p class="day-number"><strong>11 open</strong></p><div class="icon-container">
+                    <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><g fill="none"><g fill="#209cff"><path d="M9 0C14 0 18 4 18 9 18 14 14 18 9 18 4 18 0 14 0 9 0 4 4 0 9 0ZM10 4L7 4 7 4 7 9.7 9.9 13 12 11.2 10 9 10 4 10 4Z"></path></g></g></svg></div><p class="calendar-details hours"><strong>Operating Hours:</strong></p><p class="calendar-details hours time">11:00 AM – 5:00 PM</p><div class="event-name-wrapper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="20" height="20" fill="#FFD700">
+                      <path d="M287.9 17.8L354 150.2 495.6 171.5c26.2 3.8 36.7 36 17.7 54.6L402.6 319.5l23.8 139c4.5 26.1-23 46-46.4 33.7L288 439.6l-124 65.3c-23.4 12.3-50.9-7.6-46.4-33.7l23.8-139L62.7 226.1c-19-18.6-8.5-50.8 17.7-54.6L222 150.2 288.1 17.8c11.7-23.6 45.6-23.9 57.3 0z"></path>
+                    </svg><p class="calendar-details event-name">Mother's Day</p><p class="calendar-details hours">11:00 AM – 5:00 PM</p></div><div id="event-modal-5-11-0" class="event-modal">
+                        <div class="event-modal-content">
+                            <img src="https://typhoontexas.com/wp-content/uploads/2025/04/tth-mothers-day-4x3-1-300x225.png" alt="Mother's Day" class="event-modal-image">
+                            <span class="close" data-modal-close="true">×</span>
+                            <h3 class="event-modal-name">Mother's Day</h3>
+                            <p class="event-modal-time"><strong>Time:</strong> 11:00 AM – 5:00 PM</p>
+                            <a href="https://typhoontexas.com/events/tth-mothers-day/" target="_blank" class="event-link nz-button-pink">View Event Page</a>
+                        </div>
+                    </div></div></td><td data-date="2025-05-12" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>12 closed</strong></p></div></td><td data-date="2025-05-13" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>13 closed</strong></p></div></td><td data-date="2025-05-14" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>14 closed</strong></p></div></td><td data-date="2025-05-15" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>15 closed</strong></p></div></td><td data-date="2025-05-16" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>16 closed</strong></p></div></td><td data-date="2025-05-17" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>17 closed</strong></p></div></td></tr><tr><td data-date="2025-05-18" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>18 closed</strong></p></div></td><td data-date="2025-05-19" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>19 closed</strong></p></div></td><td data-date="2025-05-20" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>20 closed</strong></p></div></td><td data-date="2025-05-21" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>21 closed</strong></p></div></td><td data-date="2025-05-22" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>22 closed</strong></p></div></td><td data-date="2025-05-23" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>23 closed</strong></p></div></td><td data-date="2025-05-24" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>24 closed</strong></p></div></td></tr><tr><td data-date="2025-05-25" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>25 closed</strong></p></div></td><td data-date="2025-05-26" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>26 closed</strong></p></div></td><td data-date="2025-05-27" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>27 closed</strong></p></div></td><td data-date="2025-05-28" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>28 closed</strong></p></div></td><td data-date="2025-05-29" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>29 closed</strong></p></div></td><td data-date="2025-05-30" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>30 closed</strong></p></div></td><td data-date="2025-05-31" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>31 closed</strong></p></div></td></tr></tbody></table></div><div class="month-wrapper " data-month-index="2"><h2 class="month-header">June 2025</h2><table class="calendar-table"><tbody><tr>
+            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th>
+            <th>Thu</th><th>Fri</th><th>Sat</th>
+        </tr><tr><td data-date="2025-06-01" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>1 closed</strong></p></div></td><td data-date="2025-06-02" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>2 closed</strong></p></div></td><td data-date="2025-06-03" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>3 closed</strong></p></div></td><td data-date="2025-06-04" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>4 closed</strong></p></div></td><td data-date="2025-06-05" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>5 closed</strong></p></div></td><td data-date="2025-06-06" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>6 closed</strong></p></div></td><td data-date="2025-06-07" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>7 closed</strong></p></div></td></tr><tr><td data-date="2025-06-08" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>8 closed</strong></p></div></td><td data-date="2025-06-09" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>9 closed</strong></p></div></td><td data-date="2025-06-10" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>10 closed</strong></p></div></td><td data-date="2025-06-11" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>11 closed</strong></p></div></td><td data-date="2025-06-12" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>12 closed</strong></p></div></td><td data-date="2025-06-13" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>13 closed</strong></p></div></td><td data-date="2025-06-14" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>14 closed</strong></p></div></td></tr><tr><td data-date="2025-06-15" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>15 closed</strong></p></div></td><td data-date="2025-06-16" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>16 closed</strong></p></div></td><td data-date="2025-06-17" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>17 closed</strong></p></div></td><td data-date="2025-06-18" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>18 closed</strong></p></div></td><td data-date="2025-06-19" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>19 closed</strong></p></div></td><td data-date="2025-06-20" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>20 closed</strong></p></div></td><td data-date="2025-06-21" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>21 closed</strong></p></div></td></tr><tr><td data-date="2025-06-22" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>22 closed</strong></p></div></td><td data-date="2025-06-23" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>23 closed</strong></p></div></td><td data-date="2025-06-24" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>24 closed</strong></p></div></td><td data-date="2025-06-25" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>25 closed</strong></p></div></td><td data-date="2025-06-26" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>26 closed</strong></p></div></td><td data-date="2025-06-27" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>27 closed</strong></p></div></td><td data-date="2025-06-28" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>28 closed</strong></p></div></td></tr><tr><td data-date="2025-06-29" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>29 closed</strong></p></div></td><td data-date="2025-06-30" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>30 closed</strong></p></div></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></tbody></table></div><div class="month-wrapper " data-month-index="3"><h2 class="month-header">July 2025</h2><table class="calendar-table"><tbody><tr>
+            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th>
+            <th>Thu</th><th>Fri</th><th>Sat</th>
+        </tr><tr><td class="empty"></td><td class="empty"></td><td data-date="2025-07-01" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>1 closed</strong></p></div></td><td data-date="2025-07-02" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>2 closed</strong></p></div></td><td data-date="2025-07-03" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>3 closed</strong></p></div></td><td data-date="2025-07-04" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>4 closed</strong></p></div></td><td data-date="2025-07-05" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>5 closed</strong></p></div></td></tr><tr><td data-date="2025-07-06" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>6 closed</strong></p></div></td><td data-date="2025-07-07" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>7 closed</strong></p></div></td><td data-date="2025-07-08" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>8 closed</strong></p></div></td><td data-date="2025-07-09" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>9 closed</strong></p></div></td><td data-date="2025-07-10" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>10 closed</strong></p></div></td><td data-date="2025-07-11" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>11 closed</strong></p></div></td><td data-date="2025-07-12" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>12 closed</strong></p></div></td></tr><tr><td data-date="2025-07-13" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>13 closed</strong></p></div></td><td data-date="2025-07-14" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>14 closed</strong></p></div></td><td data-date="2025-07-15" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>15 closed</strong></p></div></td><td data-date="2025-07-16" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>16 closed</strong></p></div></td><td data-date="2025-07-17" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>17 closed</strong></p></div></td><td data-date="2025-07-18" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>18 closed</strong></p></div></td><td data-date="2025-07-19" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>19 closed</strong></p></div></td></tr><tr><td data-date="2025-07-20" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>20 closed</strong></p></div></td><td data-date="2025-07-21" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>21 closed</strong></p></div></td><td data-date="2025-07-22" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>22 closed</strong></p></div></td><td data-date="2025-07-23" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>23 closed</strong></p></div></td><td data-date="2025-07-24" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>24 closed</strong></p></div></td><td data-date="2025-07-25" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>25 closed</strong></p></div></td><td data-date="2025-07-26" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>26 closed</strong></p></div></td></tr><tr><td data-date="2025-07-27" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>27 closed</strong></p></div></td><td data-date="2025-07-28" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>28 closed</strong></p></div></td><td data-date="2025-07-29" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>29 closed</strong></p></div></td><td data-date="2025-07-30" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>30 closed</strong></p></div></td><td data-date="2025-07-31" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>31 closed</strong></p></div></td><td class="empty"></td><td class="empty"></td></tr></tbody></table></div><div class="month-wrapper " data-month-index="4"><h2 class="month-header">August 2025</h2><table class="calendar-table"><tbody><tr>
+            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th>
+            <th>Thu</th><th>Fri</th><th>Sat</th>
+        </tr><tr><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td data-date="2025-08-01" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>1 closed</strong></p></div></td><td data-date="2025-08-02" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>2 closed</strong></p></div></td></tr><tr><td data-date="2025-08-03" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>3 closed</strong></p></div></td><td data-date="2025-08-04" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>4 closed</strong></p></div></td><td data-date="2025-08-05" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>5 closed</strong></p></div></td><td data-date="2025-08-06" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>6 closed</strong></p></div></td><td data-date="2025-08-07" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>7 closed</strong></p></div></td><td data-date="2025-08-08" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>8 closed</strong></p></div></td><td data-date="2025-08-09" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>9 closed</strong></p></div></td></tr><tr><td data-date="2025-08-10" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>10 closed</strong></p></div></td><td data-date="2025-08-11" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>11 closed</strong></p></div></td><td data-date="2025-08-12" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>12 closed</strong></p></div></td><td data-date="2025-08-13" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>13 closed</strong></p></div></td><td data-date="2025-08-14" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>14 closed</strong></p></div></td><td data-date="2025-08-15" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>15 closed</strong></p></div></td><td data-date="2025-08-16" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>16 closed</strong></p></div></td></tr><tr><td data-date="2025-08-17" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>17 closed</strong></p></div></td><td data-date="2025-08-18" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>18 closed</strong></p></div></td><td data-date="2025-08-19" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>19 closed</strong></p></div></td><td data-date="2025-08-20" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>20 closed</strong></p></div></td><td data-date="2025-08-21" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>21 closed</strong></p></div></td><td data-date="2025-08-22" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>22 closed</strong></p></div></td><td data-date="2025-08-23" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>23 closed</strong></p></div></td></tr><tr><td data-date="2025-08-24" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>24 closed</strong></p></div></td><td data-date="2025-08-25" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>25 closed</strong></p></div></td><td data-date="2025-08-26" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>26 closed</strong></p></div></td><td data-date="2025-08-27" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>27 closed</strong></p></div></td><td data-date="2025-08-28" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>28 closed</strong></p></div></td><td data-date="2025-08-29" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>29 closed</strong></p></div></td><td data-date="2025-08-30" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>30 closed</strong></p></div></td></tr><tr><td data-date="2025-08-31" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>31 closed</strong></p></div></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></tbody></table></div><div class="month-wrapper " data-month-index="5"><h2 class="month-header">September 2025</h2><table class="calendar-table"><tbody><tr>
+            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th>
+            <th>Thu</th><th>Fri</th><th>Sat</th>
+        </tr><tr><td class="empty"></td><td data-date="2025-09-01" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>1 closed</strong></p></div></td><td data-date="2025-09-02" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>2 closed</strong></p></div></td><td data-date="2025-09-03" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>3 closed</strong></p></div></td><td data-date="2025-09-04" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>4 closed</strong></p></div></td><td data-date="2025-09-05" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>5 closed</strong></p></div></td><td data-date="2025-09-06" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>6 closed</strong></p></div></td></tr><tr><td data-date="2025-09-07" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>7 closed</strong></p></div></td><td data-date="2025-09-08" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>8 closed</strong></p></div></td><td data-date="2025-09-09" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>9 closed</strong></p></div></td><td data-date="2025-09-10" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>10 closed</strong></p></div></td><td data-date="2025-09-11" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>11 closed</strong></p></div></td><td data-date="2025-09-12" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>12 closed</strong></p></div></td><td data-date="2025-09-13" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>13 closed</strong></p></div></td></tr><tr><td data-date="2025-09-14" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>14 closed</strong></p></div></td><td data-date="2025-09-15" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>15 closed</strong></p></div></td><td data-date="2025-09-16" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>16 closed</strong></p></div></td><td data-date="2025-09-17" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>17 closed</strong></p></div></td><td data-date="2025-09-18" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>18 closed</strong></p></div></td><td data-date="2025-09-19" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>19 closed</strong></p></div></td><td data-date="2025-09-20" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>20 closed</strong></p></div></td></tr><tr><td data-date="2025-09-21" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>21 closed</strong></p></div></td><td data-date="2025-09-22" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>22 closed</strong></p></div></td><td data-date="2025-09-23" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>23 closed</strong></p></div></td><td data-date="2025-09-24" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>24 closed</strong></p></div></td><td data-date="2025-09-25" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>25 closed</strong></p></div></td><td data-date="2025-09-26" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>26 closed</strong></p></div></td><td data-date="2025-09-27" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>27 closed</strong></p></div></td></tr><tr><td data-date="2025-09-28" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>28 closed</strong></p></div></td><td data-date="2025-09-29" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>29 closed</strong></p></div></td><td data-date="2025-09-30" data-open-time="" data-close-time="" data-open-time-2="" data-close-time-2="" data-notes="" data-special-event="[]" class="day-cell closed"><div class="day-inner"><p class="day-number"><strong>30 closed</strong></p></div></td><td class="empty"></td><td class="empty"></td><td class="empty"></td><td class="empty"></td></tr></tbody></table></div></div><div id="calendar-day" class="calendar-day hidden">
+        <div class="calendar-day-content">
+            <div class="calendar-day-top-container"> 
+            <h2 id="modal-date" class="calendar-day-title"></h2>
+            <div class="calendar-day-hours-container">
+                <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><g fill="none"><g fill="#209cff"><path d="M9 0C14 0 18 4 18 9 18 14 14 18 9 18 4 18 0 14 0 9 0 4 4 0 9 0ZM10 4L7 4 7 4 7 9.7 9.9 13 12 11.2 10 9 10 4 10 4Z"></path></g></g></svg>
+                <p class="calendar-day-hours" id="modal-hours"></p>
+            </div>
+        </div>
+            <div id="calendar-day-notes-container" class="calendar-day-notes-container">
+                <svg id="calendar-day-note-icon" class="note-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="18" height="18">
+                    <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path fill="#ff0482" d="M480 32c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9L381.7 53c-48 48-113.1 75-181 75l-8.7 0-32 0-96 0c-35.3 0-64 28.7-64 64l0 96c0 35.3 28.7 64 64 64l0 128c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-128 8.7 0c67.9 0 133 27 181 75l43.6 43.6c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-147.6c18.6-8.8 32-32.5 32-60.4s-13.4-51.6-32-60.4L480 32zm-64 76.7L416 240l0 131.3C357.2 317.8 280.5 288 200.7 288l-8.7 0 0-96 8.7 0c79.8 0 156.5-29.8 215.3-83.3z"></path>
+                </svg>
+                <p id="calendar-day-notes" class="calendar-modal-notes"></p>
+            </div>
+           
+            <div id="modal-events" class="calendar-modal-events"></div>
+        </div>
+    </div></div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            // === Month Navigation ===
+            const months = document.querySelectorAll(".month-wrapper");
+            const prevBtn = document.querySelector(".calendar-prev");
+            const nextBtn = document.querySelector(".calendar-next");
+            let currentIndex = 0;
+
+            function updateMonthView() {
+                months.forEach((month, i) => {
+                month.classList.toggle("active", i === currentIndex);
+                });
+            }
+
+            if (prevBtn && nextBtn && months.length > 0) {
+                prevBtn.addEventListener("click", () => {
+                currentIndex = (currentIndex - 1 + months.length) % months.length;
+                updateMonthView();
+                });
+
+                nextBtn.addEventListener("click", () => {
+                currentIndex = (currentIndex + 1) % months.length;
+                updateMonthView();
+                });
+
+                updateMonthView();
+            }
+
+            // === Day Modal Functionality ===
+
+    
+            // Close modal on click of close button
+            document.querySelectorAll("[data-modal-close]").forEach(closeBtn => {
+                closeBtn.addEventListener("click", () => {
+                const modal = closeBtn.closest(".event-modal");
+                if (modal) modal.style.display = "none";
+                });
+            });
+
+            // Close modal on click outside of modal content
+            window.addEventListener("click", (e) => {
+                document.querySelectorAll(".event-modal").forEach(modal => {
+                if (e.target === modal) modal.style.display = "none";
+                });
+            });
+            });
+
+            document.querySelectorAll('[data-date]').forEach(cell => {
+                cell.addEventListener('click', () => {
+
+                    let specialEventJSON = cell.getAttribute('data-special-event');
+
+                    let dayData = {
+                        date: cell.getAttribute('data-date'),
+                        openTime: cell.getAttribute('data-open-time'),
+                        closeTime: cell.getAttribute('data-close-time'),
+                        openTime2: cell.getAttribute('data-open-time-2'),
+                        closeTime2: cell.getAttribute('data-close-time-2'),
+                        notes: cell.getAttribute('data-notes'),
+                        events: []
+                    };
+
+                    try {
+                        dayData.events = JSON.parse(specialEventJSON);
+                    } catch (e) {
+                        console.error('Failed to parse specialEvent JSON:', e);
+                    }
+
+
+                    // ==== Populate the modal ====
+                    let dateDisplay = formatDate(dayData.date);
+
+                    document.getElementById('modal-date').textContent = dateDisplay;
+
+                    let hoursText = '';
+                    if (dayData.openTime && dayData.closeTime) {
+                        hoursText += `Operating Hours: ${dayData.openTime} – ${dayData.closeTime}`;
+                    }
+                    if (dayData.openTime2 && dayData.closeTime2) {
+                        hoursText += ` ${dayData.openTime2} – ${dayData.closeTime2}`;
+                    }
+                    document.getElementById('modal-hours').innerHTML = hoursText;
+
+                    document.getElementById('calendar-day-notes').textContent = dayData.notes;
+
+                    if (dayData.notes != '') {
+                        document.getElementById('calendar-day-notes-container').style.display = 'flex'
+                    } else {
+                        document.getElementById('calendar-day-notes-container').style.display = 'none'
+                    }
+
+                    let modalEvents = document.getElementById('modal-events');
+                    modalEvents.innerHTML = ''; // Clear existing content
+
+                    dayData.events.forEach(event => {
+                        let eventHTML = `
+                            <div class="event-container">
+                                <img src="${event.image}" alt="${event.name}" class="event-thumbnail">
+                                <div class="event-details">
+                                    <h4 class='event-name'>${event.name}</h4>
+                                    <p class='event-time'><strong>${event.start_time} – ${event.end_time}</strong></p>
+                                    <a href="${event.url}" target="_blank" class="event-link nz-button-blue">View Event</a>
+                                </div>
+                            </div>
+                        `;
+                        modalEvents.insertAdjacentHTML('beforeend', eventHTML);
+                    });
+
+                    document.getElementById('calendar-day').classList.remove('hidden');
+                });
+            })
+
+            function decodeJson(json) {
+                //Removes \/ characters, and removes array bracket
+                json = json.replace(/\\/g, '');
+                json =json.slice(1, -1);
+                return json;
+            }
+
+            function formatDate(date) {
+
+                let monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+                let dateArray = date.split('-')
+
+                let year = dateArray[0];
+                let month = Number(dateArray[1]);
+                let day = dateArray[2];
+
+                return monthNames[month] + ' ' + day + ', ' + year;
+            }
+</script>
+    </body>
+</html>
