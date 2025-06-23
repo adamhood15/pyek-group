@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Park Status Test</title>
+  <style>
+    .day-countdown {background-color: blue;width:500px;height:500px;}
+    .status-message { font-family: sans-serif; margin: 20px; }
+    .flip-clock { display: flex; gap: 10px; }
+    .flip-unit { background: #eee; padding: 10px; text-align: center; border-radius: 5px; }
+    .label { font-size: 0.8rem; color: #555; }
+    .value { font-size: 1.5rem; }
+  </style>
+</head>
+<body>
+
+<div class="day-countdown"
+  data-park="typhoon-texas"
+  data-status="open-later"
+  data-today-weather=""
+  data-now="2025-06-10T08:30:00-07:00"
+  data-today-date="2025-06-10"
+  data-today-open="09:00"
+  data-today-close="18:00"
+  data-next-date="2025-06-11"
+  data-next-open="10:00"
+  data-next-close="19:00"
+></div>
+
+<script src="./script.js"></script> <!-- your countdown script here -->
+</body>
+</html>

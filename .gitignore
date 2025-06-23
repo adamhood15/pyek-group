@@ -1,2 +1,4 @@
 .DS_Stores
 .node_modules
+.Mailchimp-API
+*.json
