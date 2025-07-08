@@ -1,0 +1,95 @@
+:root {
+--primary-color: #04868b;
+--secondary-color:#21f4e3;
+}
+.alert-banner {
+    background-color: #ffffff;
+    background-image: linear-gradient(180deg,  var(--primary-color), var(--secondary-color));
+}
+
+.status-message {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.banner-subcontainer {
+    background-color: #ffffff;
+    border-radius: 100px;
+    filter: drop-shadow(0 2px 2px #5c5c5c);
+    text-align: center;
+    display:flex;
+    align-items: center;
+    transition: background-color .2s;
+}
+
+/* .weather-button {
+        border: 2px solid yellow;
+}
+
+.calendar-button {
+    border: 2px solid red;
+} */
+
+#clock-icon {
+    cursor: pointer;
+}
+
+.banner-subcontainer p {
+    margin: 5px 10px;
+    font-weight: 700;
+    font-size: .8em;
+    
+}
+
+.banner-emoji {
+    font-size: .9em;
+}
+
+
+
+.banner-link-wrapper {
+    text-decoration: none;
+    cursor: pointer;
+
+    border-radius: 25px;
+}
+
+.banner-desktop-copy {
+    color:#000000;
+}
+
+
+
+.banner-link-wrapper:hover > .banner-subcontainer {
+    background-color: #eeeeee;
+}
+
+.banner-time.hide {
+    display: none;
+}
+
+.hours-modal {
+    background-color: #ffffff;
+    border-radius: 25px;
+    filter: drop-shadow(0 2px 2px #5c5c5c);
+    border: none;
+}
+
+.hours-modal-container {
+    padding: 10px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .banner-desktop-copy {
+        display: none;
+    }
+
+
+
+
+}
+
