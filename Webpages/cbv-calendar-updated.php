@@ -1,6 +1,6 @@
 <?php
 // === Load ACF Calendar Data ===
-$calendar_days = get_field('austin_calendar_days', 'option');
+$calendar_days = get_field('bay_calendar_days', 'option');
 $calendar_data = [];
 
 if ($calendar_days) {
@@ -10,11 +10,11 @@ if ($calendar_days) {
     }
 }
 
-// === Load Events from "austin" Category ===
+// === Load Events from "bay" Category ===
 $args = [
     'post_type'      => 'events',
     'posts_per_page' => -1,
-    'category_name'  => 'austin',
+    'category_name'  => 'bay',
 ];
 
 $events_query = new WP_Query($args);
@@ -44,7 +44,7 @@ if ($events_query->have_posts()) {
         $end_time   = $event_time_stamp['end_time'] ?? '';
         $recurring_dates = $event_time_stamp['recurring_dates'] ?? null;
 
-        if (!empty($recurring_dates)) {
+         if (!empty($recurring_dates)) {
             foreach ($recurring_dates as $recurring_entry) {
                 $start_raw = $recurring_entry['start_date'] ?? '';
                 $end_raw   = $recurring_entry['end_date'] ?? '';
@@ -106,7 +106,6 @@ function render_month_grid($month, $year, $calendar_data, $events_by_date, $inde
     $start_day     = date('w', $first_day);
     $is_active     = $index === 0 ? 'active' : '';
 
-    // === Creates skeleton for the calendar ===
     echo "<div class='month-wrapper $is_active' data-month-index='$index'>";
     echo "<div class='month-header-container'>";
     echo '<svg class="calendar-nav calendar-prev"><use xlink:href="#FontAwesomeicon-arrow-circle-left"></use></svg>';    
@@ -131,22 +130,21 @@ function render_month_grid($month, $year, $calendar_data, $events_by_date, $inde
     for ($day = 1; $day <= $days_in_month; $day++) {
         $date = sprintf('%04d-%02d-%02d', $year, $month, $day);
         $info = $calendar_data[$date] ?? null;
+        $status = strtolower($info['status'] ?? 'closed');
+        $status_copy = $status === 'weather-closure' ? 'Weather' : $status;
         $weather_status = $info['weather_status'] ?? null;
-        $rainy_day_guarantee = $info['rainy_day_guarantee'] ?? null;
         $weather_status_class = $weather_status ? strtolower(str_replace(' ', '-', $weather_status)) : '';
         $weather_note = $info['weather_note'] ?? null;
         $events_today = $events_by_date[$date] ?? [];
-
+      
       //Overrides the 'Open' status if weather closure is not normal  
-      $status_class = 'closed';
-      $status = 'closed';
-        if ($info) {
-            $status_class = strtolower($info['status']);
-            $status = strtolower($info['status']);
-            if (!empty($info['weather_status']) && $info['weather_status'] !== 'Normal') {
-                $status_class = 'closed';
-            }
-        }
+    //   $status_class = 'closed';
+    //     if ($info) {
+    //         $status_class = strtolower($info['status']);
+    //         if (!empty($info['weather_status']) && $info['weather_status'] !== 'Normal') {
+    //             $status_class = 'closed';
+    //         }
+    //     }
 
         // Prepare default values
         $notes = $info['notes'] ?? '';
@@ -169,19 +167,16 @@ function render_month_grid($month, $year, $calendar_data, $events_by_date, $inde
 
         $special_event_info = htmlspecialchars(json_encode(array_values($events_today)), ENT_QUOTES, 'UTF-8');
 
-        echo "<td data-status='$status' data-date='$date' data-open-time='$open_time' data-close-time='$close_time' data-open-time-2='$open_time_2' data-close-time-2='$close_time_2' data-notes='$notes' data-special-event='$special_event_info' data-weather-status='$weather_status' data-weather-note='$weather_note' data-rainy-day-guarantee='$rainy_day_guarantee' class='day-cell {$status_class} {$weather_status_class}'>";
+        echo "<td data-date='$date' data-status='$status' data-open-time='$open_time' data-close-time='$close_time' data-open-time-2='$open_time_2' data-close-time-2='$close_time_2' data-notes='$notes' data-special-event='$special_event_info' data-weather-status='$weather_status' data-weather-note='$weather_note' class='day-cell {$status} {$weather_status_class}'>";
         echo "<div class='day-inner'>";
-        echo "<p class='day-number'><strong>$day </strong><span class='park-status'>$status_class</span></p>";
+        echo "<p class='day-number'><strong>$day </strong><span class='park-status'>$status_copy</span></p>";
 
         // 1. Park Status & Hours
         if ($info) {
             echo '<div class="icon-container">';
 
-            //Only displays the clock if weather is 'Normal'
-            if (
-                strtolower($info['status']) !== 'closed' &&
-                (!isset($info['weather_status']) || $info['weather_status'] === 'Normal')
-            ) {
+            //Displays icons depending on status
+            if ($status === 'open' || $status === 'limited') {
                 echo '<svg class="hours-icon"><use xlink:href="#FontAwesomeicon-clock-o"></use></svg>';
             }
         
@@ -189,21 +184,17 @@ function render_month_grid($month, $year, $calendar_data, $events_by_date, $inde
                 echo '<svg class="event-icon"><use xlink:href="#FontAwesomeicon-star"></use></svg>';
             }
         
-            if (!empty($info['notes'])) {
+            if (!empty($notes) && $status === 'open' || !empty($notes) && $status === 'limited') {
                 echo '<svg class="bullhorn-icon"><use xlink:href="#FontAwesomeicon-bullhorn"></use></svg>';
             }
 
-            if ($weather_status != 'Normal') {
+            if ($status === 'weather-closure') {
                 echo '<svg class="bolt-icon"><use xlink:href="#FontAwesomeicon-bolt"></use></svg>';
-            }
-
-            if ($rainy_day_guarantee === 'Yes') {
-                echo '<svg class="shield-icon"><use xlink:href="#FontAwesomeicon-shield"></use></svg>';
             }
         
             echo "</div>";
         
-            if (strtolower($status_class) !== 'closed') {
+            if ($status === 'open' || $status === 'limited') {
                 echo "<p class='calendar-details hours'><strong>Hours:</strong></p>";
                 if (!empty($open_time) && !empty($close_time)) {
                     echo "<p class='calendar-details hours time'>{$open_time} – {$close_time}</p>";
@@ -261,6 +252,8 @@ for ($i = 0; $i < 12; $i++) {
 }
 
 echo '<div class="calendar-nav">';
+// echo '<button class="calendar-prev nz-button-blue" aria-label="Previous Month">&#8592;</button>';
+// echo '<button class="calendar-next nz-button-blue" aria-label="Next Month">&#8594;</button>';
 
 echo '</div>';
 
@@ -283,15 +276,8 @@ echo '<div id="calendar-day" class="calendar-day">
               <svg class="bolt-icon"><use xlink:href="#FontAwesomeicon-bolt"></use></svg>
               <p>The park has been CLOSED for the day due to inclement weather.</p>
             </div>
-            <div id="rainy-day-guarantee-message" class="rainy-day-message hide">
-              <svg class="shield-icon"><use xlink:href="#FontAwesomeicon-shield"></use></svg>
-              <p> Rainy Day Guarantee</p>
-            </div>
             <div id="calendar-day-notes-container" class="calendar-day-notes-container">
-                <svg id="calendar-day-note-icon" class="note-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="18" height="18">
-                    <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                    <path fill="#ff0482" d="M480 32c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9L381.7 53c-48 48-113.1 75-181 75l-8.7 0-32 0-96 0c-35.3 0-64 28.7-64 64l0 96c0 35.3 28.7 64 64 64l0 128c0 17.7 14.3 32 32 32l64 0c17.7 0 32-14.3 32-32l0-128 8.7 0c67.9 0 133 27 181 75l43.6 43.6c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6l0-147.6c18.6-8.8 32-32.5 32-60.4s-13.4-51.6-32-60.4L480 32zm-64 76.7L416 240l0 131.3C357.2 317.8 280.5 288 200.7 288l-8.7 0 0-96 8.7 0c79.8 0 156.5-29.8 215.3-83.3z"></path>
-                </svg>
+                <svg class="bullhorn-icon"><use xlink:href="#FontAwesomeicon-bullhorn"></use></svg>
                 <p id="calendar-day-notes" class="calendar-modal-notes"></p>
             </div>
            
