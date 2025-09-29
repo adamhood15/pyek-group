@@ -25,7 +25,7 @@ JOIN
 JOIN   
     Addresses on Addresses.AddressId = contacts.PrefAdId
 WHERE
-    gst_pass.expires > '2025-01-01'
+    gst_pass.expires > '2026-01-01'
     AND EmailAddresses.EMAddress != ''
     AND gst_pass.department LIKE 'CBCSP'
     AND gst_pass.category NOT LIKE 'AYCD'
