@@ -1,0 +1,775 @@
+
+/* h1, p, li, div, button, .MuiButton-root, a, input, td {
+  font-family: amino-alt !important;
+}
+
+
+.ui.button, .cart-button, .my-account-button, .back-button, .ui.cart-quantity, .ember-text-field {
+  border-radius: 50px !important;
+}
+
+.quantity-left-button {
+  border-top-left-radius: 15px !important;
+  border-bottom-left-radius: 15px !important;
+}
+
+.ember-view, .cart, .ui.form,  .MuiButton-root, .MuiInput-root, .rate-price-details>.ui.label>div:first-child, .cart-item__schedules, .ui.label  {
+  border-radius:25px !important;
+}
+
+.detail {
+  border-radius: 0 25px 25px 0 !important;
+}
+
+.MuiButton-root {
+  color: #000000 !important;
+} */
+
+
+/**
+Name: Demo CSS - Sales 
+Author: James Brown
+Purpose: Basic CSS 
+*/
+/* 
+@import url("https://fonts.googleapis.com/css2?family=Fjalla+One:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400;500;600;700;800&display=swap"); */
+
+
+
+
+/**
+Name: Demo CSS - Sales 
+Author: James Brown
+Purpose: Basic CSS 
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Fjalla+One:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400;500;600;700;800&display=swap");
+
+body,
+html {
+  background-color: transparent;
+}
+
+body.full-screen main#main-container,
+body:not(.full-screen) {
+  background-color: transparent;
+}
+
+/**Root variables for styling found through web engine**/
+:root {
+  /**Primary theme color**/
+  --primary-color: black;
+
+  /**Secondary theme color**/
+  --secondary-color: black;
+
+  /**Accent color. Used mostly in on hover effects**/
+  --accent-color: black;
+
+  /**Call to action buttons ex: proceed to cart**/
+  --cta-buttons-color: #ff0482;
+
+  /**my account buttons**/
+  --nav-buttons-color: #ff0482;
+
+  /**Primary font used throughout**/
+  --primary-header-font-family: "Bebas Neue", sans-serif;
+  --primary-font-family: "Mulish", sans-serif;
+  --header-font-weight: 700;
+  --body-font-weight: 400;
+  --header-font-size: 3rem !important;
+  --primary-letter-spacing: 0.03em;
+
+  /**default box shadow**/
+  --default-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/**END VARIABLES**/
+
+/**Parent layout styling**/
+
+/*This body.fullscreen class is only for modal experiences*/
+body.full-screen main#main-container {
+  background-color: #fff;
+  margin: 1em 0;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  border-radius: 15px;
+  padding: 1em;
+  width: 75%;
+  overflow-y: auto;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: var(--default-box-shadow);
+}
+
+.ui.grid {
+  display: relative;
+}
+
+.description {
+  margin: auto;
+}
+
+.ccpayment-div__contact-form .ui.header,
+.credit-card-fields__title {
+  font-family: var(--primary-font-family);
+}
+
+#header-container .ui.large.header {
+  font-size: 2.6em;
+  margin-bottom: 10px;
+  letter-spacing: var(--primary-letter-spacing);
+  font-family: var(--primary-header-font-family);
+}
+
+p {
+  font-family: var(--primary-font-family);
+}
+
+label {
+  font-family: var(--primary-font-family);
+  font-size: 15px;
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.content {
+  font-family: var(--primary-font-family);
+}
+
+.description {
+  margin-left: 20px !important;
+}
+
+.cart-container {
+  margin-top: 15px !important;
+}
+
+.ccpayment-div {
+  margin-top: 15px !important;
+}
+
+.cart-summary {
+  font-family: var(--primary-font-family);
+}
+
+/**Headers styling**/
+.ui.large.header {
+  font-family: var(--primary-font-family);
+  font-weight: var(--primary-font-weight);
+  font-size: var(--header-font-size);
+  color: black;
+  padding-top: 5% !important;
+}
+
+.ui.unstackable.divided.items.quantity-items {
+  margin-top: 10px !important;
+}
+
+.ui.header {
+  margin-top: 10px !important;
+}
+
+nav.navigation-buttons.time-segments__confirmation-banner {
+  margin-bottom: 10px !important;
+}
+
+.ui.header.date {
+  font-family: var(--primary-font-family);
+}
+
+.sub.header.times-for {
+  font-family: var(--primary-font-family);
+}
+
+.subHeader {
+  text-align: center;
+}
+
+.item-name.header {
+  font-family: var(--primary-font-family);
+}
+
+.ui.blue.inverted.segment.payment-header {
+  font-family: var(--primary-font-family);
+}
+
+.ui.segment.payment-header.amount-due {
+  font-family: var(--primary-font-family);
+}
+
+.ui.header {
+  font-family: var(--primary-font-family);
+}
+
+/**card styling**/
+
+.card {
+  box-shadow: var(--default-box-shadow) !important;
+}
+
+.order-complete-message {
+  text-align: center;
+}
+
+.available-items .ui.card > .content > .header,
+.rates-item-details .ui.card > .content > .header {
+  margin: auto;
+}
+
+.ui.hover.card,
+.ui.segments > .ui.link.segment {
+  transition: 0.6s;
+}
+
+/**lables throughout**/
+.rate-price-details > .ui.label > div:first-child {
+  background-color: var(--primary-color);
+}
+
+.ui.blue.label,
+.ui.blue.labels .label {
+  background-color: var(--primary-color) !important;
+}
+
+.ui.inverted.blue.segment {
+  background-color: var(--primary-color) !important;
+}
+
+/**buttons - CTA, nav, etc**/
+.ui.primary.button {
+  background-color: var(--cta-buttons-color) !important;
+  font-family: var(--primary-font-family);
+}
+
+.ui.primary.button:hover {
+  background-color: white !important;
+  transition: background-color 0.3s ease-in-out;
+  border: 0.5px solid var(--primary-color);
+  color: var(--primary-color);
+  font-family: var(--primary-font-family);
+}
+
+.ui.blue.button {
+  background-color: var(--primary-color) !important;
+}
+
+.ui.green.button {
+  background-color: var(--primary-color) !important;
+}
+
+button.ui.green.icon.button.quantity-right-button {
+  border: 1px solid #ccc;
+  color: white !important;
+  background: var(--primary-color);
+  font-family: var(--primary-font-family);
+}
+
+button.ui.green.icon.button.quantity-right-button:hover {
+  border: 1px solid #ccc;
+  color: var(--primary-color) !important;
+  background: white !important;
+  transition: background-color 0.4s ease-in-out;
+}
+
+button.ui.red.icon.button.quantity-left-button {
+  border: 1px solid #ccc;
+  color: white;
+  background: var(--primary-color) !important;
+}
+
+button.ui.red.icon.button.quantity-left-button:hover {
+  border: 1px solid #ccc;
+  color: var(--primary-color);
+  background: white !important;
+  transition: background-color 0.4s ease-in-out;
+}
+
+button.ui.disabled.right.labeled.icon.big.primary.button {
+  background: var(--cta-buttons-color) !important;
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+button.ui.right.labeled.icon.big.primary.button {
+  background: var(--cta-buttons-color) !important;
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+button.ui.right.labeled.icon.big.primary.button:hover {
+  background-color: white !important;
+  transition: background-color 0.3s ease-in-out;
+  border: 0.5px solid var(--primary-color);
+  color: var(--primary-color);
+  font-family: var(--primary-font-family);
+}
+
+button.ui.small.button.cart-button {
+  font-family: var(--primary-font-family);
+}
+
+button.ui.large.blue.button {
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+  color: white;
+}
+
+button.ui.small.button.cart-button {
+  font-family: var(--primary-font-family);
+}
+
+button.ui.big.default.button {
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+button.ui.fluid.right.labeled.icon.large.primary.button {
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+button.ui.fluid.right.labeled.icon.large.primary.button:hover {
+  background-color: white !important;
+  transition: background-color 0.3s ease-in-out;
+  border: 0.5px solid var(--primary-color);
+  color: var(--primary-color);
+  font-family: var(--primary-font-family);
+}
+
+button.ui.inverted.red.button {
+  font-family: var(--primary-font-family);
+}
+
+button.ui.disabled.big.green.button {
+  background: var(--cta-buttons-color) !important;
+}
+
+button.ui.big.green.button {
+  background: var(--cta-buttons-color) !important;
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+button.ui.large.blue.button {
+  background: var(--cta-buttons-color) !important;
+}
+
+button.ui.large.blue.button:hover {
+  background-color: white !important;
+  transition: background-color 0.3s ease-in-out;
+  border: 0.5px solid var(--primary-color);
+  color: var(--primary-color);
+  font-family: var(--primary-font-family);
+}
+
+button.ui.big.green.button:hover {
+  background-color: white !important;
+  transition: background-color 0.3s ease-in-out;
+  border: 0.5px solid var(--primary-color);
+  color: var(--primary-color);
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+/**Times & schedule container**/
+.sub.header.times-for {
+  font-family: var(--primary-font-family);
+}
+
+.times-container .ui.items {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  column-gap: 10px;
+  row-gap: 15px;
+}
+
+.ui.items > .item > .content > .header {
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.ui.items > .item > .content p {
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.schedule-container .times-container .ui.items > .item.time-item > .content {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  max-width: 100%;
+  margin: auto !important;
+  padding: 10% !important;
+}
+
+i.big.clock.outline.icon {
+  display: none;
+}
+
+.ui.compact.items > .item .content .description,
+.ui.form#contact-form .ui.header.order-number,
+.ui.form#contact-form .ui.header.tour-start-time {
+  display: none;
+}
+
+.ui.form .field > label {
+  font-size: 1em;
+  font-weight: 500;
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.times-container .ui.compact.items > .hover.item.time-item {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 10px 0 rgba(0, 0, 0, 0.19) !important;
+  border-radius: 15px;
+  padding: 10px !important;
+}
+
+.ui.compact.divided.link.hover.unstackable.items {
+  margin-bottom: 20px !important;
+}
+
+div#times-list {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+/***
+Begin Time segments styling
+*
+*/
+.time-segments__tab-button:not(:first-child) {
+  border-left: var(--primary-color) !important;
+}
+
+.time-segments__flex {
+  box-shadow: var(--default-box-shadow) !important;
+  border-radius: 15px;
+}
+
+.time-segments__background {
+  background-color: transparent !important;
+}
+
+.time-segments-time__ticket-left-font {
+  font-size: 0.9rem !important;
+}
+
+.time-confirmation__date,
+.time-confirmation__time {
+  color: var(--primary-color);
+}
+
+a.item.time-segments__tab-button.active {
+  color: white !important;
+  background-color: var(--primary-color) !important;
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.time-segments__tab-button {
+  color: var(--primary-color) !important;
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.time-segments__tabs {
+  border: 3px solid var(--primary-color) !important;
+  border-radius: 7px !important;
+  overflow: hidden;
+  width: 98% !important;
+  display: flex;
+  justify-content: space-between;
+  height: 45px;
+}
+
+.time-segments__border-left {
+  border-left: 3px solid var(--primary-color) !important;
+}
+
+.time-segments__info-container {
+  background-color: var(--accent-color) !important;
+  color: var(--primary-color) !important;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+button.ui.big.button.time-segments-tabs__active-colour {
+  background-color: var(--cta-buttons-color) !important;
+  color: var(--accent-color) !important;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+button.ui.big.button.time-segments-tabs__active-colour:hover {
+  background-color: var(--accent-color) !important;
+  color: var(--primary-color) !important;
+  border-radius: 10px;
+  transition: 0.3s ease-in-out;
+  border: 1px solid black !important;
+}
+
+.time-segments__tabs {
+  border: 1px solid #ccc !important;
+}
+
+.time-segments__border-left {
+  border: 1px solid #ccc !important;
+}
+
+.time-segments-time__item-clicked {
+  border: 3px solid var(--primary-color) !important;
+}
+
+.time-segments-time__container.time-segments-time__details-container {
+  min-height: 75px;
+  min-width: 215px;
+}
+
+.time-segments__background {
+  background-color: #e0e1e2;
+  width: 100%;
+  height: 326px;
+  border-radius: 7px !important;
+  overflow-y: auto;
+}
+
+/***
+End Time segments styling
+*
+*/
+/***End schedule section styling**/
+
+/**
+Footer styling
+**/
+
+footer#footer-container {
+  margin-bottom: 15px;
+}
+
+nav.navigation-buttons {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+nav.navigation-buttons {
+  margin-top: 15px !important;
+  margin-bottom: 10px !important;
+}
+
+/** my account stuff **/
+button.ui.small.button.back-home-button {
+  border-radius: 15px !important;
+}
+
+button.ui.red.small.button.sign-out-button {
+  border-radius: 15px !important;
+}
+
+button.ui.black.small.button {
+  border-radius: 15px !important;
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+button.ui.green.small.button.my-account-button {
+  border-radius: 15px;
+}
+
+button.ui.small.button.cart-button {
+  border-radius: 15px;
+  background-color: var(--secondary-color);
+}
+
+.ui.small.button.cart-button .ui.red.label.cart-item-count {
+  background-color: var(--secondary-color) !important;
+}
+
+button.ui.small.button.cart-button:hover {
+  border-radius: 15px;
+  background-color: var(--secondary-color);
+}
+
+.ui.small.button.cart-button .ui.red.label.cart-item-count:hover {
+  background-color: var(--secondary-color) !important;
+}
+
+.cart-summary__total {
+  margin-top: 1rem;
+  color: var(--accent-color) !important;
+}
+
+.time-segments__tab-button.active {
+  background-color: var(--accent-color);
+  color: white !important;
+}
+
+.time-segments__tab-button.active:hover {
+  background-color: var(--accent-color);
+  color: white !important;
+}
+
+.time-segments__tab-button {
+  flex: 1;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+}
+
+.ui.ui.calendar .ui.table td.active {
+  background-color: var(--accent-color) !important;
+}
+
+.time-confirmation__button.ui.button {
+  background: var(--cta-buttons-color) !important;
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.time-confirmation__button.ui.button:hover {
+  background-color: white !important;
+  transition: background-color 0.3s ease-in-out;
+  border: 0.5px solid var(--primary-color);
+  color: var(--primary-color);
+  font-family: var(--primary-font-family);
+}
+
+.terms-container {
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: var(--primary-letter-spacing);
+  margin-top: 10px;
+}
+
+button.ui.big.labeled.icon.button.navigation-buttons__back-to-cart {
+  letter-spacing: var(--primary-letter-spacing);
+  font-family: var(--primary-font-family);
+}
+
+.ui.warning.message {
+  font-family: var(--primary-font-family);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.time-confirmation__date,
+.time-confirmation__time {
+  border-style: solid;
+  border-color: var(--primary-color);
+  border-width: 1px;
+  border-radius: 15px;
+}
+
+.ui.top.attached.tabular.menu.my-account-menu .item.active {
+  background-color: var(--primary-color);
+}
+
+.ui.top.attached.tabular.menu.my-account-menu .item {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.ui.form#contact-form .ui.header.section-header,
+.ui.form#questions-form .field > label {
+  color: var(--primary-color);
+}
+
+.ui.top.attached.tabular.menu.my-account-menu .item.active:focus-visible,
+.ui.top.attached.tabular.menu.my-account-menu .item.active:hover {
+  background-color: var(--nav-buttons-color);
+}
+
+form {
+  margin-top: 10px;
+}
+
+.powered-by {
+  margin-top: 10px;
+}
+
+.time-segments-time__container {
+  background-color: #ffffff;
+  box-shadow: var(--default-box-shadow);
+}
+
+.schedule-container {
+  margin-top: 10px;
+}
+
+.time-item {
+  background: white;
+  box-shadow: var(--default-box-shadow);
+}
+
+div#contact-form {
+  margin-top: 10px;
+}
+
+.ui.column.grid.available-items {
+  margin-top: 10px;
+}
+
+.ui.centered.header {
+  display: none;
+}
+
+.BuyTicketsButton {
+  cursor: pointer;
+  min-height: 1em;
+  outline: 0;
+  border: none;
+  background: var(--cta-buttons-color);
+  color: white;
+  margin: 0 0.25em 0 0;
+  padding: 0.78571429em 1.5em;
+  text-transform: uppercase;
+  text-shadow: none;
+  line-height: 1em;
+  text-align: center;
+  border-radius: 10px;
+  user-select: none;
+  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease,
+    box-shadow 0.1s ease, background 0.1s ease;
+  will-change: "";
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: var(--primary-font-family);
+}
+
+@media (max-width: 640px) {
+  .item-images {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Make width 100% on small screens (iPhone) */
+@media screen and (max-width: 480px) {
+  body.full-screen main#main-container {
+    width: 100%;
+    margin: 0.5em; /* optional, some spacing around */
+    border-radius: 10px; /* optional, slightly smaller corners */
+  }
+}
+
+.description {
+  font-size: 16px;
+}
+
+.card .header {
+  font-size: 22px !important;
+}
+
+.ui.compact.segment.rate-price .header {
+  display: none;
+}
+
+footer img {
+  vertical-align: middle;
+  height: 65px;
+}

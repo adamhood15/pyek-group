@@ -1,0 +1,313 @@
+/* =========================================================
+   1. FONT IMPORTS
+========================================================= */
+
+@font-face {
+  font-family: "aloevera-display";
+  src: url("https://typhoon-texas.s3.us-east-1.amazonaws.com/fonts/AloeveraDisplay-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "aloevera-display";
+  src: url("https://typhoon-texas.s3.us-east-1.amazonaws.com/fonts/AloeveraDisplay-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "aloevera-display";
+  src: url("https://typhoon-texas.s3.us-east-1.amazonaws.com/fonts/AloeveraDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* =========================================================
+   2. VARIABLES
+========================================================= */
+
+:root {
+  --primary-color: black;
+  --secondary-color: black;
+  --tertiary-color: #ffffff;
+  --accent-color: black;
+  --cta-buttons-color: #32a4f8 ;
+  --nav-buttons-color: #32a4f8 ;
+
+  --primary-header-font-family: "aloevera-display", sans-serif;
+  --primary-font-family: "aloevera-display", sans-serif;
+
+  --header-font-weight: 700;
+  --body-font-weight: 400;
+  --header-font-size: 3rem !important;
+  --primary-letter-spacing: 0.03em;
+
+  --default-box-shadow:
+    0 4px 8px rgba(0,0,0,.2),
+    0 6px 20px rgba(0,0,0,.19);
+}
+
+
+/* =========================================================
+   3. FONT DECLARATIONS 
+========================================================= */
+
+.ccpayment-div__contact-form .ui.header,
+.credit-card-fields__title,
+p,
+label,
+.content,
+.cart-summary,
+.item-name.header,
+.ui.header,
+.sub.header.times-for,
+.ui.header.date,
+.ui.warning.message,
+.time-segments__tab-button,
+.time-confirmation__button,
+.BuyTicketsButton,
+footer img,
+button, 
+.text {
+  font-family: var(--primary-font-family) !important;
+}
+
+.text {
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   4. BUTTON STYLES
+========================================================= */
+
+.button, .cart-item-count {
+	border-radius: 50px !important;
+}
+
+
+.ui.primary.button {
+    border: 1px solid var(--tertiary-color) !important;
+  	
+}
+
+.ui.primary.button:hover {
+    border: 1px solid var(--cta-buttons-color) !important;
+  background: #ffffff;
+  color: var(--cta-buttons-color) !important;
+}
+
+.ui.big.button.back-button {
+  padding: .785em 1.1em;
+}
+
+
+/* =========================================================
+   5. GLOBAL / LAYOUT
+========================================================= */
+
+body.full-screen 
+main#main-container 
+.navigation-buttons, 
+header#header-container,
+body.full-screen header#header-container{
+  border: none;
+  }
+
+body.full-screen main#main-container {
+	width: 1200px;
+  padding: 1em 2em;
+}
+
+#header-container {
+	margin: 1em 0 2em 0 !important;
+   background: transparent !important;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+header > h1 {
+	grid-column: 2;
+  text-align: center;
+}
+
+.application-actions {
+	position: inherit;
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ui.card, .ui.cards>.card {
+	border-radius: 1rem;
+	box-shadow: var(--default-box-shadow);
+}
+
+body.full-screen main#main-container {
+	border: none;
+  border-radius: 1rem;
+	background: #f8f8f8;
+}
+
+body.full-screen {
+
+  background-color: rgba(25, 25, 25, .8);
+}
+
+.ui.card:hover {
+  background-color: #ecf7fa;
+}
+
+body.full-screen .application-actions {
+	right: 0;
+}
+
+
+/* =========================================================
+   6. SHARED BOX SHADOWS
+========================================================= */
+
+
+
+/* =========================================================
+   7. HEADERS & TYPOGRAPHY
+========================================================= */
+
+.ui.large.header {
+  font-weight: var(--header-font-weight);
+  color: #000000;
+
+}
+
+
+/* =========================================================
+   8. ITEMS / CARDS
+========================================================= */
+
+.ui.items {
+  margin: 1.5rem;
+}
+
+.image > img {
+	border-radius: 15px !important;
+}
+
+.ui.button:not(.icon)>.icon:not(.button):not(.dropdown), .ui.button>.icon:not(.button) {
+	margin: 0;
+}
+
+.ui.card:hover {
+  cursor: pointer;
+}
+
+.price {
+    box-shadow: 0 0 0 1px #a9d5de inset, 0 0 0 0 transparent;
+    background-color: #f8ffff;
+    color: #276f86;
+  	padding: .1em .3em;
+  border-radius: 5px ;
+    flex-grow:  0 ;
+ 	width: fit-content;
+  
+}
+
+
+/* =========================================================
+   9. TIME SEGMENTS / SCHEDULING
+========================================================= */
+
+/* .times-container .ui.items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px 10px;
+}
+
+.time-segments__tabs {
+  display: flex;
+  justify-content: space-between;
+  height: 45px;
+  width: 98% !important;
+  border: 1px solid #ccc !important;
+  border-radius: 7px;
+}
+
+.time-segments__tab-button {
+  flex: 1;
+  color: var(--accent-color) !important;
+  border: 2px solid var(--accent-color);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.time-segments__tab-button.active {
+  background: var(--accent-color);
+  color: var(--tertiary-color) !important;
+} */
+
+
+/* =========================================================
+   10. FOOTER
+========================================================= */
+
+footer#footer-container {
+  display: none;
+}
+
+
+
+/* =========================================================
+   11. MEDIA QUERIES
+========================================================= */
+
+/* @media (max-width: 640px) {
+  .item-images {
+    margin: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  body.full-screen main#main-container {
+    width: 100%;
+    margin: 0.5em;
+    border-radius: 10px;
+  }
+} */
+
+@media only screen and (max-width: 1400px) {
+    body.full-screen main#main-container {
+		align-self: auto;
+    }
+}
+
+@media (max-width: 1200px) {
+	body.full-screen main#main-container {
+    	width: 90%;
+    }
+  
+  #header-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .ui.grid {
+    flex-direction: column;
+  }
+ .ui.grid.available-items>.column {
+   width: 100%;
+ }
+  
+}
+
+
+@media only screen and (min-width: 500px) {
+    .available-items .ui.card, .multipass-items .ui.card, .rates-item-details .ui.card {
+        height: 100%;
+    }
+}

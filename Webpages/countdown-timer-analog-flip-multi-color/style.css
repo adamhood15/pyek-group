@@ -1,0 +1,211 @@
+:root {
+  --primary: rgb(179, 0, 255);
+  --secondary: black;
+  --background: #fff;
+
+}
+
+html, body {
+  height: 100%;
+  background: #209cff;
+  font-family: "aloeveradisplay-regular", sans-serif;
+}
+
+.heading{
+  color: var(--secondary);
+}
+
+.friday {
+  color: var(--primary);
+}
+
+.header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+  /* background:#1d1d1d; */
+  background-image: url('tv-noise.mp4');
+  background-size: auto;
+  padding: 20px;
+  background-color:var(--background);
+
+}
+
+.bf-button {
+  background-color: var(--primary);
+  color: var(--secondary);
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 15px;
+  border: 1px solid var(--secondary);
+  font: 25px "aloeveradisplay-bold", sans-serif;
+}
+
+.close-banner {
+  position: absolute;
+  top: 5px;
+  right: 25px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--secondary);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.close-banner:hover {
+  opacity: 0.7;
+}
+
+.flip-clock {
+
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  perspective: 400px;
+  gap: 1vw;
+  margin: auto;
+}
+
+
+
+.flip-clock__piece {
+  display: inline-block;
+  margin: 0 4px;
+}
+
+.flip-clock__slot {
+  display: block;
+  font-size: 1.5vw;
+  color: var(--secondary);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.card {
+  position: relative;
+  display: block;
+  font-size: 3em;
+  padding-bottom: 0.72em;
+  line-height: 1;
+}
+
+.card__top,
+.card__bottom,
+.card__back::before,
+.card__back::after {
+  display: block;
+  height: 0.5em;
+  color: var(--secondary);
+  /* background: var(--primary); */
+  border-radius: 0.15em;
+  border: 1px solid var(--secondary);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  width: 0.8em;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1em;
+  padding-top: 0.25em;
+}
+
+/* Hours group - Blue */
+.flip-clock__group[data-unit="hours"] .card__top,
+.flip-clock__group[data-unit="hours"] .card__bottom,
+.flip-clock__group[data-unit="hours"] .card__back::before,
+.flip-clock__group[data-unit="hours"] .card__back::after {
+  background: #209cff;
+}
+
+/* Minutes group - Red */
+.flip-clock__group[data-unit="minutes"] .card__top,
+.flip-clock__group[data-unit="minutes"] .card__bottom,
+.flip-clock__group[data-unit="minutes"] .card__back::before,
+.flip-clock__group[data-unit="minutes"] .card__back::after {
+  background: #ff3b3b;
+}
+
+/* Seconds group - Green */
+.flip-clock__group[data-unit="seconds"] .card__top,
+.flip-clock__group[data-unit="seconds"] .card__bottom,
+.flip-clock__group[data-unit="seconds"] .card__back::before,
+.flip-clock__group[data-unit="seconds"] .card__back::after {
+  background: #00cc66;
+}
+
+.card__bottom {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-top: 1px solid var(--background);
+}
+
+.card__bottom::after {
+  display: block;
+  margin-top: -0.72em;
+}
+
+.card__back::before,
+.card__bottom::after {
+  content: attr(data-value);
+}
+
+.card__back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  pointer-events: none;
+}
+
+.flip .card__back::before {
+  animation: flipTop 0.3s cubic-bezier(0.37, 0.01, 0.94, 0.35);
+  animation-fill-mode: both;
+  transform-origin: center bottom;
+}
+
+.flip .card__back .card__bottom {
+  transform-origin: center top;
+  animation-fill-mode: both;
+  animation: flipBottom 0.6s cubic-bezier(0.15, 0.45, 0.28, 1);
+}
+
+@keyframes flipTop {
+  0% {
+    transform: rotateX(0deg);
+    z-index: 2;
+  }
+  0%, 99% {
+    opacity: 0.99;
+  }
+  100% {
+    transform: rotateX(-90deg);
+    opacity: 0;
+  }
+}
+
+@keyframes flipBottom {
+  0%, 50% {
+    z-index: -1;
+    transform: rotateX(90deg);
+    opacity: 0;
+  }
+  51% {
+    opacity: 0.99;
+  }
+  100% {
+    opacity: 0.99;
+    transform: rotateX(0deg);
+    z-index: 5;
+  }
+}
+
+@font-face {
+  font-family: "aloeveradisplay-regular";
+  src: url("https://typhoon-texas.s3.us-east-1.amazonaws.com/fonts/AloeveraDisplay-Regular.ttf")
+    format("truetype");
+}

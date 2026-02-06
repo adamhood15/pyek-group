@@ -1,0 +1,289 @@
+/* =========================================================
+   1. FONT IMPORTS
+========================================================= */
+
+@font-face {
+  font-family: "aloevera-display";
+  src: url("https://typhoon-texas.s3.us-east-1.amazonaws.com/fonts/AloeveraDisplay-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "aloevera-display";
+  src: url("https://typhoon-texas.s3.us-east-1.amazonaws.com/fonts/AloeveraDisplay-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "aloevera-display";
+  src: url("https://typhoon-texas.s3.us-east-1.amazonaws.com/fonts/AloeveraDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* =========================================================
+   2. VARIABLES
+========================================================= */
+
+:root {
+  --primary-color: black;
+  --secondary-color: black;
+  --tertiary-color: #ffffff;
+  --accent-color: black;
+  --cta-buttons-color: #ff0482;
+  --nav-buttons-color: #ff0482;
+
+  --primary-header-font-family: "aloevera-display", sans-serif;
+  --primary-font-family: "aloevera-display", sans-serif;
+
+  --header-font-weight: 900;
+  --body-font-weight: 400;
+  --header-font-size: 3rem !important;
+  --primary-letter-spacing: 0.03em;
+
+  --default-box-shadow:
+    0 4px 8px rgba(0,0,0,.2),
+    0 6px 20px rgba(0,0,0,.19);
+}
+
+
+/* =========================================================
+   3. FONT DECLARATIONS (SHARED)
+========================================================= */
+
+.ccpayment-div__contact-form .ui.header,
+.credit-card-fields__title,
+p,
+label,
+.content,
+.cart-summary,
+.item-name.header,
+.ui.header,
+.sub.header.times-for,
+.ui.header.date,
+.ui.warning.message,
+.time-segments__tab-button,
+.time-confirmation__button,
+.BuyTicketsButton,
+footer img,
+button {
+  font-family: var(--primary-font-family) !important;
+}
+
+.text {
+  font-family: "aloevera-display", sans-serif;
+  font-size: 20px;
+}
+
+
+/* =========================================================
+   4. BUTTON STYLES (SHARED)
+========================================================= */
+
+.button,
+#header-container {
+	border-radius: 50px !important;
+}
+
+/* .ui.primary.button,
+button.ui.right.labeled.icon.big.primary.button,
+button.ui.fluid.right.labeled.icon.large.primary.button,
+button.ui.disabled.right.labeled.icon.big.primary.button,
+button.ui.disabled.big.green.button,
+button.ui.big.green.button,
+button.ui.large.blue.button,
+.time-confirmation__button.ui.button {
+  background: var(--cta-buttons-color) !important;
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+
+button.ui.right.labeled.icon.big.primary.button:hover,
+button.ui.fluid.right.labeled.icon.large.primary.button:hover,
+button.ui.big.green.button:hover,
+button.ui.large.blue.button:hover,
+.time-confirmation__button.ui.button:hover {
+  background: var(--tertiary-color) !important;
+  color: var(--primary-color);
+  border: 0.5px solid var(--primary-color);
+  transition: background-color 0.3s ease-in-out;
+} */
+
+.ui.primary.button {
+    border: 1px solid var(--tertiary-color) !important;
+  	
+}
+
+.ui.primary.button:hover {
+    border: 1px solid var(--cta-buttons-color) !important;
+  color: var(--cta-buttons-color) !important;
+}
+
+
+/* =========================================================
+   5. GLOBAL / LAYOUT
+========================================================= */
+
+/* html,
+body,
+body:not(.full-screen),
+.time-segments__background {
+  background-color: transparent !important;
+} */
+/* 
+#main-container {
+  margin: 25px 0;
+} */
+
+body.full-screen {
+  margin: 125px 0 0;
+}
+
+/* body.full-screen main#main-container {
+  background: #ffffff !important;
+  margin: 1em auto;
+  padding: 1em;
+  width: 75%;
+  overflow-y: auto;
+  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 15px;
+  box-shadow: var(--default-box-shadow);
+} */
+
+/* .ui.grid {
+  display: relative;
+}  */
+
+
+/* =========================================================
+   6. SHARED BOX SHADOWS
+========================================================= */
+
+/* #header-container,
+.card,
+.time-item,
+.time-segments__flex,
+.time-segments-time__container {
+  box-shadow: var(--default-box-shadow) !important;
+} */
+
+
+/* =========================================================
+   7. HEADERS & TYPOGRAPHY
+========================================================= */
+
+.ui.large.header {
+  font-weight: var(--header-font-weight);
+  font-size: var(--header-font-size);
+  color: black;
+}
+
+#header-container .ui.large.header {
+  font-size: 2em;
+ 
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+#header-container {
+  width: 75%;
+	margin: 0 auto 10px auto !important;
+}
+
+label {
+  font-size: 15px;
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.description {
+  margin-left: 20px !important;
+  font-size: 16px;
+}
+
+
+/* =========================================================
+   8. ITEMS / CARDS
+========================================================= */
+
+.item {
+  background: var(--tertiary-color) !important;
+
+}
+
+.content {
+  padding: 15px 0 !important;
+}
+
+.card .header {
+  font-size: 22px !important;
+}
+
+
+/* =========================================================
+   9. TIME SEGMENTS / SCHEDULING
+========================================================= */
+
+.times-container .ui.items {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px 10px;
+}
+
+.time-segments__tabs {
+  display: flex;
+  justify-content: space-between;
+  height: 45px;
+  width: 98% !important;
+  border: 1px solid #ccc !important;
+  border-radius: 7px;
+}
+
+.time-segments__tab-button {
+  flex: 1;
+  color: var(--accent-color) !important;
+  border: 2px solid var(--accent-color);
+  letter-spacing: var(--primary-letter-spacing);
+}
+
+.time-segments__tab-button.active {
+  background: var(--accent-color);
+  color: var(--tertiary-color) !important;
+}
+
+
+/* =========================================================
+   10. FOOTER
+========================================================= */
+
+footer#footer-container {
+  display: none;
+}
+
+footer img {
+  height: 65px;
+  vertical-align: middle;
+}
+
+
+/* =========================================================
+   11. MEDIA QUERIES
+========================================================= */
+
+/* @media (max-width: 640px) {
+  .item-images {
+    margin: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  body.full-screen main#main-container {
+    width: 100%;
+    margin: 0.5em;
+    border-radius: 10px;
+  }
+} */

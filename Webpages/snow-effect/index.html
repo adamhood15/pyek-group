@@ -1,0 +1,152 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winter Wonderland Collection</title>
+    <style>
+
+        @font-face {
+            font-family: "Frost";
+            src: url('./Frost.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            --primary-blue: #2D5D7B;
+            --accent-blue: #3A7CA5;
+            --ice-blue: #D6E6F2;
+            --silver: #C0CFD8;
+            --white: #FFFFFF;
+            --glow: rgba(255, 255, 255, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #2D5D7B, #3A7CA5);
+            color: #ffffff;
+            overflow-x: hidden;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+      
+       
+
+        .banner-heading {
+            font-family: 'Frost', sans-serif;
+            font-size: 75px;
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            animation: draw 4s
+    }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="glass">
+            <h1 class="banner-heading">Freeze Week:</h1>
+            <p class="tagline">Today's low is 42&deg;<br>So we're taking 42% Off</p>
+
+            <button class="freeze-btn">Buy Now</button>
+                            <p class="tagline_bottom">*Discount resets every morning of Freeze Week based on the forecasted low for that day.</p>
+
+        </div>
+        
+           <!-- <img src="./icicle-1.png" alt="Icicle Decoration" class="icicle"> -->
+
+        
+        
+
+       
+
+    </div>
+   
+    <div class="snowflakes" id="snowflakes"></div>
+    
+   
+    <script>
+        // Create snowflakes
+        const snowflakesContainer = document.getElementById('snowflakes');
+        const containerWidth = window.innerWidth;
+        const containerHeight = window.innerHeight;
+        const snowflakeCount = 50;
+        let scrollSpeedFactor = 1;
+        
+        // Create initial snowflakes
+        for (let i = 0; i < snowflakeCount; i++) {
+            createSnowflake();
+        }
+        
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            
+            // Randomize snowflake properties
+            const size = Math.random() * 5 + 2;
+            const startPositionX = Math.random() * containerWidth;
+            const startPositionY = Math.random() * containerHeight * -1;
+            const duration = Math.random() * 10 + 8;
+            const delay = Math.random() * 5;
+            
+            // Set snowflake styles
+            snowflake.style.width = `${size}px`;
+            snowflake.style.height = `${size}px`;
+            snowflake.style.left = `${startPositionX}px`;
+            snowflake.style.top = `${startPositionY}px`;
+            snowflake.style.opacity = Math.random() * 0.7 + 0.3;
+            
+            // Store snowflake properties for animation
+            snowflake.setAttribute('data-speed', Math.random() * 2 + 1);
+            snowflake.setAttribute('data-amplitude', Math.random() * 30 + 5);
+            snowflake.setAttribute('data-x', startPositionX);
+            snowflake.setAttribute('data-y', startPositionY);
+            
+            snowflakesContainer.appendChild(snowflake);
+            animateSnowflake(snowflake);
+        }
+        
+        function animateSnowflake(snowflake) {
+            const speed = parseFloat(snowflake.getAttribute('data-speed'));
+            const amplitude = parseFloat(snowflake.getAttribute('data-amplitude'));
+            let x = parseFloat(snowflake.getAttribute('data-x'));
+            let y = parseFloat(snowflake.getAttribute('data-y'));
+            
+            function update() {
+                // Update position with scroll speed factor
+                y += speed * scrollSpeedFactor;
+                x += Math.sin(y / amplitude) * 0.5;
+                
+                // Set new position
+                snowflake.style.transform = `translate(${Math.sin(y / 50) * amplitude}px, ${y}px)`;
+                
+                // Reset if snowflake moves out of view
+                if (y > containerHeight) {
+                    y = -10;
+                    x = Math.random() * containerWidth;
+                    snowflake.setAttribute('data-x', x);
+                    snowflake.setAttribute('data-y', y);
+                } else {
+                    snowflake.setAttribute('data-y', y);
+                }
+                
+                requestAnimationFrame(update);
+            }
+            
+            update();
+        }
+    </script>
+</body>
+</html>
