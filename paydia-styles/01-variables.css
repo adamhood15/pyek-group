@@ -1,0 +1,61 @@
+/**
+ * CSS Custom Properties (Variables)
+ * Replace these values with your actual brand colors
+ */
+
+:root {
+  /* Primary Colors */
+  --blue: #234ea2;
+  --blue-light: #6fdbff;
+  --blue-medium:  #0285c5;
+  --red: #ff1469;
+  --yellow: #ffee30;
+
+  /* Neutral Colors */
+  --black: #000000;
+  --white: #ffffff;
+  --gray-dark: #474747;
+  --gray-medium: #989898;
+  --gray-light: #d9d9d9;
+
+  /* Background Colors */
+  --bg-light-blue: #6fdbff;
+  --bg-white: #ffffff;
+  --bg-error: #fbeded;
+
+  /* Border Colors */
+  --border-color: rgba(71, 71, 71, 0.3);
+  --border-separator: rgba(0, 0, 0, 0.14);
+
+  /* Typography */
+  --font-primary: 'Aloevera-display', Arial, sans-serif;
+
+  /* Breakpoints (for reference in comments) */
+  /* Phone: 767px */
+  /* Tablet: 768px */
+  /* Laptop: 1024px */
+  /* Laptop L: 1440px */
+  /* Desktop: 1920px */
+
+  /* Spacing */
+  --spacing-xs: 10px;
+  --spacing-sm: 16px;
+  --spacing-md: 20px;
+  --spacing-lg: 30px;
+  --spacing-xl: 40px;
+
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-pill: 100px;
+
+  /* Shadows */
+  --shadow-card: 0px 4px 33px rgba(0, 0, 0, 0.14);
+  --shadow-modal: 0px 0px 33px rgba(0, 0, 0, 0.14);
+  --shadow-dropdown: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+  /* Transitions */
+  --transition-fast: 0.2s all;
+  --transition-medium: 0.35s ease;
+}

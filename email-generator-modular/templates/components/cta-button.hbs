@@ -1,0 +1,18 @@
+<!-- Single CTA Button Component -->
+<tr>
+  <td style="padding: {{#if this.padding}}{{this.padding}}{{else}}25px 0 50px 0{{/if}}; background-color: {{@root.theme.backgroundColor}};" class="dark-mode" align="center">
+    <!--[if mso]>
+    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{this.url}}{{#if @root.utm.enabled}}{{@root.utm.params}}{{/if}}" style="height:{{#if this.height}}{{this.height}}{{else}}60px{{/if}};v-text-anchor:middle;width:{{#if this.width}}{{this.width}}{{else}}240px{{/if}};" arcsize="45%" strokecolor="{{#if this.borderColor}}{{this.borderColor}}{{else}}{{#if this.color}}{{this.color}}{{else}}{{@root.brandConfig.cta.primaryColor}}{{/if}}{{/if}}" strokeweight="4px" fillcolor="{{#if this.color}}{{this.color}}{{else}}{{@root.brandConfig.cta.primaryColor}}{{/if}}">
+      <w:anchorlock/>
+      <center style="color:{{#if this.textColor}}{{this.textColor}}{{else}}#ffffff{{/if}};font-family:'Arial Black',sans-serif;font-size:{{#if this.fontSize}}{{this.fontSize}}{{else}}18px{{/if}};font-weight:{{#if this.fontWeight}}{{this.fontWeight}}{{else}}900{{/if}};line-height:26px;mso-line-height-rule:exactly;">
+        {{this.text}}
+      </center>
+    </v:roundrect>
+    <![endif]-->
+    <!--[if !mso]><!-->
+    <a class="cta-{{@index}}" href="{{this.url}}{{#if @root.utm.enabled}}{{@root.utm.params}}{{/if}}" style="display:inline-block;background-color:{{#if this.color}}{{this.color}}{{else}}{{@root.brandConfig.cta.primaryColor}}{{/if}};color:{{#if this.textColor}}{{this.textColor}}{{else}}#ffffff{{/if}};font-family:'Arial Black',sans-serif;font-size:{{#if this.fontSize}}{{this.fontSize}}{{else}}18px{{/if}};font-weight:{{#if this.fontWeight}}{{this.fontWeight}}{{else}}900{{/if}};line-height:26px;text-align:center;text-decoration:none;-webkit-border-radius:35px;-moz-border-radius:35px;border-radius:35px;border:4px solid {{#if this.borderColor}}{{this.borderColor}}{{else}}{{#if this.color}}{{this.color}}{{else}}{{@root.brandConfig.cta.primaryColor}}{{/if}}{{/if}};padding:{{#if this.buttonPadding}}{{this.buttonPadding}}{{else}}10px 20px{{/if}};">
+      {{this.text}}
+    </a>
+    <!--<![endif]-->
+  </td>
+</tr>

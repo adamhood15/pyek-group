@@ -1,0 +1,57 @@
+/**
+ * Utilities & Miscellaneous
+ * Hidden elements, chat widgets, and other utility styles
+ */
+
+/* Hide Newsletter and Instagram Sections */
+body.page.kissimmee-parties .newsletter-signup,
+body.page.kissimmee-parties .instagram-slider,
+body.page.kissimmee-parties .instagram-slider + .container,
+body.page.orlando-parties .newsletter-signup,
+body.page.orlando-parties .instagram-slider,
+body.page.orlando-parties .instagram-slider + .container,
+body.page.renew-season-pass .newsletter-signup,
+body.page.renew-season-pass .instagram-slider,
+body.page.renew-season-pass .instagram-slider + .container,
+body.page.season-pass .newsletter-signup,
+body.page.season-pass .instagram-slider,
+body.page.season-pass .instagram-slider + .container,
+body.page.buy-tickets .newsletter-signup,
+body.page.buy-tickets .instagram-slider,
+body.page.buy-tickets .instagram-slider + .container {
+  display: none !important;
+}
+
+/* Chat Widget Positioning */
+body.page.kissimmee-parties #apexchat_prechat_invitation_wrapper,
+body.page.kissimmee-parties #apexchat_dompopup_chatwindow_wrapper,
+body.page.orlando-parties #apexchat_prechat_invitation_wrapper,
+body.page.orlando-parties #apexchat_dompopup_chatwindow_wrapper,
+body.page.renew-season-pass #apexchat_prechat_invitation_wrapper,
+body.page.renew-season-pass #apexchat_dompopup_chatwindow_wrapper,
+body.page.season-pass #apexchat_prechat_invitation_wrapper,
+body.page.season-pass #apexchat_dompopup_chatwindow_wrapper,
+body.page.buy-tickets #apexchat_prechat_invitation_wrapper,
+body.page.buy-tickets #apexchat_dompopup_chatwindow_wrapper {
+  margin-bottom: 86px !important;
+}
+
+@media (max-width: 767px) {
+  body.page.kissimmee-parties #apexchat_prechat_invitation_wrapper,
+  body.page.kissimmee-parties #apexchat_dompopup_chatwindow_wrapper,
+  body.page.orlando-parties #apexchat_prechat_invitation_wrapper,
+  body.page.orlando-parties #apexchat_dompopup_chatwindow_wrapper,
+  body.page.renew-season-pass #apexchat_prechat_invitation_wrapper,
+  body.page.renew-season-pass #apexchat_dompopup_chatwindow_wrapper,
+  body.page.season-pass #apexchat_prechat_invitation_wrapper,
+  body.page.season-pass #apexchat_dompopup_chatwindow_wrapper,
+  body.page.buy-tickets #apexchat_prechat_invitation_wrapper,
+  body.page.buy-tickets #apexchat_dompopup_chatwindow_wrapper {
+    margin-bottom: unset !important;
+  }
+}
+
+/* Cart Modal Active State */
+body > #paydia-cart.active {
+  z-index: 10000 !important;
+}

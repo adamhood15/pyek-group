@@ -1,0 +1,37 @@
+<!-- Three Column Component -->
+<tr>
+  <td style="padding: {{#if this.padding}}{{this.padding}}{{else}}25px 0{{/if}}; background-color: {{@root.theme.backgroundColor}};" class="dark-mode">
+    <table width="600" border="0" align="center" cellpadding="0" cellspacing="0" role="presentation" style="width: 600px;">
+      <tr>
+        {{#each this.columns}}
+        <td width="200" valign="top" align="center" style="padding: {{#if ../columnPadding}}{{../columnPadding}}{{else}}10px{{/if}}; width: 200px;">
+          {{#if this.icon}}
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+            <tr>
+              <td align="center" style="padding-bottom: {{#if this.title}}12px{{else}}0{{/if}};">
+                <img src="{{this.icon}}"
+                  alt="{{this.alt}}"
+                  width="{{#if ../iconWidth}}{{../iconWidth}}{{else}}60{{/if}}"
+                  style="width: {{#if ../iconWidth}}{{../iconWidth}}{{else}}60{{/if}}px; height: auto; display: block; margin: 0 auto;">
+              </td>
+            </tr>
+          </table>
+          {{/if}}
+
+          {{#if this.title}}
+          <h4 style="font: 700 {{#if ../titleFontSize}}{{../titleFontSize}}{{else}}18px{{/if}}/{{#if ../titleLineHeight}}{{../titleLineHeight}}{{else}}22px{{/if}} Arial Black, sans-serif; color: {{#if ../titleColor}}{{../titleColor}}{{else}}{{@root.theme.textColor}}{{/if}}; margin: 0; padding: 0 0 8px 0; text-align: center;">
+            {{this.title}}
+          </h4>
+          {{/if}}
+
+          {{#if this.text}}
+          <p style="font: {{#if ../textFontWeight}}{{../textFontWeight}}{{else}}400{{/if}} {{#if ../textFontSize}}{{../textFontSize}}{{else}}14px{{/if}}/{{#if ../textLineHeight}}{{../textLineHeight}}{{else}}20px{{/if}} Arial, sans-serif; color: {{#if ../textColor}}{{../textColor}}{{else}}{{@root.theme.textColor}}{{/if}}; margin: 0; padding: 0; text-align: center;">
+            {{this.text}}
+          </p>
+          {{/if}}
+        </td>
+        {{/each}}
+      </tr>
+    </table>
+  </td>
+</tr>

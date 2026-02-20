@@ -1,0 +1,43 @@
+<!-- Two Column Component -->
+<tr>
+  <td style="padding: {{#if this.padding}}{{this.padding}}{{else}}25px 0{{/if}}; background-color: {{@root.theme.backgroundColor}};" class="dark-mode">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
+      <tr>
+        {{#each this.columns}}
+        <td width="50%" valign="top" style="padding: {{#if ../columnPadding}}{{../columnPadding}}{{else}}10px{{/if}};">
+          {{#if this.image}}
+          {{#if this.link}}
+          <a href="{{this.link}}{{#if @root.utm.enabled}}{{@root.utm.params}}{{/if}}" style="display:block;">
+          {{/if}}
+          <img src="{{this.image}}"
+            alt="{{this.alt}}"
+            width="{{#if ../imageWidth}}{{../imageWidth}}{{else}}250{{/if}}"
+            style="max-width: 100%; width: {{#if ../imageWidth}}{{../imageWidth}}{{else}}250{{/if}}px; height: auto; display: block; margin-bottom: {{#if this.title}}15px{{else}}0{{/if}};">
+          {{#if this.link}}
+          </a>
+          {{/if}}
+          {{/if}}
+
+          {{#if this.title}}
+          <h3 style="font: 700 {{#if ../titleFontSize}}{{../titleFontSize}}{{else}}20px{{/if}}/{{#if ../titleLineHeight}}{{../titleLineHeight}}{{else}}24px{{/if}} Arial Black, sans-serif; color: {{#if ../titleColor}}{{../titleColor}}{{else}}{{@root.theme.textColor}}{{/if}}; margin: 0 0 10px 0; text-align: {{#if ../textAlign}}{{../textAlign}}{{else}}left{{/if}};">
+            {{this.title}}
+          </h3>
+          {{/if}}
+
+          {{#if this.description}}
+          <p style="font: {{#if ../descriptionFontWeight}}{{../descriptionFontWeight}}{{else}}400{{/if}} {{#if ../descriptionFontSize}}{{../descriptionFontSize}}{{else}}16px{{/if}}/{{#if ../descriptionLineHeight}}{{../descriptionLineHeight}}{{else}}22px{{/if}} Arial, sans-serif; color: {{#if ../descriptionColor}}{{../descriptionColor}}{{else}}{{@root.theme.textColor}}{{/if}}; margin: 0 0 {{#if this.ctaText}}12px{{else}}0{{/if}} 0; text-align: {{#if ../textAlign}}{{../textAlign}}{{else}}left{{/if}};">
+            {{this.description}}
+          </p>
+          {{/if}}
+
+          {{#if this.ctaText}}
+          <a href="{{this.ctaLink}}{{#if @root.utm.enabled}}{{@root.utm.params}}{{/if}}" style="display: inline-block; color: {{#if ../ctaColor}}{{../ctaColor}}{{else}}#ffe00c{{/if}}; text-decoration: underline; font-weight: 700; font-size: {{#if ../ctaFontSize}}{{../ctaFontSize}}{{else}}16px{{/if}};">
+            {{this.ctaText}} →
+          </a>
+          {{/if}}
+        </td>
+        {{/each}}
+      </tr>
+    </table>
+  </td>
+</tr>

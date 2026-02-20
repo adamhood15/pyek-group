@@ -1,0 +1,208 @@
+/**
+ * Tabs & Navigation
+ * Tab controls and navigation elements
+ */
+
+/* Base selector for all pages */
+.paydia-pages .container.p-4 .tabs-wrapper,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* Tabs Toggle Button (Mobile) */
+.paydia-pages .container.p-4 .tabs-wrapper .tabs-toggle,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle {
+  display: none;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 120%;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  box-shadow: unset;
+  padding: 13px 26px 11px;
+  border: 1px solid var(--blue);
+  background-color: transparent;
+  color: var(--blue);
+}
+
+.paydia-pages .container.p-4 .tabs-wrapper .tabs-toggle:hover,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:hover,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:hover,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:hover,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:hover,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:hover {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.paydia-pages .container.p-4 .tabs-wrapper .tabs-toggle:hover:after,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:hover:after,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:hover:after,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:hover:after,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:hover:after,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:hover:after {
+  filter: brightness(20) grayscale(1);
+}
+
+.paydia-pages .container.p-4 .tabs-wrapper .tabs-toggle:after,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:after,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:after,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:after,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:after,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper .tabs-toggle:after {
+  content: url("../../resources/assets/images/chevron-bottom.svg");
+  transition: var(--transition-medium);
+  margin-left: 10px;
+}
+
+/* Desktop Nav Tabs */
+.paydia-pages .container.p-4 .tabs-wrapper > ul.nav-tabs,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper > ul.nav-tabs,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper > ul.nav-tabs,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper > ul.nav-tabs,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper > ul.nav-tabs,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper > ul.nav-tabs {
+  display: flex;
+}
+
+/* Mobile Tabs Wrapper */
+.paydia-pages .container.p-4 .tabs-wrapper.mobile-tabs-wrapper .tabs-toggle,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper .tabs-toggle,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper .tabs-toggle,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper .tabs-toggle,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper .tabs-toggle,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper .tabs-toggle {
+  display: block;
+}
+
+.paydia-pages .container.p-4 .tabs-wrapper.mobile-tabs-wrapper ul.nav.nav-tabs,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper ul.nav.nav-tabs,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper ul.nav.nav-tabs,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper ul.nav.nav-tabs,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper ul.nav.nav-tabs,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper ul.nav.nav-tabs {
+  display: none;
+}
+
+/* Mobile Tabs - Open State */
+.paydia-pages .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open .tabs-toggle,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open .tabs-toggle,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open .tabs-toggle,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open .tabs-toggle,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open .tabs-toggle,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open .tabs-toggle {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.paydia-pages .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs {
+  display: block;
+  position: absolute;
+  top: 45px;
+  margin: 0 !important;
+  z-index: 1;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  box-shadow: var(--shadow-dropdown);
+}
+
+.paydia-pages .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item {
+  display: block;
+  margin: 0;
+}
+
+.paydia-pages .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item .nav-link,
+.paydia-pages .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item button,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item .nav-link,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item button,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item .nav-link,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item button,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item .nav-link,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item button,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item .nav-link,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item button,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item .nav-link,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 .tabs-wrapper.mobile-tabs-wrapper.open ul.nav.nav-tabs .nav-item button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border-radius: 0;
+}
+
+/* Nav Tabs Styling */
+.paydia-pages .container.p-4 ul.nav-tabs,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs {
+  display: none;
+  margin: 28px auto 40px !important;
+  background-color: var(--bg-light-blue);
+  padding: 14px;
+  border-radius: var(--radius-pill);
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+/* Nav Tab Items */
+.paydia-pages .container.p-4 ul.nav-tabs li.nav-item button.nav-link,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link {
+  border: unset;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: var(--blue);
+  background-color: transparent;
+  padding: 15px 20px;
+}
+
+.paydia-pages .container.p-4 ul.nav-tabs li.nav-item button.nav-link:hover,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link:hover,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link:hover,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link:hover,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link:hover,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link:hover {
+  background-color: #dbe3f7;
+}
+
+.paydia-pages .container.p-4 ul.nav-tabs li.nav-item button.nav-link.active,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link.active,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link.active,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link.active,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link.active,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 ul.nav-tabs li.nav-item button.nav-link.active {
+  color: var(--white);
+  background-color: var(--blue);
+}

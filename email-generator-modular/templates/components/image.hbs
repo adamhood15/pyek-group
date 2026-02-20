@@ -1,0 +1,15 @@
+<!-- Image Component -->
+<tr>
+  <td style="padding: {{#if this.padding}}{{this.padding}}{{else}}0{{/if}};" class="dark-mode" bgcolor="{{@root.theme.backgroundColor}}">
+    {{#if this.link}}
+    <a href="{{this.link}}{{#if @root.utm.enabled}}{{@root.utm.params}}{{/if}}" style="display:block;">
+    {{/if}}
+    <img src="{{this.src}}"
+      alt="{{this.alt}}"
+      width="600"
+      style="width: 600px; height: auto; display: block; background-color: {{@root.theme.backgroundColor}};">
+    {{#if this.link}}
+    </a>
+    {{/if}}
+  </td>
+</tr>

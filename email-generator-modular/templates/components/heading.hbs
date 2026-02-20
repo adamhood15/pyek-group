@@ -1,0 +1,12 @@
+<!-- Heading Component -->
+<tr>
+  <td style="
+    font: {{#if this.fontWeight}}{{this.fontWeight}}{{else}}700{{/if}} {{#if this.fontSize}}{{this.fontSize}}{{else}}48px{{/if}}/{{#if this.lineHeight}}{{this.lineHeight}}{{else}}52px{{/if}} 'aloevera display', Arial, sans-serif;
+    text-align: {{#if this.textAlign}}{{this.textAlign}}{{else}}center{{/if}};
+    padding: {{#if this.padding}}{{this.padding}}{{else}}25px 0 0 0{{/if}};
+    color: {{#if this.color}}{{this.color}}{{else}}{{@root.theme.textColor}}{{/if}};
+    background-color: {{@root.theme.backgroundColor}};
+  " class="dark-mode">
+    {{{this.content}}}
+  </td>
+</tr>

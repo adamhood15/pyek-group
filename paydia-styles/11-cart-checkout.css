@@ -1,0 +1,330 @@
+/**
+ * Cart Checkout - Checkout flow within cart modal
+ * Promo code, order summary, totals, and checkout button
+ */
+
+/* Cart Summary Section */
+body > #paydia-cart #paydia-modal-content .cart-summary {
+  background-color: var(--bg-light-blue);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin-top: 30px;
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content .cart-summary {
+    padding: 20px;
+    margin-top: 20px;
+  }
+}
+
+/* Promo Code Section */
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Promo Code Label */
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section label {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  color: var(--black);
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Promo Code Input Container */
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-input-wrapper {
+    flex-direction: column;
+  }
+}
+
+/* Promo Code Input */
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-input-wrapper input {
+  flex: 1;
+  padding: 10px 15px;
+  height: 45px;
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 120%;
+  color: var(--black);
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-input-wrapper input:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-input-wrapper input::placeholder {
+  color: var(--gray-medium);
+}
+
+/* Apply Promo Button */
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-input-wrapper button {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 120%;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--white);
+  background-color: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: var(--radius-pill);
+  padding: 13px 26px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-input-wrapper button:hover {
+  background-color: var(--blue-light);
+  border-color: var(--blue-light);
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-input-wrapper button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-input-wrapper button {
+    width: 100%;
+  }
+}
+
+/* Promo Code Success Message */
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgba(0, 200, 0, 0.1);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 120%;
+  color: #008000;
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-success:before {
+  content: "✓";
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* Promo Code Error Message */
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: rgba(255, 0, 0, 0.1);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 120%;
+  color: var(--red);
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .promo-code-section .promo-error:before {
+  content: "✕";
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* Order Summary */
+body > #paydia-cart #paydia-modal-content .cart-summary .order-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* Summary Row */
+body > #paydia-cart #paydia-modal-content .cart-summary .order-summary .summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 120%;
+  color: var(--gray-dark);
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .order-summary .summary-row .label {
+  color: var(--black);
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .order-summary .summary-row .value {
+  font-weight: 600;
+  color: var(--black);
+}
+
+/* Discount Row (negative value) */
+body > #paydia-cart #paydia-modal-content .cart-summary .order-summary .summary-row.discount .value {
+  color: var(--red);
+}
+
+/* Total Row */
+body > #paydia-cart #paydia-modal-content .cart-summary .order-summary .summary-row.total {
+  padding-top: 15px;
+  margin-top: 5px;
+  border-top: 2px solid var(--border-color);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .order-summary .summary-row.total .value {
+  color: var(--blue);
+  font-size: 24px;
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content .cart-summary .order-summary .summary-row.total {
+    font-size: 18px;
+  }
+
+  body > #paydia-cart #paydia-modal-content .cart-summary .order-summary .summary-row.total .value {
+    font-size: 20px;
+  }
+}
+
+/* Checkout Button */
+body > #paydia-cart #paydia-modal-content .cart-summary .checkout-button {
+  width: 100%;
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 120%;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--white);
+  background-color: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: var(--radius-pill);
+  padding: 16px 32px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-md);
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .checkout-button:hover {
+  background-color: var(--blue-light);
+  border-color: var(--blue-light);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .checkout-button:active {
+  transform: translateY(0);
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .checkout-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+body > #paydia-cart #paydia-modal-content .cart-summary .checkout-button:disabled:hover {
+  background-color: var(--blue);
+  border-color: var(--blue);
+  box-shadow: var(--shadow-md);
+  transform: translateY(0);
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content .cart-summary .checkout-button {
+    font-size: 16px;
+    padding: 14px 28px;
+  }
+}
+
+/* Continue Shopping Button */
+body > #paydia-cart #paydia-modal-content .continue-shopping-button {
+  width: 100%;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--blue);
+  background-color: transparent;
+  border: 1px solid var(--blue);
+  border-radius: var(--radius-pill);
+  padding: 13px 26px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.2s ease;
+}
+
+body > #paydia-cart #paydia-modal-content .continue-shopping-button:hover {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+/* Clear Cart Button */
+body > #paydia-cart #paydia-modal-content .clear-cart-button {
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+  color: var(--red);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 10px 0;
+  margin-top: 10px;
+  transition: opacity 0.2s ease;
+}
+
+body > #paydia-cart #paydia-modal-content .clear-cart-button:hover {
+  opacity: 0.7;
+}
+
+/* Loading State */
+body > #paydia-cart #paydia-modal-content .loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+body > #paydia-cart #paydia-modal-content .loading-overlay .spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid var(--bg-light-blue);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

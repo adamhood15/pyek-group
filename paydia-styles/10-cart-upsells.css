@@ -1,0 +1,193 @@
+/**
+ * Cart Upsells - Upsell items display
+ * Recommended products, add-ons, and cross-sell items
+ */
+
+/* Upsells Section */
+body > #paydia-cart #paydia-modal-content .upsells-section {
+  margin: 40px 0;
+  padding: 30px 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content .upsells-section {
+    margin: 30px 0;
+    padding: 20px 0;
+  }
+}
+
+/* Upsells Heading */
+body > #paydia-cart #paydia-modal-content .upsells-section > h3 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 120%;
+  color: var(--black);
+  margin-bottom: 20px;
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content .upsells-section > h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+}
+
+/* Upsells List */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 991px) {
+  body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+/* Individual Upsell Item */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item {
+  background-color: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s ease;
+}
+
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Upsell Image */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .upsell-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-bottom: 5px;
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .upsell-image {
+    height: 180px;
+  }
+}
+
+/* Upsell Title */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .upsell-title {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 120%;
+  color: var(--black);
+  margin: 0;
+}
+
+/* Upsell Description */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .upsell-description {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 150%;
+  color: var(--gray-dark);
+  margin: 0;
+  flex: 1;
+}
+
+/* Upsell Price & Button Row */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .upsell-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+/* Upsell Price */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .upsell-footer .upsell-price {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 120%;
+  color: var(--blue);
+}
+
+/* Add to Cart Button */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .upsell-footer .add-upsell-button {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 120%;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--blue);
+  background-color: transparent;
+  border: 1px solid var(--blue);
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .upsell-footer .add-upsell-button:hover {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .upsell-footer .add-upsell-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .upsell-footer .add-upsell-button:disabled:hover {
+  background-color: transparent;
+  color: var(--blue);
+}
+
+/* Added to Cart State */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item.added .upsell-footer .add-upsell-button {
+  background-color: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+}
+
+/* Upsell Badge (e.g., "Popular", "Recommended") */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .upsell-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: var(--blue);
+  color: var(--white);
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 11px;
+  line-height: 120%;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+/* Discount Badge */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item .discount-badge {
+  background-color: var(--red);
+}
+
+/* Position for badge */
+body > #paydia-cart #paydia-modal-content .upsells-section .upsells-list .upsell-item {
+  position: relative;
+}

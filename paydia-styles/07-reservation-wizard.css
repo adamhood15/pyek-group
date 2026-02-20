@@ -1,0 +1,473 @@
+/**
+ * Reservation Wizard
+ * Calendar, date picker, room/time selection, and navigation
+ */
+
+/* Reservation Wizard Container */
+.paydia-pages #paydia-reservation-wizard,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard {
+  margin: auto;
+  width: 100%;
+  max-width: 900px;
+}
+
+/* Guest List Container (after header) */
+.paydia-pages #paydia-reservation-wizard > .text-center + div:not(.row),
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + div:not(.row),
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + div:not(.row),
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + div:not(.row),
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + div:not(.row),
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + div:not(.row) {
+  max-width: 578px;
+  margin: auto;
+}
+
+/* Guest Input Row */
+.paydia-pages #paydia-reservation-wizard > .text-center + .row,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row {
+  border-radius: var(--radius-md);
+  background-color: var(--bg-light-blue);
+  padding: 30px;
+  margin: 0;
+  gap: 20px;
+}
+
+/* Individual Guest Input */
+.paydia-pages #paydia-reservation-wizard > .text-center + .row .paydia-guest-list,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list {
+  width: calc((100% - (20px * 2)) / 3);
+  padding: 0;
+  margin: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .paydia-pages #paydia-reservation-wizard > .text-center + .row .paydia-guest-list,
+  body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list,
+  body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list,
+  body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list,
+  body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list,
+  body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list {
+    width: 100%;
+  }
+}
+
+/* Guest Input Labels */
+.paydia-pages #paydia-reservation-wizard > .text-center + .row .paydia-guest-list label.form-labels,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list label.form-labels,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list label.form-labels,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list label.form-labels,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list label.form-labels,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list label.form-labels {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 120%;
+  color: var(--black);
+}
+
+/* Guest Input Fields */
+.paydia-pages #paydia-reservation-wizard > .text-center + .row .paydia-guest-list input.form-control,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list input.form-control,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list input.form-control,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list input.form-control,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list input.form-control,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .text-center + .row .paydia-guest-list input.form-control {
+  padding: 5px 17px;
+  height: 45px;
+  background: var(--bg-white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+}
+
+/* Horizontal Rule Separator */
+.paydia-pages #paydia-reservation-wizard > hr,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > hr,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > hr,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > hr,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > hr,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > hr {
+  background-color: transparent;
+  margin: 10px 0;
+}
+
+/* Error Message Container */
+.paydia-pages #paydia-reservation-wizard > .error-message-container,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .error-message-container,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .error-message-container,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .error-message-container,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .error-message-container,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > .error-message-container {
+  min-height: unset;
+}
+
+/* Calendar Controls Container */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items),
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items),
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items),
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items),
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items),
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Navigation Buttons */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn {
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 120%;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  box-shadow: unset;
+  padding: 13px 26px 11px;
+}
+
+/* Outline Button */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline {
+  border: 1px solid var(--blue);
+  background-color: transparent;
+  color: var(--blue);
+}
+
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline:hover,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline:hover,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline:hover,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline:hover,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline:hover,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-outline:hover {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+/* Primary Button */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary {
+  border: 1px solid var(--blue);
+  background-color: var(--blue);
+  color: var(--white);
+  margin-right: 0 !important;
+}
+
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary:hover,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary:hover,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary:hover,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary:hover,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary:hover,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .btn.btn-primary:hover {
+  background-color: var(--blue-light);
+  border-color: var(--blue-light);
+  color: var(--white);
+}
+
+/* Month Display Row */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row {
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+/* Month Display Heading */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display {
+  font-family: var(--font-primary);
+  font-weight: 800;
+  line-height: 120%;
+  color: var(--black);
+  font-size: 26px;
+}
+
+@media (max-width: 768px) {
+  .paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+  body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+  body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+  body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+  body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+  body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+  body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+  body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+  body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+  body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display,
+  body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > h1#month-display {
+    font-size: 22px;
+  }
+}
+
+/* Month Navigation Buttons Container */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 {
+  padding: 0;
+  margin: 0;
+  width: unset;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1440px) {
+  .paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6,
+  body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6,
+  body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6,
+  body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6,
+  body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6,
+  body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 {
+    gap: 20px;
+  }
+}
+
+/* Month Navigation Buttons */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn {
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 120%;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+  background-color: transparent;
+  border: 1px solid transparent;
+  box-shadow: unset;
+  padding: 11px 15px 7px;
+}
+
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn:hover,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn:hover,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn:hover,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn:hover,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn:hover,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 3px;
+}
+
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-outline,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-outline,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-outline,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-outline,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-outline,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-outline {
+  color: rgba(0, 51, 153, 0.44);
+}
+
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-primary,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-primary,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-primary,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-primary,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-primary,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .row > .col-md-6 > .btn.btn-primary {
+  color: var(--blue);
+}
+
+/* Calendar Table */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table {
+  margin: 0 auto;
+}
+
+/* Calendar Table Rows */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row {
+  height: unset;
+}
+
+/* Calendar Cells */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td {
+  position: relative;
+}
+
+/* Unavailable Dates */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-unavailable,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-unavailable,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-unavailable,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-unavailable,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-unavailable,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-unavailable {
+  background-color: transparent;
+  color: var(--gray-medium);
+}
+
+/* Available Dates */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data {
+  color: var(--blue);
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:before,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:before,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:before,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:before,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:before,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:before {
+  content: "";
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 50px;
+  z-index: -1;
+}
+
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover {
+  background-color: transparent;
+}
+
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover:before,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover:before,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover:before,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover:before,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover:before,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data:hover:before {
+  background-color: var(--bg-light-blue);
+}
+
+/* Selected Date */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day {
+  background-color: transparent;
+  color: var(--white);
+  font-weight: 700;
+}
+
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day:before,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day:before,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day:before,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day:before,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day:before,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > table.table tr.paydia-table-row td.paydia-table-data.paydia-selected-day:before {
+  background-color: var(--blue);
+}
+
+/* Capacity Warning */
+.paydia-pages #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .reservation-max-capacity,
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .reservation-max-capacity,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .reservation-max-capacity,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .reservation-max-capacity,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .reservation-max-capacity,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 #paydia-reservation-wizard > div:not(.paydia-guest-list-items) > .reservation-max-capacity {
+  margin: 0 auto 40px;
+}
+
+/* Room/Time Selection */
+#room-time-selection .paydia-time-selection {
+  width: 100%;
+  position: relative;
+}
+
+#room-time-selection .paydia-time-selection::after {
+  content: "";
+  width: 100%;
+  height: 106px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: var(--bg-light-blue);
+  border-radius: var(--radius-md);
+  z-index: -1;
+}
+
+#room-time-selection .paydia-time-selection h2 {
+  font-family: var(--font-primary);
+  font-style: normal;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 120%;
+  color: var(--black);
+  -webkit-text-stroke: unset !important;
+  padding-bottom: 20px;
+}
+
+#room-time-selection .paydia-time-selection select.form-select {
+  margin: 30px !important;
+  width: calc(100% - 60px);
+  padding: 5px 17px;
+  height: 45px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+}

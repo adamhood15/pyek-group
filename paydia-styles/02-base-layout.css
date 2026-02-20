@@ -1,0 +1,123 @@
+/**
+ * Base Layout & Typography
+ * Core page structure and text styling
+ */
+
+/* Page Base Styles */
+body.page.kissimmee-parties,
+body.page.orlando-parties,
+body.page.renew-season-pass,
+body.page.season-pass,
+body.page.buy-tickets {
+  overflow-x: hidden;
+}
+
+body.page.kissimmee-parties .main,
+body.page.orlando-parties .main,
+body.page.renew-season-pass .main,
+body.page.season-pass .main,
+body.page.buy-tickets .main {
+  margin-bottom: 0 !important;
+}
+
+/* Text Column */
+body.page.kissimmee-parties .main .wpb_text_column,
+body.page.orlando-parties .main .wpb_text_column,
+body.page.renew-season-pass .main .wpb_text_column,
+body.page.season-pass .main .wpb_text_column,
+body.page.buy-tickets .main .wpb_text_column {
+  padding-top: 16px;
+}
+
+@media (max-width: 767px) {
+  body.page.kissimmee-parties .main .wpb_text_column,
+  body.page.orlando-parties .main .wpb_text_column,
+  body.page.renew-season-pass .main .wpb_text_column,
+  body.page.season-pass .main .wpb_text_column,
+  body.page.buy-tickets .main .wpb_text_column {
+    margin-bottom: 30px;
+  }
+}
+
+/* Main Headings */
+body.page.kissimmee-parties .main .wpb_text_column h1,
+body.page.orlando-parties .main .wpb_text_column h1,
+body.page.renew-season-pass .main .wpb_text_column h1,
+body.page.season-pass .main .wpb_text_column h1,
+body.page.buy-tickets .main .wpb_text_column h1 {
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: 48px;
+}
+
+@media (max-width: 1440px) {
+  body.page.kissimmee-parties .main .wpb_text_column h1,
+  body.page.orlando-parties .main .wpb_text_column h1,
+  body.page.renew-season-pass .main .wpb_text_column h1,
+  body.page.season-pass .main .wpb_text_column h1,
+  body.page.buy-tickets .main .wpb_text_column h1 {
+    font-size: 44px;
+  }
+}
+
+@media (max-width: 1024px) {
+  body.page.kissimmee-parties .main .wpb_text_column h1,
+  body.page.orlando-parties .main .wpb_text_column h1,
+  body.page.renew-season-pass .main .wpb_text_column h1,
+  body.page.season-pass .main .wpb_text_column h1,
+  body.page.buy-tickets .main .wpb_text_column h1 {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  body.page.kissimmee-parties .main .wpb_text_column h1,
+  body.page.orlando-parties .main .wpb_text_column h1,
+  body.page.renew-season-pass .main .wpb_text_column h1,
+  body.page.season-pass .main .wpb_text_column h1,
+  body.page.buy-tickets .main .wpb_text_column h1 {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  body.page.kissimmee-parties .main .wpb_text_column h1,
+  body.page.orlando-parties .main .wpb_text_column h1,
+  body.page.renew-season-pass .main .wpb_text_column h1,
+  body.page.season-pass .main .wpb_text_column h1,
+  body.page.buy-tickets .main .wpb_text_column h1 {
+    font-size: 28px;
+  }
+}
+
+body.page.kissimmee-parties .main .wpb_text_column h1 span,
+body.page.orlando-parties .main .wpb_text_column h1 span,
+body.page.renew-season-pass .main .wpb_text_column h1 span,
+body.page.season-pass .main .wpb_text_column h1 span,
+body.page.buy-tickets .main .wpb_text_column h1 span {
+  font-family: var(--font-primary);
+  font-weight: 800;
+}
+
+/* Paydia Container Base */
+body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4,
+body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4,
+body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4,
+body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4,
+body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 {
+  padding: 0 !important;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 2.3%;
+  row-gap: 30px;
+}
+
+@media (max-width: 767px) {
+  body.page.kissimmee-parties .main .wpb_raw_code #paydia-order-root .container.p-4,
+  body.page.orlando-parties .main .wpb_raw_code #paydia-order-root .container.p-4,
+  body.page.renew-season-pass .main .wpb_raw_code #paydia-order-root .container.p-4,
+  body.page.season-pass .main .wpb_raw_code #paydia-order-root .container.p-4,
+  body.page.buy-tickets .main .wpb_raw_code #paydia-order-root .container.p-4 {
+    margin-bottom: 0 !important;
+  }
+}

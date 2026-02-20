@@ -1,0 +1,202 @@
+/**
+ * Modal Base - Cart Modal Structure
+ * Full-screen modal overlay, container, header, and close button
+ */
+
+/* Modal Overlay */
+body > #paydia-cart {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  overflow-y: auto;
+  display: none;
+}
+
+body > #paydia-cart.active {
+  display: block;
+}
+
+/* Modal Content Container */
+body > #paydia-cart #paydia-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background-color: var(--bg-white);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 1440px) {
+  body > #paydia-cart #paydia-modal-content {
+    max-width: 900px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  body > #paydia-cart #paydia-modal-content {
+    max-width: 700px;
+    margin: 30px auto;
+  }
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content {
+    margin: 20px;
+    padding: 20px;
+    border-radius: var(--radius-md);
+  }
+}
+
+/* Modal Header */
+body > #paydia-cart #paydia-modal-content > .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content > .modal-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+}
+
+/* Modal Title */
+body > #paydia-cart #paydia-modal-content > .modal-header > h2 {
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 120%;
+  color: var(--black);
+  margin: 0;
+}
+
+@media (max-width: 991px) {
+  body > #paydia-cart #paydia-modal-content > .modal-header > h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content > .modal-header > h2 {
+    font-size: 24px;
+  }
+}
+
+/* Close Button */
+body > #paydia-cart #paydia-modal-content > .modal-header > .close-button,
+body > #paydia-cart #paydia-modal-content > .close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+body > #paydia-cart #paydia-modal-content > .modal-header > .close-button:hover,
+body > #paydia-cart #paydia-modal-content > .close-button:hover {
+  background-color: var(--bg-light-blue);
+}
+
+/* Close Icon */
+body > #paydia-cart #paydia-modal-content > .modal-header > .close-button:before,
+body > #paydia-cart #paydia-modal-content > .modal-header > .close-button:after,
+body > #paydia-cart #paydia-modal-content > .close-button:before,
+body > #paydia-cart #paydia-modal-content > .close-button:after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background-color: var(--black);
+}
+
+body > #paydia-cart #paydia-modal-content > .modal-header > .close-button:before,
+body > #paydia-cart #paydia-modal-content > .close-button:before {
+  transform: rotate(45deg);
+}
+
+body > #paydia-cart #paydia-modal-content > .modal-header > .close-button:after,
+body > #paydia-cart #paydia-modal-content > .close-button:after {
+  transform: rotate(-45deg);
+}
+
+/* Modal Body */
+body > #paydia-cart #paydia-modal-content > .modal-body {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content > .modal-body {
+    margin-bottom: 20px;
+  }
+}
+
+/* Modal Footer */
+body > #paydia-cart #paydia-modal-content > .modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content > .modal-footer {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+/* Empty Cart Message */
+body > #paydia-cart #paydia-modal-content .empty-cart-message {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+body > #paydia-cart #paydia-modal-content .empty-cart-message h3 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 120%;
+  color: var(--gray-dark);
+  margin-bottom: 20px;
+}
+
+body > #paydia-cart #paydia-modal-content .empty-cart-message p {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--gray-medium);
+  margin-bottom: 30px;
+}
+
+@media (max-width: 767px) {
+  body > #paydia-cart #paydia-modal-content .empty-cart-message {
+    padding: 40px 20px;
+  }
+
+  body > #paydia-cart #paydia-modal-content .empty-cart-message h3 {
+    font-size: 20px;
+  }
+}
