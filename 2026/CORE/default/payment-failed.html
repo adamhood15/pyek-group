@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{{ email_title|default("Payment Failed") }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    <style>
+    /* Reset and base styles */
+    body { 
+        width: 100% !important; 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        background-color: #f8f9fa !important; 
+        font-family: Arial, sans-serif !important;
+        line-height: 1.6 !important; 
+        color: #333 !important;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+    
+    table {
+        border-collapse: collapse !important;
+        mso-table-lspace: 0pt !important;
+        mso-table-rspace: 0pt !important;
+    }
+    
+    img {
+        border: 0 !important;
+        height: auto !important;
+        line-height: 100% !important;
+        outline: none !important;
+        text-decoration: none !important;
+        -ms-interpolation-mode: bicubic !important;
+    }
+    
+    /* Email container */
+    .email-container {
+        max-width: 600px !important;
+        margin: 0 auto !important;
+        background-color: #ffffff !important;
+    }
+    
+    /* Header styles */
+    .header {
+        background-color: #e74c3c !important;
+        color: white !important;
+        padding: 30px 20px !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+    
+    .header h1 {
+        margin: 0 !important;
+        font-size: 28px !important;
+        font-weight: bold !important;
+        color: white !important;
+    }
+    
+    .header p {
+        margin: 10px 0 0 0 !important;
+        font-size: 16px !important;
+        color: white !important;
+    }
+    
+    /* Content sections */
+    .content-section {
+        padding: 30px 20px !important;
+    }
+    
+    /* Message content */
+    .message-content {
+        background-color: #f8f9fa !important;
+        padding: 25px !important;
+        margin: 20px 0 !important;
+        border-left: 4px solid #e74c3c !important;
+    }
+    
+    .message-content h2 {
+        margin: 0 0 15px 0 !important;
+        color: #e74c3c !important;
+        font-size: 24px !important;
+        font-weight: bold !important;
+    }
+    
+    .message-content p {
+        margin: 0 0 15px 0 !important;
+        color: #495057 !important;
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+    }
+    
+    .message-content p:last-child {
+        margin-bottom: 0 !important;
+    }
+    
+    /* Payment details */
+    .payment-details {
+        background-color: #ffffff !important;
+        border: 2px solid #e9ecef !important;
+        padding: 25px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .payment-details h3 {
+        margin: 0 0 20px 0 !important;
+        color: #2c3e50 !important;
+        font-size: 20px !important;
+        font-weight: bold !important;
+        text-align: center !important;
+    }
+    
+    .payment-info {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+    
+    .payment-label {
+        padding: 12px 15px !important;
+        background-color: #f8f9fa !important;
+        border-bottom: 1px solid #e9ecef !important;
+        font-weight: bold !important;
+        color: #495057 !important;
+        width: 40% !important;
+    }
+    
+    .payment-value {
+        padding: 12px 15px !important;
+        border-bottom: 1px solid #e9ecef !important;
+        color: #2c3e50 !important;
+    }
+    
+    .payment-total {
+        background-color: #e74c3c !important;
+        color: white !important;
+        font-weight: bold !important;
+        font-size: 18px !important;
+    }
+    
+    .payment-total .payment-label {
+        background-color: #e74c3c !important;
+        color: white !important;
+    }
+    
+    .payment-total .payment-value {
+        color: white !important;
+    }
+    
+    /* Button container */
+    .button-container {
+        text-align: center !important;
+        margin: 30px 0 !important;
+    }
+    
+    .btn {
+        display: inline-block !important;
+        background-color: #e74c3c !important;
+        color: white !important;
+        text-decoration: none !important;
+        padding: 15px 30px !important;
+        font-weight: bold !important;
+        font-size: 16px !important;
+        margin: 0 10px !important;
+        border: 2px solid #e74c3c !important;
+    }
+    
+    .btn-secondary {
+        background-color: #2980B9 !important;
+        border: 2px solid #2980B9 !important;
+    }
+    
+    /* Error box */
+    .error-box {
+        background-color: #f8d7da !important;
+        border-left: 4px solid #e74c3c !important;
+        padding: 20px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .error-box p {
+        margin: 0 !important;
+        color: #721c24 !important;
+        font-size: 14px !important;
+    }
+    
+    /* Info box */
+    .info-box {
+        background-color: #d1ecf1 !important;
+        border-left: 4px solid #17a2b8 !important;
+        padding: 20px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .info-box p {
+        margin: 0 !important;
+        color: #0c5460 !important;
+        font-size: 14px !important;
+    }
+    
+    /* Footer */
+    .footer {
+        background-color: #f8f9fa !important;
+        padding: 20px !important;
+        text-align: center !important;
+        color: #6c757d !important;
+        font-size: 14px !important;
+        border-top: 1px solid #e9ecef !important;
+    }
+    
+    /* Mobile responsive */
+    @media only screen and (max-width: 600px) {
+        .email-container {
+            width: 100% !important;
+        }
+        
+        .content-section {
+            padding: 20px 15px !important;
+        }
+        
+        .message-content {
+            padding: 20px !important;
+        }
+        
+        .payment-details {
+            padding: 20px !important;
+        }
+        
+        .header {
+            padding: 20px 15px !important;
+        }
+        
+        .header h1 {
+            font-size: 24px !important;
+        }
+        
+        .btn {
+            display: block !important;
+            margin: 10px 0 !important;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Banner Image -->
+        {% if email_banner_image %}
+            <div style="text-align: center;">
+                <img src="{{ email_banner_image }}" alt="Email Banner" style="max-width: 100%; height: auto;">
+            </div>
+        {% endif %}
+
+        <!-- Main Content Section -->
+        <div class="content-section">
+            <div class="message-content">
+                <h2>{{ message_title|default("Payment Processing Failed") }}</h2>
+                <p>Hello {{ customer_name|default("Valued Customer") }},</p>
+                <p>{{ message_content|default("We were unable to process your recent payment. Please review the details below and take action to resolve this issue.") }}</p>
+                <p>{{ additional_content|default("Don't worry - we're here to help you resolve this quickly.") }}</p>
+            </div>
+
+            <!-- Error Details -->
+            {% if error_message %}
+            <div class="error-box">
+                <p><strong>Error Details:</strong> {{ error_message|default("Payment could not be processed") }}</p>
+            </div>
+            {% endif %}
+
+            <!-- Payment Details -->
+            <div class="payment-details">
+                <h3>Failed Payment Details</h3>
+                <table class="payment-info">
+                    {% if retry_count %}
+                    <tr class="payment-row">
+                        <td class="payment-label">Retry Attempts:</td>
+                        <td class="payment-value">{{ retry_count }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if next_retry_date %}
+                    <tr class="payment-row">
+                        <td class="payment-label">Next Retry Date:</td>
+                        <td class="payment-value">{{ next_retry_date }}</td>
+                    </tr>
+                    {% endif %}
+                    <tr class="payment-row">
+                        <td class="payment-label">Payment Method:</td>
+                        <td class="payment-value">{{ payment_method|default("Credit Card") }}</td>
+                    </tr>
+                    <tr class="payment-row payment-total">
+                        <td class="payment-label">Amount Due:</td>
+                        <td class="payment-value">{{ failed_amount|default("$25.00") }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="button-container">
+                {% if account_url %}
+                <a href="{{ account_url }}" class="btn">{{ account_button_text|default("Manage My Account") }}</a>
+                {% endif %}
+                {% if support_url %}
+                <a href="{{ support_url }}" class="btn btn-secondary">{{ support_button_text|default("Contact Support") }}</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            {% if company_name %}<p><strong>{{ company_name }}</strong></p>{% endif %}
+            {% if company_address %}<p>{{ company_address }}</p>{% endif %}
+            {% if company_phone %}<p>{{ company_phone }}</p>{% endif %}
+            {% if company_email %}<p>{{ company_email }}</p>{% endif %}
+            {% if support_url %}<p><a href="{{ support_url }}">Contact Support</a></p>{% endif %}
+        </div>
+    </div>
+</body>
+</html>

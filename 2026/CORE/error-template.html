@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <meta name="supported-color-schemes" content="light" />
+  <title>{{ error_title }}</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; }
+      .content-pad { padding: 20px 15px !important; }
+    }
+   
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f8f9fa; width: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+
+  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8f9fa; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+    <tr>
+      <td align="center" style="padding: 20px 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+  <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="background-color: #ffffff; width: 600px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+            <tr>
+                <td align="center">
+                    <table border="0" cellpadding="0" cellspacing="0" width="150" style="width:150px; max-width:150px; background-color:#ffffff; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                        <tr>
+                            <td align="center" style="padding:0; line-height:0;width:150px; max-width:150px; mso-table-lspace:0pt; mso-table-rspace:0pt; border-collapse:collapse;">
+                            &nbsp;
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="0" cellpadding="0" cellspacing="0" width="300" style="width:300px; max-width:300px; background-color:#ffffff; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                        <tr>
+                            <td align="center" style="padding:0; line-height:0;width:300px; max-width:300px; mso-table-lspace:0pt; mso-table-rspace:0pt; border-collapse:collapse;">
+                            {% if email_banner_image %}
+                            <img 
+                                src="{{ email_banner_image }}"
+                                alt="Email Banner"
+                                width="300"
+                                style="display:block; width:300px; max-width:300px; height:auto; border:0; line-height:100%; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic;"
+                            />
+                            {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="0" cellpadding="0" cellspacing="0" width="150" style="width:150px; max-width:150px; background-color:#ffffff; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                        <tr>
+                            <td align="center" style="padding:0; line-height:0;width:150px; max-width:150px; mso-table-lspace:0pt; mso-table-rspace:0pt; border-collapse:collapse;">
+                           &nbsp;
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="background-color: #ffffff; width: 600px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+
+       
+
+          <!-- Error Message -->
+          <tr>
+            <td style="padding: 30px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" class="content-pad">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                <tr>
+                  <td style="background-color: #f8f9fa; border-left: 4px solid #234ea2; padding: 25px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <p style="margin: 0 0 12px 0; font-family: Arial, Helvetica, sans-serif; font-size: 22px; font-weight: bold; color: #234ea2;">Error Notification</p>
+                    <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.6; color: #495057;">We encountered an issue that requires your attention. Please review the details below and take appropriate action.</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Error Details Table -->
+          <tr>
+            <td style="padding: 0 30px 20px 30px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" class="content-pad">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border: 2px solid #e9ecef; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                <tr>
+                  <td colspan="2" align="center" style="padding: 20px 15px 10px 15px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 20px; font-weight: bold; color: #2c3e50;">Error Details</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-top: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; color: #495057; width: 40%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">Error Type:</td>
+                  <td style="padding: 12px 15px; border-top: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ error_title }}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; color: #495057; width: 40%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">Message:</td>
+                  <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ error_message }}</td>
+                </tr>
+                {% if error_code %}
+                <tr>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; color: #495057; width: 40%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">Error Code:</td>
+                  <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ error_code }}</td>
+                </tr>
+                {% endif %}
+                {% if error_time %}
+                <tr>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; color: #495057; width: 40%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">Time:</td>
+                  <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ error_time }}</td>
+                </tr>
+                {% endif %}
+                {% if user_email %}
+                <tr>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; color: #495057; width: 40%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">User:</td>
+                  <td style="padding: 12px 15px; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ user_email }}</td>
+                </tr>
+                {% endif %}
+              </table>
+            </td>
+          </tr>
+
+          <!-- Support Button -->
+          {% if support_url %}
+          <tr>
+            <td align="center" style="padding: 0 30px 20px 30px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+              <table border="0" cellpadding="0" cellspacing="0" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                <tr>
+                  <td class="btn-cta" align="center" bgcolor="#ffffff" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <!--[if mso]>
+                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ support_url }}" style="height:50px;v-text-anchor:middle;width:200px;" arcsize="50%" strokecolor="#ffffff" strokeweight="4px" fillcolor="#ff1469">
+                      <w:anchorlock/>
+                      <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">Contact Support</center>
+                    </v:roundrect>
+                    <![endif]-->
+                    <!--[if !mso]><!-->
+                    <a class="btn-cta" href="{{ support_url }}" style="background-color: #ff1469; -webkit-border-radius: 100px; -moz-border-radius: 100px; border-radius: 100px; border: 4px solid #ffffff; color: #ffffff; display: inline-block; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; line-height: 50px; mso-hide: all; text-align: center; text-decoration: none; padding: 0 30px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">Contact Support</a>
+                    <!--<![endif]-->
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          {% endif %}
+
+          <!-- Info Box -->
+          <tr>
+            <td style="padding: 0 30px 30px 30px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" class="content-pad">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                <tr>
+                  <td style="background-color: #d1ecf1; border-left: 4px solid #0285c5; padding: 20px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 1.5; color: #0285c5;"><strong>What to do next:</strong> If this error persists or you need immediate assistance, please contact our support team. We're here to help resolve any issues you may encounter.</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding: 20px 30px; border-top: 1px solid #e9ecef; background-color: #f8f9fa; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+              <p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #6c757d;">Need Help?</p>
+              <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #6c757d;">If you're experiencing technical difficulties, please don't hesitate to reach out to our support team.</p>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

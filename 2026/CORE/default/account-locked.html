@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{{ email_title|default("Account Locked") }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    <style>
+    /* Reset and base styles */
+    body { 
+        width: 100% !important; 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        background-color: #f8f9fa !important; 
+        font-family: Arial, sans-serif !important;
+        line-height: 1.6 !important; 
+        color: #333 !important;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+    
+    table {
+        border-collapse: collapse !important;
+        mso-table-lspace: 0pt !important;
+        mso-table-rspace: 0pt !important;
+    }
+    
+    img {
+        border: 0 !important;
+        height: auto !important;
+        line-height: 100% !important;
+        outline: none !important;
+        text-decoration: none !important;
+        -ms-interpolation-mode: bicubic !important;
+    }
+    
+    /* Email container */
+    .email-container {
+        max-width: 600px !important;
+        margin: 0 auto !important;
+        background-color: #ffffff !important;
+    }
+    
+    /* Content sections */
+    .content-section {
+        padding: 30px 20px !important;
+    }
+    
+    /* Message content */
+    .message-content {
+        background-color: #f8f9fa !important;
+        padding: 25px !important;
+        margin: 20px 0 !important;
+        border-left: 4px solid #e74c3c !important;
+    }
+    
+    .message-content h2 {
+        margin: 0 0 15px 0 !important;
+        color: #e74c3c !important;
+        font-size: 24px !important;
+        font-weight: bold !important;
+    }
+    
+    .message-content p {
+        margin: 0 0 15px 0 !important;
+        color: #495057 !important;
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+    }
+    
+    .message-content p:last-child {
+        margin-bottom: 0 !important;
+    }
+    
+    /* Account details */
+    .account-details {
+        background-color: #ffffff !important;
+        border: 2px solid #e9ecef !important;
+        padding: 25px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .account-details h3 {
+        margin: 0 0 20px 0 !important;
+        color: #2c3e50 !important;
+        font-size: 20px !important;
+        font-weight: bold !important;
+        text-align: center !important;
+    }
+    
+    .account-info {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+    
+    .account-label {
+        padding: 12px 15px !important;
+        background-color: #f8f9fa !important;
+        border-bottom: 1px solid #e9ecef !important;
+        font-weight: bold !important;
+        color: #495057 !important;
+        width: 40% !important;
+    }
+    
+    .account-value {
+        padding: 12px 15px !important;
+        border-bottom: 1px solid #e9ecef !important;
+        color: #2c3e50 !important;
+    }
+    
+    .account-status {
+        background-color: #e74c3c !important;
+        color: white !important;
+        font-weight: bold !important;
+        font-size: 18px !important;
+    }
+    
+    .account-status .account-label {
+        background-color: #e74c3c !important;
+        color: white !important;
+    }
+    
+    .account-status .account-value {
+        color: white !important;
+    }
+    
+    /* Button container */
+    .button-container {
+        text-align: center !important;
+        margin: 30px 0 !important;
+    }
+    
+    .btn {
+        display: inline-block !important;
+        background-color: #e74c3c !important;
+        color: white !important;
+        text-decoration: none !important;
+        padding: 15px 30px !important;
+        font-weight: bold !important;
+        font-size: 16px !important;
+        margin: 0 10px !important;
+        border: 2px solid #e74c3c !important;
+    }
+    
+    .btn-secondary {
+        background-color: #2980B9 !important;
+        border: 2px solid #2980B9 !important;
+    }
+    
+    /* Warning box */
+    .warning-box {
+        background-color: #fff3cd !important;
+        border-left: 4px solid #ffc107 !important;
+        padding: 20px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .warning-box p {
+        margin: 0 !important;
+        color: #856404 !important;
+        font-size: 14px !important;
+    }
+    
+    /* Info box */
+    .info-box {
+        background-color: #d1ecf1 !important;
+        border-left: 4px solid #17a2b8 !important;
+        padding: 20px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .info-box p {
+        margin: 0 !important;
+        color: #0c5460 !important;
+        font-size: 14px !important;
+    }
+    
+    /* Footer */
+    .footer {
+        background-color: #f8f9fa !important;
+        padding: 20px !important;
+        text-align: center !important;
+        color: #6c757d !important;
+        font-size: 14px !important;
+        border-top: 1px solid #e9ecef !important;
+    }
+    
+    /* Mobile responsive */
+    @media only screen and (max-width: 600px) {
+        .email-container {
+            width: 100% !important;
+        }
+        
+        .content-section {
+            padding: 20px 15px !important;
+        }
+        
+        .message-content {
+            padding: 20px !important;
+        }
+        
+        .account-details {
+            padding: 20px !important;
+        }
+        
+        .btn {
+            display: block !important;
+            margin: 10px 0 !important;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Banner Image -->
+        {% if email_banner_image %}
+            <div style="text-align: center;">
+                <img src="{{ email_banner_image }}" alt="Email Banner" style="max-width: 100%; height: auto;">
+            </div>
+        {% endif %}
+
+        <!-- Main Content Section -->
+        <div class="content-section">
+            <div class="message-content">
+                <h2>{{ message_title|default("Account Temporarily Locked") }}</h2>
+                <p>Hello {{ customer_name|default("Valued Customer") }},</p>
+                <p>{{ message_content|default("Your account has been temporarily locked due to multiple failed payment attempts. This is a security measure to protect your account.") }}</p>
+                <p>{{ additional_content|default("Please contact our support team to unlock your account and resolve any payment issues.") }}</p>
+            </div>
+
+            <!-- Warning Details -->
+            {% if warning_message %}
+            <div class="warning-box">
+                <p><strong>Security Notice:</strong> {{ warning_message|default("Account locked due to multiple failed payment attempts") }}</p>
+            </div>
+            {% endif %}
+
+            <!-- Account Details -->
+            <div class="account-details">
+                <h3>Account Information</h3>
+                <table class="account-info">
+                    <tr class="account-row">
+                        <td class="account-label">Account Email:</td>
+                        <td class="account-value">{{ customer_email|default("customer@example.com") }}</td>
+                    </tr>
+                    {% if failed_attempts %}
+                    <tr class="account-row">
+                        <td class="account-label">Failed Attempts:</td>
+                        <td class="account-value">{{ failed_attempts }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if last_failed_payment %}
+                    <tr class="account-row">
+                        <td class="account-label">Last Failed Payment:</td>
+                        <td class="account-value">{{ last_failed_payment }}</td>
+                    </tr>
+                    {% endif %}
+                    <tr class="account-row account-status">
+                        <td class="account-label">Account Status:</td>
+                        <td class="account-value">{{ account_status|default("Temporarily Locked") }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="button-container">
+                {% if unlock_url %}
+                <a href="{{ unlock_url }}" class="btn">{{ unlock_button_text|default("Manage My Account") }}</a>
+                {% endif %}
+                {% if support_url %}
+                <a href="{{ support_url }}" class="btn btn-secondary">{{ support_button_text|default("Contact Support") }}</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            {% if company_name %}<p><strong>{{ company_name }}</strong></p>{% endif %}
+            {% if company_address %}<p>{{ company_address }}</p>{% endif %}
+            {% if company_phone %}<p>{{ company_phone }}</p>{% endif %}
+            {% if company_email %}<p>{{ company_email }}</p>{% endif %}
+        </div>
+    </div>
+</body>
+</html>

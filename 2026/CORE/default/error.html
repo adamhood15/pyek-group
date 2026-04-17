@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{{ error_title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    <style>
+    /* Reset and base styles */
+    body { 
+        width: 100% !important; 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        background-color: #f8f9fa !important; 
+        font-family: Arial, sans-serif !important;
+        line-height: 1.6 !important; 
+        color: #333 !important;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+    
+    table {
+        border-collapse: collapse !important;
+        mso-table-lspace: 0pt !important;
+        mso-table-rspace: 0pt !important;
+    }
+    
+    img {
+        border: 0 !important;
+        height: auto !important;
+        line-height: 100% !important;
+        outline: none !important;
+        text-decoration: none !important;
+        -ms-interpolation-mode: bicubic !important;
+    }
+    
+    /* Email container */
+    .email-container {
+        max-width: 600px !important;
+        margin: 0 auto !important;
+        background-color: #ffffff !important;
+    }
+    
+    /* Banner image */
+    .banner-image {
+        display: block !important;
+        margin: 0 auto !important;
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* Content sections */
+    .content-section {
+        padding: 30px 20px !important;
+    }
+    
+    /* Error content */
+    .error-content {
+        background-color: #f8f9fa !important;
+        padding: 25px !important;
+        margin: 20px 0 !important;
+        border-left: 4px solid #2980B9 !important;
+    }
+    
+    .error-content h2 {
+        margin: 0 0 15px 0 !important;
+        color: #2980B9 !important;
+        font-size: 24px !important;
+        font-weight: bold !important;
+    }
+    
+    .error-content p {
+        margin: 0 0 15px 0 !important;
+        color: #495057 !important;
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+    }
+    
+    .error-content p:last-child {
+        margin-bottom: 0 !important;
+    }
+    
+    /* Error details */
+    .error-details {
+        background-color: #ffffff !important;
+        border: 2px solid #e9ecef !important;
+        padding: 25px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .error-details h3 {
+        margin: 0 0 20px 0 !important;
+        color: #2c3e50 !important;
+        font-size: 20px !important;
+        font-weight: bold !important;
+        text-align: center !important;
+    }
+    
+    .error-info {
+        width: 100% !important;
+        border-collapse: collapse !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .error-info td {
+        padding: 12px 15px !important;
+        border-bottom: 1px solid #e9ecef !important;
+        color: #2c3e50 !important;
+    }
+    
+    .error-info tr:last-child td {
+        border-bottom: none !important;
+    }
+    
+    .error-label {
+        background-color: #f8f9fa !important;
+        font-weight: bold !important;
+        color: #495057 !important;
+        width: 40% !important;
+    }
+    
+    .error-value {
+        color: #2c3e50 !important;
+    }
+    
+    /* Button container */
+    .button-container {
+        text-align: center !important;
+        margin: 30px 0 !important;
+    }
+    
+    .btn {
+        display: inline-block !important;
+        background-color: #2980B9 !important;
+        color: white !important;
+        text-decoration: none !important;
+        padding: 15px 30px !important;
+        font-weight: bold !important;
+        font-size: 16px !important;
+        margin: 0 10px !important;
+        border: 2px solid #2980B9 !important;
+    }
+    
+    /* Info box */
+    .info-box {
+        background-color: #d1ecf1 !important;
+        padding: 20px !important;
+        margin: 20px 0 !important;
+        border-left: 4px solid #17a2b8 !important;
+    }
+    
+    .info-box p {
+        margin: 0 !important;
+        color: #0c5460 !important;
+        font-size: 14px !important;
+    }
+    
+    /* Footer */
+    .footer {
+        background-color: #f8f9fa !important;
+        padding: 20px !important;
+        text-align: center !important;
+        color: #6c757d !important;
+        font-size: 14px !important;
+        border-top: 1px solid #e9ecef !important;
+    }
+    
+    /* Mobile responsive */
+    @media only screen and (max-width: 600px) {
+        .email-container {
+            width: 100% !important;
+        }
+        
+        .content-section {
+            padding: 20px 15px !important;
+        }
+        
+        .error-content, .error-details, .info-box {
+            padding: 20px !important;
+            margin: 20px 0 !important;
+        }
+        
+        .btn {
+            display: block !important;
+            margin: 10px 0 !important;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Banner Image -->
+        {% if email_banner_image %}
+            <div style="text-align: center;">
+                <img src="{{ email_banner_image }}" alt="Email Banner" class="banner-image">
+            </div>
+        {% endif %}
+
+        <!-- Main Content Section -->
+        <div class="content-section">
+            <!-- Error Content -->
+            <div class="error-content">
+                <h2>Error Notification</h2>
+                <p>We encountered an issue that requires your attention. Please review the details below and take appropriate action.</p>
+            </div>
+
+            <!-- Error Details -->
+            <div class="error-details">
+                <h3>Error Details</h3>
+                <table class="error-info">
+                    <tr>
+                        <td class="error-label">Error Type:</td>
+                        <td class="error-value">{{ error_title }}</td>
+                    </tr>
+                    <tr>
+                        <td class="error-label">Message:</td>
+                        <td class="error-value">{{ error_message }}</td>
+                    </tr>
+                    {% if error_code %}
+                    <tr>
+                        <td class="error-label">Error Code:</td>
+                        <td class="error-value">{{ error_code }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if error_time %}
+                    <tr>
+                        <td class="error-label">Time:</td>
+                        <td class="error-value">{{ error_time }}</td>
+                    </tr>
+                    {% endif %}
+                    {% if user_email %}
+                    <tr>
+                        <td class="error-label">User:</td>
+                        <td class="error-value">{{ user_email }}</td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+
+            <!-- Action Buttons -->
+            {% if support_url %}
+            <div class="button-container">
+                <a href="{{ support_url }}" class="btn" target="_blank">Contact Support</a>
+            </div>
+            {% endif %}
+
+            <!-- Info Box -->
+            <div class="info-box">
+                <p><strong>What to do next:</strong> If this error persists or you need immediate assistance, please contact our support team. We're here to help resolve any issues you may encounter.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Need Help?</strong></p>
+            <p>If you're experiencing technical difficulties, please don't hesitate to reach out to our support team.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light" />
+  <meta name="supported-color-schemes" content="light" />
+  <title>{{ "email.confirmation.title"|tr }}</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; }
+      .content-pad { padding: 20px 15px !important; }
+      .contact-col { display: block !important; width: 100% !important; padding: 10px 0 !important; }
+      .ticket-col { display: block !important; width: 100% !important; margin-bottom: 15px !important; }
+    }
+   
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f8f9fa; width: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">
+
+  <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8f9fa; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+    <tr>
+      <td align="center" style="padding: 20px 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+  <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="background-color: #ffffff; width: 600px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+            <tr>
+                <td align="center">
+                    <table border="0" cellpadding="0" cellspacing="0" width="150" style="width:150px; max-width:150px; background-color:#ffffff; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                        <tr>
+                            <td align="center" style="padding:0; line-height:0;width:150px; max-width:150px; mso-table-lspace:0pt; mso-table-rspace:0pt; border-collapse:collapse;">
+                            &nbsp;
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="0" cellpadding="0" cellspacing="0" width="300" style="width:300px; max-width:300px; background-color:#ffffff; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                        <tr>
+                            <td align="center" style="padding:0; line-height:0;width:300px; max-width:300px; mso-table-lspace:0pt; mso-table-rspace:0pt; border-collapse:collapse;">
+                            {% if email_banner_image %}
+                            <img 
+                                src="{{ email_banner_image }}"
+                                alt="Email Banner"
+                                width="300"
+                                style="display:block; width:300px; max-width:300px; height:auto; border:0; line-height:100%; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic;"
+                            />
+                            {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table border="0" cellpadding="0" cellspacing="0" width="150" style="width:150px; max-width:150px; background-color:#ffffff; border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                        <tr>
+                            <td align="center" style="padding:0; line-height:0;width:150px; max-width:150px; mso-table-lspace:0pt; mso-table-rspace:0pt; border-collapse:collapse;">
+                           &nbsp;
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <!--[if mso]><table width="600" style="width:600px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;"><tr><td style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><![endif]-->
+        <table border="0" cellpadding="0" cellspacing="0" width="600" class="email-container" style="background-color: #ffffff; width: 600px; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+
+         
+          <!-- Contact Information: 2 columns -->
+          <tr>
+            <td style="padding: 30px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" class="content-pad">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                <tr>
+                  <!-- Contact Column -->
+                  <td class="contact-col" valign="top" style="width: 50%; padding-right: 15px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <p style="margin: 0 0 12px 0; font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold; color: #495057;">{{ "email.confirmation.contact"|tr }}</p>
+                    <p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50;"><strong>{{ "email.confirmation.order_name"|tr }}</strong> {{ con_first_name }} {{ con_last_name }}</p>
+                    <p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50;"><strong>{{ "email.confirmation.email_address"|tr }}</strong> {{ con_email }}</p>
+                    <p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50;"><strong>{{ "email.confirmation.phone"|tr }}</strong> {{ con_phone }}</p>
+                    <p style="margin: 0 0 4px 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50;"><strong>{{ "email.confirmation.address"|tr }}</strong></p>
+                    <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50; line-height: 1.5;">{{ con_address_1 }}<br />{% if con_address_2 %}{{ con_address_2 }}<br />{% endif %}{{ con_city }}, {{ con_state }} {{ con_zip }}</p>
+                  </td>
+                  <!-- Bill To Column -->
+                  <td class="contact-col" valign="top" style="width: 50%; padding-left: 15px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <p style="margin: 0 0 12px 0; font-family: Arial, Helvetica, sans-serif; font-size: 18px; font-weight: bold; color: #495057;">{{ "email.confirmation.bill_to"|tr }}</p>
+                    <p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50;"><strong>{{ "email.confirmation.order_name"|tr }}</strong> {{ bill_first_name }} {{ bill_last_name }}</p>
+                    <p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50;"><strong>{{ "email.confirmation.email_address"|tr }}</strong> {{ bill_email }}</p>
+                    <p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50;"><strong>{{ "email.confirmation.phone"|tr }}</strong> {{ bill_phone }}</p>
+                    <p style="margin: 0 0 4px 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50;"><strong>{{ "email.confirmation.address"|tr }}</strong></p>
+                    <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #2c3e50; line-height: 1.5;">{{ bill_address_1 }}<br />{% if bill_address_2 %}{{ bill_address_2 }}<br />{% endif %}{{ bill_city }}, {{ bill_state }} {{ bill_zip }}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Confirmation Info: Barcode + Number -->
+          <tr>
+            <td style="padding: 0 30px 20px 30px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" class="content-pad">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8f9fa; border: 2px solid #e9ecef; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                <tr>
+                  <td align="center" style="padding: 25px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    {% if confirmation_barcode %}
+                    <img src="{{ confirmation_barcode }}" alt="Confirmation Barcode" width="300" style="width: 300px; max-width: 100%; height: auto; display: block; margin: 0 auto 15px auto; border: 2px solid #e9ecef; background: #ffffff; padding: 10px; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;" />
+                    {% endif %}
+                    <p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; color: #2c3e50;">{{ "email.confirmation.confirmation_number"|tr }} {{ confirmation }}</p>
+                    <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #495057;">{{ "email.confirmation.order_date"|tr }} {{ order_date }}</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Order Details -->
+          <tr>
+            <td style="padding: 0 30px 20px 30px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" class="content-pad">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border: 2px solid #e9ecef; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                <tr>
+                  <td colspan="4" align="center" style="padding: 20px 15px 10px 15px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 20px; font-weight: bold; color: #2c3e50;">Order Details</p>
+                  </td>
+                </tr>
+                {% if promo_code %}
+                <tr>
+                  <td colspan="4" style="padding: 10px 15px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                      <tr>
+                        <td align="center" style="background-color: #e8f5e9; border: 1px solid #28a745; padding: 12px 15px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                          <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; color: #155724;">Promo code used: {{ promo_code }}</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                {% endif %}
+                <!-- Table Header -->
+                <tr>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-top: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #495057; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ "email.confirmation.item_colhead"|tr }}</td>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-top: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #495057; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ "email.confirmation.quantity_colhead"|tr }}</td>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-top: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #495057; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ "email.confirmation.price_colhead"|tr }}</td>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-top: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #495057; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ "email.confirmation.item_total_colhead"|tr }}</td>
+                </tr>
+                {% for item in item_rows %}
+                  {% if item.demographics is defined and item.demographics|length > 0 %}
+                    {% for demo in item.demographics %}
+                    <tr>
+                      <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                        {{ item.name }}<br />
+                        <span style="padding-left: 10px; font-size: 12px; color: #6c757d;">
+                          {% for field_label, field_value in demo %}
+                            {% if field_label != 'item_id' and field_label != 'item_name' %}
+                            <strong>{{ field_label }}:</strong> {{ field_value }}<br />
+                            {% endif %}
+                          {% endfor %}
+                        </span>
+                      </td>
+                      <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">1</td>
+                      <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ item.unit_price }}</td>
+                      <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ item.unit_price }}</td>
+                    </tr>
+                    {% endfor %}
+                  {% else %}
+                  <tr>
+                    <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ item.name }}</td>
+                    <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ item.qty }}</td>
+                    <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ item.unit_price }}</td>
+                    <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ item.total_price }}</td>
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+                <tr>
+                  <td colspan="3" style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><strong>{{ "email.confirmation.subtotal"|tr }}</strong></td>
+                  <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><strong>{{ subtotal }}</strong></td>
+                </tr>
+                {% if taxes %}
+                <tr>
+                  <td colspan="3" style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><strong>{{ "email.confirmation.taxes"|tr }}</strong></td>
+                  <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><strong>{{ taxes }}</strong></td>
+                </tr>
+                {% endif %}
+                <tr>
+                  <td colspan="3" style="padding: 12px 15px; background-color: #234ea2; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; color: #ffffff; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ "email.confirmation.total"|tr }}</td>
+                  <td style="padding: 12px 15px; background-color: #234ea2; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; color: #ffffff; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ total }}</td>
+                </tr>
+                {% if has_payment_plans and future_payments %}
+                <tr>
+                  <td colspan="3" style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><strong>Future Payments</strong></td>
+                  <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><strong>{{ future_payments }}</strong></td>
+                </tr>
+                {% endif %}
+                {% if show_paid_now %}
+                <tr>
+                  <td colspan="3" style="padding: 12px 15px; background-color: #234ea2; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; color: #ffffff; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">Paid Now</td>
+                  <td style="padding: 12px 15px; background-color: #234ea2; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; color: #ffffff; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ paid_now }}</td>
+                </tr>
+                {% endif %}
+              </table>
+            </td>
+          </tr>
+
+          <!-- Tickets Section -->
+          {% if tickets and tickets|length > 0 %}
+          <tr>
+            <td style="padding: 0 30px 20px 30px; background-color: #f8f9fa; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" class="content-pad">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                <tr>
+                  <td align="center" style="padding: 25px 0 20px 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 22px; font-weight: bold; color: #2c3e50;">{{ "email.confirmation.ticket_list"|tr }}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td align="center" style="padding-bottom: 20px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table border="0" cellpadding="0" cellspacing="0" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                      <tr>
+                        <td class="btn-cta" align="center" bgcolor="#ffffff" style="-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                          <!--[if mso]>
+                          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ print_tickets_url }}" style="height:50px;v-text-anchor:middle;width:200px;" arcsize="50%" strokecolor="#ffffff" strokeweight="4px" fillcolor="#ff1469">
+                            <w:anchorlock/>
+                            <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">{{ "email.confirmation.print_tickets"|tr }}</center>
+                          </v:roundrect>
+                          <![endif]-->
+                          <!--[if !mso]><!-->
+                          <a class="btn-cta" href="{{ print_tickets_url }}" style="background-color: #ff1469; -webkit-border-radius: 100px; -moz-border-radius: 100px; border-radius: 100px; border: 4px solid #ffffff; color: #ffffff; display: inline-block; font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold; line-height: 50px; mso-hide: all; text-align: center; text-decoration: none; padding: 0 25px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">{{ "email.confirmation.print_tickets"|tr }}</a>
+                          <!--<![endif]-->
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <!-- Ticket Grid -->
+                {% for ticket in tickets %}
+                <tr>
+                  <td align="center" style="padding: 0 0 15px 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border: 3px solid #234ea2; background-color: #ffffff; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                      <tr>
+                        <td align="center" style="padding: 20px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                          <p style="margin: 0 0 10px 0; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold; color: #6c757d; text-transform: uppercase; letter-spacing: 1px;">{{ ticket.name }}</p>
+                          {% if ticket.voucher_url %}<a href="{{ ticket.voucher_url }}" style="text-decoration: none; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;">{% endif %}
+                          <img src="{{ ticket.qr_code }}" alt="Ticket QR Code" width="200" style="width: 200px; max-width: 280px; height: auto; display: block; margin: 0 auto 10px auto; border: 2px solid #e9ecef; background: #ffffff; padding: 8px; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;" />
+                          {% if ticket.voucher_url %}</a>{% endif %}
+                          <p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #2c3e50;">{{ ticket.vid }}</p>
+                          <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 11px; font-weight: bold; color: #234ea2; background-color: #e8f0f8; padding: 4px 8px; display: inline-block;">#{{ loop.index }}</p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                {% endfor %}
+              </table>
+            </td>
+          </tr>
+          {% endif %}
+
+          <!-- Reservations Section -->
+          {% if reservations and reservations|length > 0 %}
+          <tr>
+            <td style="padding: 0 30px 20px 30px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" class="content-pad">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border: 2px solid #e9ecef; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+                <tr>
+                  <td colspan="3" align="center" style="padding: 20px 15px 10px 15px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 20px; font-weight: bold; color: #2c3e50;">Reservations</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-top: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #495057; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ "email.confirmation.reservation_colhead"|tr }}</td>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-top: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #495057; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ "email.confirmation.room_colhead"|tr }}</td>
+                  <td style="padding: 12px 15px; background-color: #f8f9fa; border-top: 1px solid #e9ecef; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; color: #495057; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ "email.confirmation.time_colhead"|tr }}</td>
+                </tr>
+                {% for reservation in reservations %}
+                <tr>
+                  <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ reservation.package }}</td>
+                  <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ reservation.room }}</td>
+                  <td style="padding: 12px 15px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">{{ reservation.time }}</td>
+                </tr>
+                {% if reservation_demographics and reservation_demographics[loop.index0] and reservation_demographics[loop.index0].demographics and reservation_demographics[loop.index0].demographics|length > 0 %}
+                <tr>
+                  <td colspan="3" style="padding: 10px 15px 15px 25px; border-bottom: 1px solid #e9ecef; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #2c3e50; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+                    <strong>Reservation Information:</strong><br />
+                    {% for name, demo in reservation_demographics[loop.index0].demographics %}
+                    <span style="padding-left: 10px;"><strong>{{ name }}:</strong> {{ demo }}<br /></span>
+                    {% endfor %}
+                  </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+              </table>
+            </td>
+          </tr>
+          {% endif %}
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding: 20px 30px; border-top: 1px solid #e9ecef; background-color: #f8f9fa; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+              {% if company_name %}<p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #6c757d;"><strong>{{ company_name }}</strong></p>{% endif %}
+              {% if company_address %}<p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #6c757d;">{{ company_address }}</p>{% endif %}
+              {% if company_phone %}<p style="margin: 0 0 6px 0; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #6c757d;">{{ company_phone }}</p>{% endif %}
+              {% if company_email %}<p style="margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #6c757d;">{{ company_email }}</p>{% endif %}
+            </td>
+          </tr>
+
+        </table>
+        <!--[if mso]></td></tr></table><![endif]-->
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

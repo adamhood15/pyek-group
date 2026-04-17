@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{{ email_title|default("Welcome!") }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <style>
+    /* Reset and base styles */
+    body { 
+        width: 100%; 
+        margin: 0; 
+        padding: 0; 
+        background-color: #f8f9fa; 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        line-height: 1.6; 
+        color: #333;
+    }
+    
+    /* Email container */
+    .email-container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Header styles */
+    .header {
+        background: linear-gradient(135deg, #2980B9 0%, #1f5f8b 100%);
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .header h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 600;
+    }
+    
+    .header p {
+        margin: 10px 0 0 0;
+        font-size: 16px;
+        opacity: 0.9;
+    }
+    
+    /* Banner image */
+    .banner-image {
+        margin: 0 auto;
+    }
+    
+    /* Content sections */
+    .content-section {
+        padding: 30px 20px;
+    }
+    
+    .section-title {
+        font-size: 20px;
+        font-weight: 600;
+        color: #2c3e50;
+        margin: 0 0 20px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e9ecef;
+    }
+    
+    /* Message content */
+    .message-content {
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        padding: 25px;
+        margin: 20px 0;
+        border-left: 4px solid #2980B9;
+    }
+    
+    .message-content h2 {
+        margin: 0 0 15px 0;
+        color: #2980B9;
+        font-size: 24px;
+        font-weight: 600;
+    }
+    
+    .message-content p {
+        margin: 0 0 15px 0;
+        color: #495057;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    .message-content p:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* Button container */
+    .button-container {
+        text-align: center;
+        margin: 30px 0;
+    }
+    
+    .btn {
+        display: inline-block;
+        background: linear-gradient(135deg, #2980B9 0%, #1f5f8b 100%);
+        color: white;
+        text-decoration: none;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(41, 128, 185, 0.3);
+    }
+    
+    .btn:hover {
+        background: linear-gradient(135deg, #3498db 0%, #2980B9 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(41, 128, 185, 0.4);
+        text-decoration: none;
+        color: white;
+    }
+    
+    /* Info box */
+    .info-box {
+        background-color: #e3f2fd;
+        border-left: 4px solid #2980B9;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+    
+    .info-box p {
+        margin: 0;
+        color: #424242;
+        font-size: 14px;
+    }
+    
+    /* Footer */
+    .footer {
+        background-color: #f8f9fa;
+        padding: 20px;
+        text-align: center;
+        color: #6c757d;
+        font-size: 14px;
+        border-top: 1px solid #e9ecef;
+    }
+    
+    /* Responsive design */
+    @media only screen and (max-width: 600px) {
+        .email-container {
+            width: 100% !important;
+        }
+        
+        .content-section {
+            padding: 20px 15px;
+        }
+        
+        .message-content {
+            padding: 20px;
+        }
+        
+        .header {
+            padding: 20px 15px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+        }
+    }
+    
+    /* Print styles */
+    @media print {
+        .email-container {
+            box-shadow: none;
+        }
+        
+        .btn {
+            background: #2980B9 !important;
+            color: white !important;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+
+        <!-- Banner Image -->
+        {% if email_banner_image %}
+            <div style="text-align: center;">
+                <img src="{{ email_banner_image }}" alt="Email Banner" class="banner-image">
+            </div>
+        {% endif %}
+
+        <!-- Main Content Section -->
+        <div class="content-section">
+            <div class="message-content">
+                <h2>{{ message_title|default("Welcome to Our Service") }}</h2>
+                <p>{{ message_content|default("We're excited to have you on board! This is a generic email template that you can customize for your specific needs.") }}</p>
+                <p>{{ additional_content|default("Feel free to reach out if you have any questions or need assistance.") }}</p>
+            </div>
+
+            <!-- Call to Action Button -->
+            {% if cta_url and cta_text %}
+            <div class="button-container">
+                <a href="{{ cta_url }}" class="btn">{{ cta_text }}</a>
+            </div>
+            {% endif %}
+
+            <!-- Info Box -->
+            {% if info_message %}
+            <div class="info-box">
+                <p>{{ info_message|default("This is an informational message that can be customized for your needs.") }}</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            {% if company_name %}<p><strong>{{ company_name }}</strong></p>{% endif %}
+            {% if company_address %}<p>{{ company_address }}</p>{% endif %}
+            {% if company_phone %}<p>{{ company_phone }}</p>{% endif %}
+            {% if company_email %}<p>{{ company_email }}</p>{% endif %}
+        </div>
+    </div>
+</body>
+</html>

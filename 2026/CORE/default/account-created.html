@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>{{ email_title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <!--[if mso]>
+    <noscript>
+        <xml>
+            <o:OfficeDocumentSettings>
+                <o:PixelsPerInch>96</o:PixelsPerInch>
+            </o:OfficeDocumentSettings>
+        </xml>
+    </noscript>
+    <![endif]-->
+    <style>
+    /* Reset and base styles */
+    body { 
+        width: 100% !important; 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        background-color: #f8f9fa !important; 
+        font-family: Arial, sans-serif !important;
+        line-height: 1.6 !important; 
+        color: #333 !important;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+    
+    table {
+        border-collapse: collapse !important;
+        mso-table-lspace: 0pt !important;
+        mso-table-rspace: 0pt !important;
+    }
+    
+    img {
+        border: 0 !important;
+        height: auto !important;
+        line-height: 100% !important;
+        outline: none !important;
+        text-decoration: none !important;
+        -ms-interpolation-mode: bicubic !important;
+    }
+    
+    /* Email container */
+    .email-container {
+        max-width: 600px !important;
+        margin: 0 auto !important;
+        background-color: #ffffff !important;
+    }
+    
+    /* Header styles */
+    .header {
+        background-color: #2980B9 !important;
+        color: white !important;
+        padding: 30px 20px !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+    
+    .header h1 {
+        margin: 0 !important;
+        font-size: 28px !important;
+        font-weight: bold !important;
+        color: white !important;
+    }
+    
+    .header p {
+        margin: 10px 0 0 0 !important;
+        font-size: 16px !important;
+        color: white !important;
+    }
+    
+    /* Banner image */
+    .banner-image {
+        margin: 0 auto;
+    }
+    
+    /* Content sections */
+    .content-section {
+        padding: 30px 20px !important;
+    }
+    
+    .section-title {
+        font-size: 20px !important;
+        font-weight: bold !important;
+        color: #2c3e50 !important;
+        margin: 0 0 20px 0 !important;
+        padding-bottom: 10px !important;
+        border-bottom: 2px solid #e9ecef !important;
+    }
+    
+    /* Message content */
+    .message-content {
+        background-color: #f8f9fa !important;
+        padding: 25px !important;
+        margin: 20px 0 !important;
+        border-left: 4px solid #2980B9 !important;
+    }
+    
+    .message-content h2 {
+        margin: 0 0 15px 0 !important;
+        color: #2980B9 !important;
+        font-size: 24px !important;
+        font-weight: bold !important;
+    }
+    
+    .message-content p {
+        margin: 0 0 15px 0 !important;
+        color: #495057 !important;
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+    }
+    
+    .message-content p:last-child {
+        margin-bottom: 0 !important;
+    }
+    
+    /* Button container */
+    .button-container {
+        text-align: center !important;
+        margin: 30px 0 !important;
+    }
+    
+    .btn {
+        display: inline-block !important;
+        background-color: #2980B9 !important;
+        color: white !important;
+        text-decoration: none !important;
+        padding: 15px 30px !important;
+        font-weight: bold !important;
+        font-size: 16px !important;
+        border: 2px solid #2980B9 !important;
+    }
+    
+    /* Info box */
+    .info-box {
+        background-color: #e3f2fd !important;
+        border-left: 4px solid #2980B9 !important;
+        padding: 20px !important;
+        margin: 20px 0 !important;
+    }
+    
+    .info-box p {
+        margin: 0 !important;
+        color: #424242 !important;
+        font-size: 14px !important;
+    }
+    
+    /* Footer */
+    .footer {
+        background-color: #f8f9fa !important;
+        padding: 20px !important;
+        text-align: center !important;
+        color: #6c757d !important;
+        font-size: 14px !important;
+        border-top: 1px solid #e9ecef !important;
+    }
+    
+    /* Responsive design */
+    @media only screen and (max-width: 600px) {
+        .email-container {
+            width: 100% !important;
+        }
+        
+        .content-section {
+            padding: 20px 15px !important;
+        }
+        
+        .message-content {
+            padding: 20px !important;
+        }
+        
+        .header {
+            padding: 20px 15px !important;
+        }
+        
+        .header h1 {
+            font-size: 24px !important;
+        }
+        
+        .btn {
+            display: block !important;
+            margin: 10px 0 !important;
+        }
+    }
+    
+    /* Print styles */
+    @media print {
+        .email-container {
+            box-shadow: none;
+        }
+        
+        .btn {
+            background: #2980B9 !important;
+            color: white !important;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Banner Image -->
+        {% if email_banner_image %}
+            <div style="text-align: center;">
+                <img src="{{ email_banner_image }}" alt="Email Banner" class="banner-image">
+            </div>
+        {% endif %}
+
+        <!-- Main Content Section -->
+        <div class="content-section">
+            <div class="message-content">
+                <h2>Registration Confirmation</h2>
+                <p>{{ "email.account_created.thanks_message"|tr|default("Thanks for registering! We just need to confirm your email address in order to finish setting up your account. This link will be valid for 24 hours.") }}</p>
+                <p>{{ "email.account_created.next_steps"|tr|default("Once you've confirmed your account, you can go back to the page where you registered to use your new account.") }}</p>
+            </div>
+
+            <!-- Confirmation Button -->
+            <div class="button-container">
+                <a href="{{ confirm_url }}" class="btn">{{ "email.account_created.confirm_button"|tr|default("Confirm Address") }}</a>
+            </div>
+    </div>
+</body>
+</html>
