@@ -1,3 +1,5 @@
+purge-revisions.php
+wp-config.php
 .DS_Stores
 .node_modules
 .Mailchimp-API

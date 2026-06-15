@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Park Calendar — Diagonal Split Pill</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+      padding: 40px 16px 80px;
+      line-height: 1;
+    }
+
+    .page-title {
+      text-align: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 48px;
+    }
+
+    .section {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 0.63rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+
+    .section-heading {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 5px;
+    }
+
+    .section-desc {
+      font-size: 0.78rem;
+      color: #6b7280;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    /* ── Calendar shell ──────────────────────────────────── */
+    .cal-wrap {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .cal-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid #f3f4f6;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .cal-month { font-size: 1rem; font-weight: 700; color: #111827; }
+    .cal-year  { font-size: 0.85rem; color: #9ca3af; font-weight: 400; }
+
+    /* ── Legend ──────────────────────────────────────────── */
+    .cal-legend {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .legend-section {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .legend-label {
+      font-size: 0.55rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #d1d5db;
+    }
+
+    /* Demo pill in legend */
+    .legend-demo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .legend-demo-pill {
+      position: relative;
+      width: 88px;
+      height: 28px;
+      border-radius: 99px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08);
+    }
+
+    .legend-demo-labels {
+      display: flex;
+      justify-content: space-between;
+      width: 88px;
+      font-size: 0.55rem;
+      color: #9ca3af;
+      font-weight: 500;
+      padding: 0 6px;
+    }
+
+    /* Status key */
+    .legend-statuses {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .legend-status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.62rem;
+      color: #6b7280;
+    }
+
+    .l-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .l-dot.open    { background: #16a34a; }
+    .l-dot.closed  { background: #dc2626; }
+    .l-dot.weather { background: #ca8a04; }
+    .l-dot.private { background: #9333ea; }
+
+    .legend-divider {
+      width: 1px;
+      height: 44px;
+      background: #f3f4f6;
+    }
+
+    /* ── DOW row ─────────────────────────────────────────── */
+    .cal-dow-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: #f9fafb;
+      border-bottom: 1px solid #f3f4f6;
+    }
+
+    .cal-dow {
+      padding: 7px 8px;
+      text-align: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+    .cal-dow.wknd { color: #6b7280; }
+
+    /* ── Grid ────────────────────────────────────────────── */
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+
+    .day-cell {
+      border-right: 1px solid #f3f4f6;
+      border-bottom: 1px solid #f3f4f6;
+      min-height: 80px;
+      position: relative;
+    }
+    .day-cell:nth-child(7n) { border-right: none; }
+    .day-cell.empty { background: #fafafa; }
+
+    .day-num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #374151;
+      padding: 7px 8px 4px;
+      display: block;
+      line-height: 1;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       DIAGONAL SPLIT PILL
+    ══════════════════════════════════════════════════════ */
+    .split-pill-wrap {
+      padding: 0 7px 7px;
+    }
+
+    .split-pill {
+      position: relative;
+      height: 34px;
+      border-radius: 99px;
+      overflow: hidden;
+      background: #f9fafb;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.07);
+    }
+
+    /* Each half fills the full pill, clip-path carves the diagonal */
+    .pill-half {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    /*
+      Diagonal: \  (upper-left → lower-right)
+      Left  clip: top-right edge at 57%, bottom-right edge at 41%
+      Right clip: top-left  edge at 59%, bottom-left  edge at 43%
+      The 2% gap between halves shows through as white, forming the divider line.
+    */
+    .pill-left  {
+      clip-path: polygon(0 0, 57% 0, 41% 100%, 0 100%);
+      padding-right: 50%;
+    }
+
+    .pill-right {
+      clip-path: polygon(59% 0, 100% 0, 100% 100%, 43% 100%);
+      padding-left: 50%;
+    }
+
+    /* Status fills + text colors */
+    .p-open    { background: #dcfce7; color: #15803d; }
+    .p-closed  { background: #fee2e2; color: #b91c1c; }
+    .p-weather { background: #fef9c3; color: #92400e; }
+    .p-private { background: #f3e8ff; color: #7e22ce; }
+
+    /* Icon inside each half */
+    .pill-icon {
+      width: 11px;
+      height: 11px;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    /* Sub-text inside each half (hours or status label) */
+    .pill-text {
+      font-size: 0.48rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    /* ── Responsive ──────────────────────────────────────── */
+    @media (max-width: 640px) {
+      .cal-legend { display: none; }
+      .pill-text  { display: none; }
+      .split-pill { height: 26px; }
+    }
+
+    @media (max-width: 380px) {
+      .pill-icon { width: 9px; height: 9px; }
+    }
+
+/* ── Day badges ─────────────────────────────── */
+.day-badges {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  z-index: 1;
+}
+.badge-icon {
+  width: 9px;
+  height: 9px;
+  display: block;
+  flex-shrink: 0;
+}
+.badge-star { color: #f59e0b; }
+.badge-note { color: #9ca3af; }
+
+/* Taller pill for double WP sessions */
+.split-pill--tall {
+  height: 44px;
+}
+  </style>
+</head>
+<body>
+
+<!-- SVG symbol defs -->
+<svg style="display:none" aria-hidden="true">
+
+  <!-- Water drop — Waterpark -->
+  <symbol id="i-water" viewBox="0 0 16 20" fill="none"
+          stroke="currentColor" stroke-width="1.7"
+          stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 1 C 7 4, 2 9, 2 13 A6 6 0 0 0 14 13 C 14 9, 9 4, 8 1 Z"/>
+  </symbol>
+
+  <!-- Ferris wheel — Fun Park -->
+  <symbol id="i-ferris" viewBox="0 0 20 24" fill="none"
+          stroke="currentColor" stroke-width="1.7"
+          stroke-linecap="round">
+    <circle cx="10" cy="9" r="7.5"/>
+    <circle cx="10" cy="9" r="2" fill="currentColor" stroke="none"/>
+    <line x1="10" y1="1.5" x2="10" y2="16.5"/>
+    <line x1="2.5" y1="9"  x2="17.5" y2="9"/>
+    <line x1="4.8" y1="3.8" x2="15.2" y2="14.2"/>
+    <line x1="15.2" y1="3.8" x2="4.8" y2="14.2"/>
+    <path d="M10 17 L7.5 23 M10 17 L12.5 23"/>
+  </symbol>
+
+  <!-- Star — special event -->
+  <symbol id="i-star" viewBox="0 0 20 20">
+    <path d="M10 1 L12.4 7.3 L19.1 7.3 L13.7 11.5 L15.8 18 L10 14.1 L4.2 18 L6.3 11.5 L0.9 7.3 L7.6 7.3 Z" fill="currentColor"/>
+  </symbol>
+
+  <!-- Note — day note -->
+  <symbol id="i-note" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="1" y="1" width="14" height="16" rx="2"/>
+    <line x1="4" y1="6" x2="12" y2="6"/>
+    <line x1="4" y1="10" x2="12" y2="10"/>
+    <line x1="4" y1="14" x2="9" y2="14"/>
+  </symbol>
+
+</svg>
+
+
+<p class="page-title">Park Calendar &nbsp;/&nbsp; Diagonal Split Pill &nbsp;/&nbsp; June 2025</p>
+
+<div class="section">
+  <p class="section-eyebrow">Variant 4</p>
+  <h2 class="section-heading">Diagonal Split Pill</h2>
+  <p class="section-desc">A single pill per day, cut diagonally — left half shows Waterpark status, right half shows Fun Park status. Color communicates open/closed/weather/private at a glance.</p>
+
+  <div class="cal-wrap">
+    <div class="cal-header">
+      <span class="cal-month">June</span>
+      <span class="cal-year">2025</span>
+      <div class="cal-legend">
+
+        <!-- Diagram showing which side = which park -->
+        <div class="legend-demo">
+          <span class="legend-label">Parks</span>
+          <div class="legend-demo-pill">
+            <div class="pill-half pill-left p-open">
+              <svg class="pill-icon"><use href="#i-water"/></svg>
+            </div>
+            <div class="pill-half pill-right p-open">
+              <svg class="pill-icon"><use href="#i-ferris"/></svg>
+            </div>
+          </div>
+          <div class="legend-demo-labels">
+            <span>Waterpark</span>
+            <span>Fun Park</span>
+          </div>
+        </div>
+
+        <div class="legend-divider"></div>
+
+        <!-- Status color key -->
+        <div class="legend-statuses">
+          <span class="legend-label">Status</span>
+          <span class="legend-status"><span class="l-dot open"></span>Open</span>
+          <span class="legend-status"><span class="l-dot closed"></span>Closed</span>
+          <span class="legend-status"><span class="l-dot weather"></span>Weather Closed</span>
+          <span class="legend-status"><span class="l-dot private"></span>Private Event</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="cal-dow-row">
+      <div class="cal-dow wknd">Sun</div>
+      <div class="cal-dow">Mon</div>
+      <div class="cal-dow">Tue</div>
+      <div class="cal-dow">Wed</div>
+      <div class="cal-dow">Thu</div>
+      <div class="cal-dow">Fri</div>
+      <div class="cal-dow wknd">Sat</div>
+    </div>
+
+    <div class="cal-grid">
+
+      <!-- 1 Sun — WP open 10–6, FP open 12–8 -->
+      <div class="day-cell"><span class="day-num">1</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">10am–6pm</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">12pm–8pm</span></div>
+      </div></div></div>
+
+      <!-- 2 Mon — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">2</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 3 Tue — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">3</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 4 Wed — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">4</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 5 Thu — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">5</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 6 Fri — WP open 12–8, FP open 4–11 -->
+      <div class="day-cell"><span class="day-num">6</span><div class="split-pill-wrap"><div class="split-pill split-pill--tall">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">10am–2pm</span><span class="pill-text">4pm–8pm</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–11pm</span></div>
+      </div></div></div>
+
+      <!-- 7 Sat — WP open 10–7, FP open 12–11 -->
+      <div class="day-cell"><span class="day-num">7</span><div class="day-badges"><svg class="badge-icon badge-star" aria-label="Special Event"><use href="#i-star"/></svg></div><div class="split-pill-wrap"><div class="split-pill split-pill--tall">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">10am–2pm</span><span class="pill-text">4pm–9pm</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">12pm–11pm</span></div>
+      </div></div></div>
+
+      <!-- 8 Sun — WP open 10–6, FP open 12–8 -->
+      <div class="day-cell"><span class="day-num">8</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">10am–6pm</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">12pm–8pm</span></div>
+      </div></div></div>
+
+      <!-- 9 Mon — WP closed, FP closed -->
+      <div class="day-cell"><span class="day-num">9</span><div class="day-badges"><svg class="badge-icon badge-note" aria-label="Note"><use href="#i-note"/></svg></div><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-closed"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">Closed</span></div>
+      </div></div></div>
+
+      <!-- 10 Tue — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">10</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 11 Wed — WP weather, FP weather -->
+      <div class="day-cell"><span class="day-num">11</span><div class="day-badges"><svg class="badge-icon badge-note" aria-label="Note"><use href="#i-note"/></svg></div><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-weather"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Weather</span></div>
+        <div class="pill-half pill-right p-weather"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">Weather</span></div>
+      </div></div></div>
+
+      <!-- 12 Thu — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">12</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 13 Fri — WP open 12–8, FP open 4–11 -->
+      <div class="day-cell"><span class="day-num">13</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">12pm–8pm</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–11pm</span></div>
+      </div></div></div>
+
+      <!-- 14 Sat — WP open 10–7, FP open 12–11 -->
+      <div class="day-cell"><span class="day-num">14</span><div class="day-badges"><svg class="badge-icon badge-star" aria-label="Special Event"><use href="#i-star"/></svg></div><div class="split-pill-wrap"><div class="split-pill split-pill--tall">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">9am–1pm</span><span class="pill-text">3pm–8pm</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">12pm–11pm</span></div>
+      </div></div></div>
+
+      <!-- 15 Sun — WP private, FP open 12–8 -->
+      <div class="day-cell"><span class="day-num">15</span><div class="day-badges"><svg class="badge-icon badge-star" aria-label="Special Event"><use href="#i-star"/></svg><svg class="badge-icon badge-note" aria-label="Note"><use href="#i-note"/></svg></div><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-private"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Private</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">12pm–8pm</span></div>
+      </div></div></div>
+
+      <!-- 16 Mon — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">16</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 17 Tue — WP closed, FP closed -->
+      <div class="day-cell"><span class="day-num">17</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-closed"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">Closed</span></div>
+      </div></div></div>
+
+      <!-- 18 Wed — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">18</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 19 Thu — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">19</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 20 Fri — WP open 12–8, FP open 4–11 -->
+      <div class="day-cell"><span class="day-num">20</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">12pm–8pm</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–11pm</span></div>
+      </div></div></div>
+
+      <!-- 21 Sat — WP open 10–7, FP open 12–11 -->
+      <div class="day-cell"><span class="day-num">21</span><div class="day-badges"><svg class="badge-icon badge-star" aria-label="Special Event"><use href="#i-star"/></svg></div><div class="split-pill-wrap"><div class="split-pill split-pill--tall">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">10am–2pm</span><span class="pill-text">4pm–9pm</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">12pm–11pm</span></div>
+      </div></div></div>
+
+      <!-- 22 Sun — WP open 10–6, FP private -->
+      <div class="day-cell"><span class="day-num">22</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">10am–6pm</span></div>
+        <div class="pill-half pill-right p-private"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">Private</span></div>
+      </div></div></div>
+
+      <!-- 23 Mon — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">23</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 24 Tue — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">24</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 25 Wed — WP weather, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">25</span><div class="day-badges"><svg class="badge-icon badge-note" aria-label="Note"><use href="#i-note"/></svg></div><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-weather"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Weather</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 26 Thu — WP closed, FP open 4–10 -->
+      <div class="day-cell"><span class="day-num">26</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–10pm</span></div>
+      </div></div></div>
+
+      <!-- 27 Fri — WP open 12–8, FP open 4–11 -->
+      <div class="day-cell"><span class="day-num">27</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">12pm–8pm</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">4pm–11pm</span></div>
+      </div></div></div>
+
+      <!-- 28 Sat — WP open 10–7, FP open 12–11 -->
+      <div class="day-cell"><span class="day-num">28</span><div class="day-badges"><svg class="badge-icon badge-star" aria-label="Special Event"><use href="#i-star"/></svg></div><div class="split-pill-wrap"><div class="split-pill split-pill--tall">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">10am–2pm</span><span class="pill-text">4pm–9pm</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">12pm–11pm</span></div>
+      </div></div></div>
+
+      <!-- 29 Sun — WP open 10–6, FP open 12–8 -->
+      <div class="day-cell"><span class="day-num">29</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-open"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">10am–6pm</span></div>
+        <div class="pill-half pill-right p-open"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">12pm–8pm</span></div>
+      </div></div></div>
+
+      <!-- 30 Mon — WP closed, FP closed -->
+      <div class="day-cell"><span class="day-num">30</span><div class="split-pill-wrap"><div class="split-pill">
+        <div class="pill-half pill-left p-closed"><svg class="pill-icon" aria-label="Waterpark"><use href="#i-water"/></svg><span class="pill-text">Closed</span></div>
+        <div class="pill-half pill-right p-closed"><svg class="pill-icon" aria-label="Fun Park"><use href="#i-ferris"/></svg><span class="pill-text">Closed</span></div>
+      </div></div></div>
+
+      <div class="day-cell empty"></div>
+      <div class="day-cell empty"></div>
+      <div class="day-cell empty"></div>
+      <div class="day-cell empty"></div>
+      <div class="day-cell empty"></div>
+
+    </div><!-- /cal-grid -->
+  </div><!-- /cal-wrap -->
+</div><!-- /section -->
+
+</body>
+</html>

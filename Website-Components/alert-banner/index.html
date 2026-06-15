@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+      .waterpark-hours, .fun-park-hours {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-top: 5px;
+      }
+        .open {
+            background-color: green;
+        }
+        .closed {
+            background-color: red;
+        }
+        span {
+          display: flex;
+          text-align: center;
+          width: 100%;
+        }
+        
+
+    </style>
+  </head>
+  <body>
+
+    <section id="section-85-5685" class=" ct-section alert-banner">
+      <div class="ct-section-inner-wrap">
+        <div id="code_block-92-5685" class="ct-code-block">
+          <div id="status-data" class="day-countdown" data-park="cowabunga-canyon" data-status="open-later" data-now="2025-06-11T10:59:30-07:00" data-today-date="2025-06-11" data-today-open="11:00" data-today-close="18:00" data-today-weather="normal" data-next-date="2025-06-12" data-next-open="11:00" data-next-close="18:00"></div>
+          <div class="status-message">
+            <a href="#" target="_blank" class="banner-link-wrapper banner-weather-indicator"> <div class="banner-subcontainer weather-button"><p class="banner-weather-icon">⚡️ <span class="banner-desktop-copy"> Rainy Day Guarantee</span></p></div></a>
+            <div class="banner-subcontainer"><p class="banner-content banner-status-message">
+              <span class="banner-emoji park-status-emoji">🟢 </span><span class="banner-park-name">Canyon</span> is <span class="park-status">OPEN</span> <span id="clock-icon" class="banner-emoji clock-emoji">🕓</span> <span class="banner-desktop-copy operating-hours">11:30 AM - 12:30 PM</span></p></div>
+            <a href="#" target="_blank" class="banner-link-wrapper"><div class="banner-subcontainer calendar-button"><p class="banner-calendar-icon">📅 <span class="banner-desktop-copy">See Calendar</span></p></div></a>
+            <dialog id="banner-operating-hours-dialog" class="hours-modal">
+              <form method="dialog" class="hours-modal-container">
+                <p>Operating Hours: <br><span class="operating-hours">🕓 11:00 AM - 6:00 PM</span></p>
+                <button class="nz-button-orange">Close</button>
+              </form>
+            </dialog>
+          </div>
+        </div>
+      </div>
+      </section>
+
+      <table style="width: 600px;border: 1px solid black;">
+        <tr>
+          <td style="border: 1px solid black;">
+            1<span>🌊<div class="waterpark-hours open"></div> 🕹️<div class="fun-park-hours open"></div></span>
+            
+           
+          </td>
+          <td style="border: 1px solid black;">
+            3<br>
+            <span>🌊<div class="waterpark-hours open"></div></span>
+            <span>🕹️<div class="fun-park-hours open"></div></span>
+          </td>
+          <td style="border: 1px solid black;">
+            4<br>
+            <span>🌊<div class="waterpark-hours open"></div></span>
+            <span>🕹️<div class="fun-park-hours open"></div></span>
+          </td>
+          <td style="border: 1px solid black;">
+            5<br>
+            <span>🌊<div class="waterpark-hours open"></div></span>
+            <span>🕹️<div class="fun-park-hours open"></div></span>
+          </td>
+          <td style="border: 1px solid black;">
+            6<br>
+            <span>🌊<div class="waterpark-hours open"></div></span>
+            <span>🕹️<div class="fun-park-hours open"></div></span>
+          </td>
+          <td style="border: 1px solid black;">
+            7<br>
+            <span>🌊<div class="waterpark-hours open"></div></span>
+            <span>🕹️<div class="fun-park-hours open"></div></span>
+          </td>
+         
+        </tr>
+       
+      </table>
+
+    <script src="script.js"></script>
+  </body>
+</html>

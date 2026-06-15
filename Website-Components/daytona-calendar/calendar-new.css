@@ -1,0 +1,925 @@
+/*
+ * calendar-new.css
+ * Complete stylesheet for the refactored Daytona Calendar.
+ * Replaces styles.css — do not load both.
+ *
+ * Changes from prior version:
+ *  - Removed: .hours-icon rules (clock icon removed from calendar cells)
+ *  - Updated: .calendar__day-number — flex layout so icons sit beside number badge
+ *  - Updated: pill icons use svg-fancy_icon-* IDs (JS modal updated to match)
+ *  - Renamed: all calendar classes to BEM naming convention
+ */
+
+
+/* =========================================================
+   CUSTOM PROPERTIES
+   ========================================================= */
+
+html {
+    scroll-padding-top: 150px;
+}
+
+:root {
+    --primary:      #234ea2;
+    --secondary:    #6fdbff;
+    --tertiary:     #0285c5;
+    --open:         #D7FEDA;
+    --closed:       #fed7d7;
+    --limited:      #f4d7fe;
+    --caution:      #FEF7D7;
+    --yellow:       #ffdf4a;
+    --header-color: #234ea2;
+    --teal:         #68e0cf;
+    --orange:       #ff6a00;
+}
+
+
+/* =========================================================
+   GLOBAL CALENDAR DETAILS
+   ========================================================= */
+
+.calendar-details {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.calendar-container {
+    position: relative;
+    width: 100%;
+    margin: 35px auto;
+}
+
+
+/* =========================================================
+   CALENDAR NAVIGATION ARROWS
+   ========================================================= */
+
+.calendar__nav {
+    width: 5%;
+    height: auto;
+    max-height: 60px;
+    cursor: pointer;
+    transition-property: all;
+    transition-duration: .35s;
+    fill: #ffffff;
+}
+
+.calendar__nav > use {
+    fill: #ffffff;
+}
+
+.calendar__nav:hover > use {
+    fill: #e0e0e0;
+}
+
+
+/* =========================================================
+   MONTH WRAPPER + TABLE SHELL
+   ========================================================= */
+
+.calendar__month {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+    padding: 0;
+}
+
+.calendar__month,
+.calendar-day-display {
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+    border: 6px solid #ffffff;
+}
+
+.calendar__month--active {
+    display: block;
+}
+
+.calendar__month-header {
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary);
+    border-radius: 20px 20px 0 0;
+    border-spacing: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.top-wave {
+    --mask: radial-gradient(98.41px at 51% 138.6px, #000 99%, #0000 101%) calc(50% - 126px) 0 / 252px 100%, radial-gradient(98.41px at 51% -75.6px, #0000 99%, #000 101%) 50% 63px / 252px 100% repeat-x;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+}
+
+.calendar__month-title {
+    width: auto;
+    font-size: 45px;
+    line-height: 45px;
+    padding: 35px;
+    text-align: center;
+    color: #ffffff;
+}
+
+.calendar__table {
+    border-collapse: separate;
+    border-spacing: 5px;
+    width: 100%;
+    table-layout: fixed;
+    background-color: #ffffff;
+    border-radius: 0 0 18px 18px;
+}
+
+.calendar__table td {
+    height: 150px;
+    min-height: 150px;
+    max-height: 150px;
+}
+
+.calendar__table th,
+.calendar__table td {
+    width: 14.28%;
+    vertical-align: top;
+    text-align: left;
+    position: relative;
+}
+
+.calendar__table th {
+    padding: 15px;
+    border: 2px solid white;
+    text-align: center;
+    background-color: var(--secondary);
+    box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   DAY CELL
+   ========================================================= */
+
+.calendar__day {
+    position: relative;
+    overflow: visible;
+    padding: 2px;
+}
+
+.calendar__day--selected {
+    background-color: #f3f3f3;
+    border-radius: 12px;
+}
+
+.calendar__day:hover {
+    background-color: rgb(243, 243, 243);
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.calendar__day-inner {
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   DAY NUMBER BADGE
+   Icons are rendered inside this container so they sit beside
+   the number badge. display: flex with space-around positions
+   the <strong> and .calendar__icon-container side by side.
+   ========================================================= */
+
+.calendar__day-number {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 6px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    margin: 0 5px 5px 0;
+    box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.25);
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+/* Guard for any cached markup that still contains the old .park-status span. */
+.calendar__day-number .park-status {
+    display: none;
+}
+
+
+/* =========================================================
+   SPLIT PILL — Wrapper
+   ========================================================= */
+
+.calendar__pill-wrap {
+    position: relative;
+    padding: 0 2px 2px;
+}
+
+
+/* =========================================================
+   SPLIT PILL — Container
+   ========================================================= */
+
+.calendar__pill {
+    position: relative;
+    height: 34px;
+    border-radius: 99px;
+    overflow: hidden;
+    background: #f9fafb;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.07);
+}
+
+/* Taller pill when either park has a second operating session */
+.calendar__pill--tall {
+    height: 44px;
+}
+
+
+/* =========================================================
+   SPLIT PILL — Halves
+   Each half is absolutely positioned and fills the full pill.
+   clip-path carves the diagonal divider without a real border.
+
+   Diagonal: \  (upper-left → lower-right)
+     Left  clip: top-right at 57%, bottom-right at 41%
+     Right clip: top-left  at 59%, bottom-left  at 43%
+   The 2% gap between polygons reveals the pill background as the divider line.
+   ========================================================= */
+
+.calendar__pill-half {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+.calendar__pill-half--left {
+    clip-path: polygon(0 0, 57% 0, 41% 100%, 0 100%);
+    padding-right: 50%;
+}
+
+.calendar__pill-half--right {
+    clip-path: polygon(59% 0, 100% 0, 100% 100%, 43% 100%);
+    padding-left: 50%;
+}
+
+
+/* =========================================================
+   SPLIT PILL — Status fills
+   ========================================================= */
+
+.calendar__pill-half--open    { background: #dcfce7; color: #15803d; }
+.calendar__pill-half--closed  { background: #fee2e2; color: #b91c1c; }
+.calendar__pill-half--weather { background: #fef9c3; color: #92400e; }
+.calendar__pill-half--limited { background: var(--limited); color: #7e22ce; }
+
+
+/* =========================================================
+   SPLIT PILL — Icon and text
+   ========================================================= */
+
+.calendar__pill-icon {
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    display: block;
+    fill: currentColor; /* inherits the status text color of the parent pill half */
+}
+
+.calendar__pill-text {
+    display: none; /* hidden in calendar cells; shown in modal via #calendar-day-hours-container override */
+    font-size: 0.48rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   SPLIT PILL — Modal context
+   The pill is used inside both the calendar cell and the modal hours area.
+   Scale it up in the modal so it reads comfortably at the larger panel width.
+   ========================================================= */
+
+#calendar-day-hours-container .calendar__pill-wrap {
+    padding: 0;
+}
+
+#calendar-day-hours-container .calendar__pill {
+    height: 52px;
+    min-width: 220px;
+}
+
+#calendar-day-hours-container .calendar__pill--tall {
+    height: 66px;
+}
+
+#calendar-day-hours-container .calendar__pill-icon {
+    width: 16px;
+    height: 16px;
+}
+
+#calendar-day-hours-container .calendar__pill-text {
+    display: block; /* override base display:none — modal pill always shows times */
+    font-size: 0.65rem;
+}
+
+
+/* =========================================================
+   SPLIT PILL — Hover tooltip (desktop only)
+   Appended to document.body as position:fixed by JS so it
+   is never clipped by table cell or overflow:hidden ancestors.
+   JS handles show/hide and coordinate positioning.
+   ========================================================= */
+
+.calendar__pill-tooltip {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    pointer-events: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    min-width: 150px;
+}
+
+.calendar__pill-tooltip-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.6;
+}
+
+.calendar__pill-tooltip-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+.calendar__pill-tooltip-value {
+    font-size: 0.65rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* Value colors for white background */
+.calendar__pill-tooltip-value--open    { color: #15803d; }
+.calendar__pill-tooltip-value--closed  { color: #b91c1c; }
+.calendar__pill-tooltip-value--weather { color: #b45309; }
+.calendar__pill-tooltip-value--limited { color: #7e22ce; }
+
+
+/* =========================================================
+   DAY CELL — STATUS / LEGACY STATUS CLASSES
+   .status is used in the legend key and other UI components.
+   ========================================================= */
+
+.date-status-container {
+    display: flex;
+}
+
+.status {
+    font-weight: bold;
+    text-transform: capitalize;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    display: inline-block;
+}
+
+.status.Open {
+    background: #c6f6d5;
+    color: #22543d;
+}
+
+.status.limited {
+    background: var(--limited);
+    color: #553c63;
+}
+
+.status.closed {
+    background: #fed7d7;
+    color: #742a2a;
+}
+
+.park-status {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+
+
+/* =========================================================
+   DAY CELL — Events
+   ========================================================= */
+
+.calendar__event-name-wrapper {
+  padding: 0 5px;
+
+}
+
+
+/* =========================================================
+   DAY CELL — ICON STRIP
+   .calendar__icon-container sits inside .calendar__day-number.
+   ========================================================= */
+
+.calendar__icon-container {
+    display: flex;
+    gap: 5px;
+}
+
+.calendar__icon--event {
+    width: 20px;
+    height: 20px;
+    fill: var(--yellow);
+}
+
+.calendar__icon--notes {
+    width: 1.4em;
+    height: 1.4em;
+    fill: var(--secondary);
+}
+
+.calendar__icon--weather {
+    fill: var(--yellow);
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+
+.calendar__icon--guarantee {
+    fill: var(--teal);
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+
+
+/* =========================================================
+   DAY CELL — EVENTS IN CELL
+   ========================================================= */
+
+.calendar__event-name {
+    color: #000;
+    font-weight: 500;
+}
+
+.calendar__event-hours {
+    color: #555;
+}
+
+
+/* =========================================================
+   CALENDAR EVENT DISPLAY (modal panel)
+   ========================================================= */
+
+.calendar-modal__events {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.calendar-modal__event-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 25px;
+}
+
+.calendar-modal__event-name {
+    color: #000;
+    font-size: 25px;
+    font-weight: 700;
+    margin: 5px 0 0 0;
+}
+
+.calendar-modal__event-img {
+    border-radius: 25px;
+    width: 30%;
+    height: auto;
+}
+
+.calendar-modal__event-details {
+    font-size: 0.8rem;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.calendar-modal__event-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.calendar-modal__event-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--yellow);
+}
+
+.calendar-modal__event-time {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #333;
+}
+
+
+/* =========================================================
+   MODAL DAY PANEL — Shell
+   ========================================================= */
+
+.calendar-modal {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+}
+
+/* Modal border color reflects the overall day status derived by JS */
+.calendar-modal--open {
+    border: 4px solid var(--open);
+}
+
+.calendar-modal--limited {
+    border: 4px solid var(--limited);
+}
+
+.calendar-modal--closed {
+    border: 4px solid var(--closed);
+}
+
+.calendar-modal--weather-closure {
+    border: 4px solid var(--caution);
+}
+
+.calendar-modal__content {
+    opacity: 1;
+    transition: opacity 0.8s ease;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.calendar-day-display {
+    display: none;
+    flex-direction: column;
+    padding: 15px 25px 25px 25px;
+}
+
+.calendar-day-display.show {
+    display: flex;
+}
+
+.calendar-day-display.hide,
+.calendar-modal__weather-message.hide,
+.calendar-modal__rainy-day-message.hide {
+    display: none;
+}
+
+
+/* =========================================================
+   MODAL DAY PANEL — Animations
+   ========================================================= */
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0s ease-out;
+}
+
+
+/* =========================================================
+   MODAL DAY PANEL — Top container (date + hours pill)
+   ========================================================= */
+
+.calendar-modal__top {
+    display: flex;
+    vertical-align: middle;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.calendar-modal__title,
+.calendar-modal__hours {
+    margin: auto 0;
+}
+
+.calendar-modal__hours {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+}
+
+.calendar-date-time-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.calendar-day-text-container {
+    padding: 0 25px 25px 25px;
+}
+
+
+/* =========================================================
+   MODAL DAY PANEL — Notes
+   ========================================================= */
+
+.calendar-modal__notes-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.calendar-modal__note-icon {
+    width: 30px;
+}
+
+.calendar-modal__note-icon path {
+    fill: var(--secondary);
+}
+
+
+/* =========================================================
+   MODAL DAY PANEL — Weather + Rainy Day messages
+   ========================================================= */
+
+.calendar-modal__weather-message {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.calendar-modal__weather-icon {
+    fill: var(--yellow);
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+
+.calendar-modal__rainy-day-message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.calendar-modal__rainy-day-message > p {
+    margin: 0;
+    line-height: 1.7;
+}
+
+.calendar-modal__guarantee-icon {
+    fill: var(--teal);
+    width: 20px;
+    height: 20px;
+    padding: 0;
+}
+
+
+/* =========================================================
+   KEYFRAMES
+   ========================================================= */
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+/* =========================================================
+   RESPONSIVE — 992px
+   ========================================================= */
+
+@media screen and (max-width: 992px) {
+    .calendar__month-title {
+        font-size: 35px;
+        line-height: 35px;
+        padding: 20px;
+    }
+
+    .calendar__nav {
+        width: 7%;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — 768px
+   ========================================================= */
+
+@media screen and (max-width: 768px) {
+    .calendar__month-title {
+        font-size: 30px;
+        line-height: 30px;
+        padding: 15px;
+    }
+
+    .calendar-dropdown-container:hover {
+        color: #ececec;
+        cursor: pointer;
+    }
+
+    .calendar__nav {
+        width: 8%;
+    }
+
+    .calendar__table {
+        border-spacing: 2px;
+    }
+
+    /* Icon strip hidden on small screens — pill color communicates status */
+    .calendar__icon-container {
+        display: none;
+    }
+
+    /* .calendar__pill-text is already display:none at base — no override needed here */
+
+    .calendar__pill {
+        height: 26px;
+    }
+
+    /* Collapse the tall variant on mobile — second session not legible at this size */
+    .calendar__pill--tall {
+        height: 26px;
+    }
+
+    .calendar__table td {
+        height: 75px;
+    }
+
+    .calendar-modal {
+        width: 100%;
+    }
+
+    .calendar-modal__content {
+        padding: 25px;
+    }
+
+    /* Modal pill stays fully readable at all mobile widths */
+    #calendar-day-hours-container .calendar__pill-text {
+        display: block;
+    }
+
+    #calendar-day-hours-container .calendar__pill {
+        height: 52px;
+        min-width: 180px;
+    }
+
+    #calendar-day-hours-container .calendar__pill--tall {
+        height: 66px;
+    }
+
+    .calendar-modal__event-card {
+        flex-direction: column;
+    }
+
+
+
+    .calendar__day-number {
+        margin: 5px;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .calendar-modal__event-img {
+        width: 80%;
+    }
+
+    .calendar-modal__top {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .calendar-modal__hours {
+        justify-content: flex-start;
+    }
+
+    .key-item-container {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease, margin 0.3s ease;
+        will-change: max-height;
+    }
+
+    #key-items-container {
+        display: block;
+    }
+
+    .key-subcontainer {
+        flex: 1 1 100%;
+        transition: opacity 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .calendar-dropdown-container {
+        cursor: pointer;
+    }
+
+    .key-item-container.dropdown .key-subcontainer {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .key-item-container.dropdown {
+        max-height: 700px;
+    }
+
+    .calendar-modal__event-details {
+        align-items: stretch;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — 480px
+   ========================================================= */
+
+@media screen and (max-width: 480px) {
+    .calendar__table th {
+        font-size: .7em;
+        padding: 5px 5px;
+        border: 1px solid white;
+    }
+
+    .rotated {
+        transform: rotate(180deg);
+        margin: 0 0 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .calendar-dropdown-icon {
+        transition: transform 0.3s ease;
+    }
+
+    .calendar__nav {
+        width: 10%;
+    }
+
+    .calendar__month-title {
+        font-size: 25px;
+        line-height: 25px;
+    }
+
+    .calendar-modal {
+        width: 100%;
+    }
+
+    .calendar__day-number {
+        margin: 1px;
+    }
+
+    .calendar__pill-icon {
+        width: 9px;
+        height: 9px;
+    }
+
+    #calendar-day-hours-container .calendar__pill-icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    #calendar-day-hours-container .calendar__pill {
+        min-width: 150px;
+    }
+
+    .calendar-modal__event-img {
+        width: 100%;
+    }
+
+    .calendar-modal__note-icon {
+        width: 40px;
+    }
+
+    .calendar-modal__weather-icon {
+        width: 25px;
+        height: 25px;
+    }
+}

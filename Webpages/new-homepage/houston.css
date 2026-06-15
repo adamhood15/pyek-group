@@ -1,0 +1,83 @@
+#video-hero-code-block .hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--primary);
+}
+
+/* Video layer */
+#video-hero-code-block .hero__media,
+#video-hero-code-block .hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#video-hero-code-block .hero__video {
+  object-fit: cover;
+}
+
+/* LCP poster — sits beneath the video, same asset across breakpoints, CSS handles the crop */
+#video-hero-code-block .hero__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  z-index: 0;
+}
+
+/* Overlay tint */
+#video-hero-code-block .hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
+
+/* Content */
+#video-hero-code-block .hero__overlay {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  height: 100%;
+  text-align: center;
+  color: #fff;
+  padding: 20px;
+}
+
+#video-hero-code-block .hero__logo {
+  max-width: 220px;
+  height: auto;
+}
+
+#video-hero-code-block .hero__heading {
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1.1;
+  margin: 0;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+#video-hero-code-block .hero__heading--styled {
+  font-size: clamp(50px, 6vw, 74px);
+}
+
+#video-hero-code-block .hero__text {
+  max-width: 700px;
+  font-size: 18px;
+}
+
+/* Stroke effect */
+#video-hero-code-block .text-stroke {
+  line-height: 20px;
+  color: #ff1469;
+}
