@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  Typhoon Texas — Attraction Page Template
+  ============================================================
+  HOW TO USE:
+  - Replace all src="" image values with ACF field outputs
+    or WordPress attachment URLs.
+  - Replace placeholder text with ACF fields (comments inline).
+  - Adjust ap-map-pin top/left % to real park map coordinates.
+  - Set thrill badge class: ap-thrill__badge--high/medium/low
+  - Activate ap-audience__badge--active on matching ages.
+  - Activate ap-persona-card--match on applicable personalities.
+  ============================================================
+  ENQUEUE:  attraction-page.css  +  attraction-page.js
+  ============================================================
+
+  SEO NOTES:
+  - H1 = attraction name (one per page, in hero)
+  - H2 = major section headings (Overview, Ride Info, etc.)
+  - Schema: use TouristAttraction or EntertainmentBusiness JSON-LD
+  - Alt text: describe rider action + slide name for every image
+  - Meta title pattern: "[Attraction Name] | Typhoon Texas Waterpark"
+  - Meta desc pattern: "[Tagline]. [Height req]. Located in [area].
+    Learn more and buy tickets."
+  - Internal links: nearby attractions, park map page, ticket page
+  ============================================================
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- ── SEO ──────────────────────────────────────────────────────────── -->
+  <title>Tidal Wave Tower | Typhoon Texas Waterpark</title>
+  <!-- ACF: <title><?php echo get_field('attraction_name'); ?> | Typhoon Texas Waterpark</title> -->
+
+  <meta name="description" content="Twist. Drop. Scream. Repeat. Tidal Wave Tower is the tallest water slide at Typhoon Texas. 48&quot; minimum height. Located in the Thrill Zone. Buy tickets and plan your visit." />
+  <!-- ACF pattern: <?php echo get_field('tagline') . ' ' . get_field('height_requirement') . '. Located in ' . get_field('park_area') . '.'; ?> -->
+
+  <!-- Open Graph -->
+  <meta property="og:title"       content="Tidal Wave Tower | Typhoon Texas" />
+  <meta property="og:description" content="Twist. Drop. Scream. Repeat. Texas's most heart-pounding water slide experience." />
+  <meta property="og:image"       content="" /><!-- ACF: <?php echo get_field('hero_image'); ?> -->
+  <meta property="og:type"        content="website" />
+
+  <!-- Schema.org — TouristAttraction -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristAttraction",
+    "name": "Tidal Wave Tower",
+    "description": "Seven-story water slide tower at Typhoon Texas featuring steep drops, high-speed banking turns, and a dramatic splash-down finale.",
+    "url": "",
+    "image": "",
+    "containedInPlace": {
+      "@type": "AmusementPark",
+      "name": "Typhoon Texas Waterpark",
+      "url": "https://typhoontexas.com"
+    }
+  }
+  </script>
+  <!-- /Schema — update name, description, url, image via ACF -->
+
+  <link rel="stylesheet" href="attraction-page.css" />
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     STICKY NAV — appears after hero scrolls out of view
+     ════════════════════════════════════════════════════════════════════════ -->
+<nav class="ap-sticky-nav" aria-label="Attraction quick navigation">
+  <span class="ap-sticky-nav__title">Tidal Wave Tower</span>
+  <!-- ACF: <?php echo get_field('attraction_name'); ?> -->
+
+  <div class="ap-sticky-nav__links" role="list">
+    <a class="ap-sticky-nav__link" href="#overview">Overview</a>
+    <a class="ap-sticky-nav__link" href="#ride-info">Ride Info</a>
+    <a class="ap-sticky-nav__link" href="#map">Map</a>
+    <a class="ap-sticky-nav__link" href="#safety">Safety</a>
+    <a class="ap-sticky-nav__link" href="#gallery">Photos</a>
+  </div>
+
+  <a class="ap-sticky-nav__cta" href="/tickets/">Buy Tickets</a>
+  <!-- ACF: href="<?php echo get_field('ticket_url') ?: '/tickets/'; ?>" -->
+</nav>
+
+
+<div class="attraction-page">
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     1. HERO
+     ACF fields: hero_image, hero_video (optional), attraction_category,
+                 attraction_name, tagline, ride_type, thrill_level,
+                 height_requirement, rider_type, park_area
+     ════════════════════════════════════════════════════════════════════════ -->
+<section class="ap-hero" id="hero" aria-label="Tidal Wave Tower attraction hero">
+
+  <div class="ap-hero__media">
+    <img
+      class="ap-hero__img"
+      src="./images/Buckaroo-Bayou.jpg"
+      alt="Riders launching off the summit of Tidal Wave Tower at Typhoon Texas"
+      width="1400"
+      height="800"
+      fetchpriority="high"
+    />
+    <!-- ACF: src="<?php echo get_field('hero_image'); ?>"  -->
+    <!--
+      OPTIONAL — video background (muted, autoplay, loop; hero image as poster):
+      <video class="ap-hero__video" autoplay muted loop playsinline
+        poster="<?php echo get_field('hero_image'); ?>">
+        <source src="<?php echo get_field('hero_video'); ?>" type="video/mp4">
+      </video>
+    -->
+  </div>
+
+  <div class="ap-hero__overlay" aria-hidden="true"></div>
+
+  <div class="ap-hero__content">
+
+    <span class="ap-hero__eyebrow">Water Slides</span>
+    <!-- ACF: <?php echo get_field('attraction_category'); ?> -->
+
+    <h1 class="ap-hero__title">Tidal Wave Tower</h1>
+    <!-- ACF: <?php echo get_field('attraction_name'); ?> -->
+
+    <p class="ap-hero__tagline">Twist. Drop. Scream. Repeat. Texas's most heart-pounding water slide experience.</p>
+    <!-- ACF: <?php echo get_field('tagline'); ?> -->
+
+    <!-- ── Quick Stats ────────────────────────────────────────────────── -->
+    <!-- ACF: populate each ap-stat__value from its corresponding field   -->
+    <div class="ap-hero__stats" aria-label="Quick attraction stats">
+
+      <!-- Ride Type -->
+      <div class="ap-stat">
+        <div class="ap-stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="ap-stat__label">Ride Type</span>
+          <span class="ap-stat__value">Body Slide</span>
+          <!-- ACF: <?php echo get_field('ride_type'); ?> -->
+        </div>
+      </div>
+
+      <!-- Thrill Level -->
+      <div class="ap-stat">
+        <div class="ap-stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C8.5 6.5 6 9.5 6 13a6 6 0 0012 0c0-3.5-2.5-6.5-6-11z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="ap-stat__label">Thrill Level</span>
+          <span class="ap-stat__value">High</span>
+          <!-- ACF: <?php echo get_field('thrill_level'); ?> -->
+        </div>
+      </div>
+
+      <!-- Height Requirement -->
+      <div class="ap-stat">
+        <div class="ap-stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="2" x2="12" y2="22"/>
+            <polyline points="17 7 12 2 7 7"/>
+            <polyline points="7 17 12 22 17 17"/>
+          </svg>
+        </div>
+        <div>
+          <span class="ap-stat__label">Min. Height</span>
+          <span class="ap-stat__value">48&#8243;</span>
+          <!-- ACF: <?php echo get_field('height_requirement'); ?> -->
+        </div>
+      </div>
+
+      <!-- Rider Type -->
+      <div class="ap-stat">
+        <div class="ap-stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <div>
+          <span class="ap-stat__label">Riders</span>
+          <span class="ap-stat__value">Single Rider</span>
+          <!-- ACF: <?php echo get_field('rider_type'); ?> -->
+        </div>
+      </div>
+
+      <!-- Park Area -->
+      <div class="ap-stat">
+        <div class="ap-stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <div>
+          <span class="ap-stat__label">Park Area</span>
+          <span class="ap-stat__value">Thrill Zone</span>
+          <!-- ACF: <?php echo get_field('park_area'); ?> -->
+        </div>
+      </div>
+
+      <!-- Best For (persona) -->
+      <div class="ap-stat">
+        <div class="ap-stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <div>
+          <span class="ap-stat__label">Best For</span>
+          <span class="ap-stat__value">Thrill Seekers</span>
+          <!-- ACF: <?php echo get_field('best_for'); ?> -->
+        </div>
+      </div>
+
+      <!-- Recommended Ages -->
+      <div class="ap-stat">
+        <div class="ap-stat__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <div>
+          <span class="ap-stat__label">Ages</span>
+          <span class="ap-stat__value">Teens &amp; Adults</span>
+          <!-- ACF: <?php echo get_field('recommended_ages'); ?> -->
+        </div>
+      </div>
+
+    </div><!-- /.ap-hero__stats -->
+  </div><!-- /.ap-hero__content -->
+
+  <!-- Animated wave — bottom of hero -->
+  <div class="ap-hero__wave-container" aria-hidden="true">
+    <div class="ap-hero__wave-layer ap-hero__wave-layer--back">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,50 C180,82 540,82 720,50 C900,18 1260,18 1440,50 L1440,100 L0,100 Z"/>
+      </svg>
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,50 C180,82 540,82 720,50 C900,18 1260,18 1440,50 L1440,100 L0,100 Z"/>
+      </svg>
+    </div>
+    <div class="ap-hero__wave-layer ap-hero__wave-layer--front">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,62 C200,92 520,92 720,62 C920,32 1240,32 1440,62 L1440,100 L0,100 Z"/>
+      </svg>
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,62 C200,92 520,92 720,62 C920,32 1240,32 1440,62 L1440,100 L0,100 Z"/>
+      </svg>
+    </div>
+  </div>
+
+</section><!-- /.ap-hero -->
+
+<!-- Wave: hero → body -->
+<svg class="ap-wave-divider" viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true">
+  <path class="ap-wave-divider--bg" d="M0,40 C240,64 480,16 720,40 C960,64 1200,16 1440,40 L1440,64 L0,64 Z"/>
+</svg>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     2. ATTRACTION DESCRIPTION / OVERVIEW
+     ACF fields: section_label, overview_heading, description (or desc_p1 + desc_p2),
+                 detail_image
+     ════════════════════════════════════════════════════════════════════════ -->
+<div class="ap-section" id="overview">
+  <div class="ap-section-label">The Ride</div>
+  <!-- ACF: <?php echo get_field('section_label') ?: 'The Ride'; ?> -->
+
+  <div class="ap-overview">
+
+    <div class="ap-overview__text ap-animate">
+      <h2 class="ap-section-heading">A Surge of Pure Adrenaline</h2>
+      <!-- ACF: <?php echo get_field('overview_heading'); ?> -->
+
+      <p class="ap-overview__body">
+        Climb to the top of our seven-story slide tower and choose your fate: plunge into the dark enclosed chute or face the open-air half-pipe with sweeping views of the park below. Either way, your heart is racing before you even push off.
+      </p>
+      <p class="ap-overview__body">
+        Tidal Wave Tower combines steep drops, high-speed banking turns, and a dramatic splash-down finale that sends a wall of water ten feet into the air. Whether you ride solo or race a friend on the dueling lanes, this is the signature thrill at Typhoon Texas — and you'll be back for more.
+      </p>
+      <!-- ACF: <?php echo get_field('description'); ?> -->
+    </div>
+
+    <div class="ap-overview__img-wrap ap-animate ap-animate--delay-2">
+      <img
+        class="ap-overview__img"
+        src="./images/Duelin-Daltons.jpg"
+        alt="Close-up of the spiral enclosed chute on Tidal Wave Tower at Typhoon Texas"
+        width="600"
+        height="450"
+        loading="lazy"
+        decoding="async"
+      />
+      <!-- ACF: src="<?php echo get_field('detail_image'); ?>" -->
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     3. RIDE DETAILS
+     ACF fields: thrill_level, thrill_note, height_requirement, height_note,
+                 great_for, great_for_note, rider_config, ride_duration,
+                 accessibility_info, water_depth, max_weight
+     Thrill badge modifier: --high / --medium / --low
+     Dot --on count:        3 = high | 2 = medium | 1 = low
+     ════════════════════════════════════════════════════════════════════════ -->
+<section class="ap-details-band" id="ride-info" aria-label="Ride details and restrictions">
+  <div class="ap-details-band__inner">
+
+    <div class="ap-section-label ap-section-label--light">Quick Facts</div>
+    <h2 class="ap-section-heading ap-section-heading--light">Ride Info</h2>
+    <p class="ap-section-sub ap-section-sub--light">Everything you need to know before you ride</p>
+
+    <div class="ap-details-grid">
+
+      <!-- Thrill Level -->
+      <div class="ap-detail-card ap-animate">
+        <div class="ap-detail-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <div class="ap-detail-card__label">Thrill Level</div>
+        <div class="ap-detail-card__value">
+          <div class="ap-thrill">
+            <!-- Badge: swap modifier class based on ACF thrill_level value -->
+            <span class="ap-thrill__badge ap-thrill__badge--high" aria-label="High thrill level">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C8.5 6.5 6 9.5 6 13a6 6 0 0012 0c0-3.5-2.5-6.5-6-11zm0 16a3 3 0 01-3-3c0-2 1.5-4 3-5.5C13.5 11 15 13 15 15a3 3 0 01-3 3z"/>
+              </svg>
+              High
+            </span>
+            <!-- Dots: 3 = high, 2 = medium, 1 = low -->
+            <div class="ap-thrill__dots" aria-hidden="true">
+              <div class="ap-thrill__dot ap-thrill__dot--on"></div>
+              <div class="ap-thrill__dot ap-thrill__dot--on"></div>
+              <div class="ap-thrill__dot ap-thrill__dot--on"></div>
+            </div>
+          </div>
+        </div>
+        <div class="ap-detail-card__note">Not recommended for guests with heart, back, or neck conditions.</div>
+        <!-- ACF: <?php echo get_field('thrill_note'); ?> -->
+      </div>
+
+      <!-- Height Requirement -->
+      <div class="ap-detail-card ap-animate ap-animate--delay-1">
+        <div class="ap-detail-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="2" x2="12" y2="22"/>
+            <polyline points="17 7 12 2 7 7"/>
+            <polyline points="7 17 12 22 17 17"/>
+            <line x1="8" y1="12" x2="16" y2="12"/>
+          </svg>
+        </div>
+        <div class="ap-detail-card__label">Height Requirement</div>
+        <div class="ap-detail-card__value">48&#8243; (122&nbsp;cm) minimum</div>
+        <!-- ACF: <?php echo get_field('height_requirement'); ?> -->
+        <div class="ap-detail-card__note">No exceptions. Guests under 48&#8243; must try other attractions.</div>
+        <!-- ACF: <?php echo get_field('height_note'); ?> -->
+      </div>
+
+      <!-- Rider Configuration -->
+      <div class="ap-detail-card ap-animate ap-animate--delay-2">
+        <div class="ap-detail-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+        </div>
+        <div class="ap-detail-card__label">Rider Config</div>
+        <div class="ap-detail-card__value">Single Rider</div>
+        <!-- ACF: <?php echo get_field('rider_config'); ?> -->
+        <div class="ap-detail-card__note">Dueling lanes available — race head-to-head with a friend.</div>
+        <!-- ACF: <?php echo get_field('rider_config_note'); ?> -->
+      </div>
+
+      <!-- Duration -->
+      <div class="ap-detail-card ap-animate ap-animate--delay-3">
+        <div class="ap-detail-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <div class="ap-detail-card__label">Ride Duration</div>
+        <div class="ap-detail-card__value">~45 seconds</div>
+        <!-- ACF: <?php echo get_field('ride_duration'); ?> — use "Varies" if unknown -->
+        <div class="ap-detail-card__note">From launch to splash-down pool.</div>
+      </div>
+
+      <!-- Accessibility -->
+      <div class="ap-detail-card ap-animate ap-animate--delay-1">
+        <div class="ap-detail-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4l3 3"/>
+          </svg>
+        </div>
+        <div class="ap-detail-card__label">Accessibility</div>
+        <div class="ap-detail-card__value">Stairs to Summit</div>
+        <!-- ACF: <?php echo get_field('accessibility_info'); ?> -->
+        <div class="ap-detail-card__note">No elevator access. Guests must be able to climb unaided.</div>
+        <!-- ACF: <?php echo get_field('accessibility_note'); ?> -->
+      </div>
+
+      <!-- Water Depth / Life Jacket -->
+      <div class="ap-detail-card ap-animate ap-animate--delay-2">
+        <div class="ap-detail-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18C3 12 12 3 12 3s9 9 9 15a9 9 0 01-18 0z"/>
+          </svg>
+        </div>
+        <div class="ap-detail-card__label">Water Depth</div>
+        <div class="ap-detail-card__value">3.5 ft splash pool</div>
+        <!-- ACF: <?php echo get_field('water_depth'); ?> -->
+        <div class="ap-detail-card__note">Life jackets available free at the ride entrance.</div>
+        <!-- ACF: <?php echo get_field('life_jacket_note'); ?> -->
+      </div>
+
+      <!-- Max Weight (optional — hide card if no field value) -->
+      <div class="ap-detail-card ap-animate ap-animate--delay-3">
+        <div class="ap-detail-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="3"/>
+            <path d="M8.5 8H5l-2 12h18L19 8h-3.5"/>
+          </svg>
+        </div>
+        <div class="ap-detail-card__label">Max Weight</div>
+        <div class="ap-detail-card__value">300 lbs</div>
+        <!-- ACF: <?php echo get_field('max_weight') ?: 'None'; ?> -->
+        <div class="ap-detail-card__note">Combined weight limit applies for tandem lanes.</div>
+      </div>
+
+      <!-- Best For -->
+      <div class="ap-detail-card ap-animate ap-animate--delay-4">
+        <div class="ap-detail-card__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </div>
+        <div class="ap-detail-card__label">Great For</div>
+        <div class="ap-detail-card__value">Thrill Seekers &amp; Teens</div>
+        <!-- ACF: <?php echo get_field('great_for'); ?> -->
+        <div class="ap-detail-card__note">Best experienced with friends who can handle the speed.</div>
+        <!-- ACF: <?php echo get_field('great_for_note'); ?> -->
+      </div>
+
+    </div><!-- /.ap-details-grid -->
+  </div>
+</section>
+
+
+<!-- Wave: details → map -->
+<svg class="ap-wave-divider" viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true">
+  <path class="ap-wave-divider--bg" d="M0,32 C180,64 360,0 540,32 C720,64 900,8 1080,32 C1260,56 1380,20 1440,32 L1440,64 L0,64 Z"/>
+</svg>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     6. PARK MAP
+     ACF fields: park_map_image, map_description, map_pin_top, map_pin_left
+     Nearby attractions: link to their respective pages.
+     ════════════════════════════════════════════════════════════════════════ -->
+<div class="ap-section ap-map-section" id="map">
+
+  <div class="ap-map-section__header ap-animate">
+    <div class="ap-section-label">Location</div>
+    <h2 class="ap-section-heading">Find It in the Park</h2>
+    <p class="ap-section-sub">
+      Tidal Wave Tower is in the Thrill Zone — northwest corner, past the Lazy River.
+    </p>
+    <!-- ACF: <?php echo get_field('map_description'); ?> -->
+  </div>
+
+  <div class="ap-map-frame" role="img" aria-label="Park map showing the location of Tidal Wave Tower">
+
+    <img
+      class="ap-map-frame__img"
+      src="./images/Buckaroo-Bayou.jpg"
+      alt="Typhoon Texas park map with Tidal Wave Tower location highlighted in the northwest Thrill Zone"
+      width="1200"
+      height="525"
+      loading="lazy"
+      decoding="async"
+    />
+    <!-- ACF: src="<?php echo get_field('park_map_image'); ?>" -->
+
+    <!-- Placeholder shown when src is empty — remove in production -->
+    <div class="ap-map-frame__placeholder" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+      </svg>
+      <span>Park Map Image</span>
+    </div>
+
+    <!-- Pin: adjust top/left to match real map coordinates for this attraction -->
+    <!-- ACF: style="top:<?php echo get_field('map_pin_top'); ?>%;left:<?php echo get_field('map_pin_left'); ?>%;" -->
+    <div class="ap-map-pin" aria-hidden="true" style="top:20%;left:54%;">
+      <div class="ap-map-pin__label">Tidal Wave Tower</div>
+      <div class="ap-map-pin__dot"></div>
+    </div>
+
+  </div>
+
+  <!-- Expand to full map modal -->
+  <button class="ap-map-expand" data-ap-map-trigger type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+      <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+    </svg>
+    View full park map
+  </button>
+
+  <!-- Nearby attractions — update hrefs to actual attraction page URLs -->
+  <div class="ap-nearby" aria-label="Nearby attractions">
+    <span class="ap-nearby__label">Nearby:</span>
+    <!-- ACF: loop get_field('nearby_attractions') repeater -->
+    <a class="ap-nearby__chip" href="/attractions/lazy-river/">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18L15 12L9 6"/>
+      </svg>
+      Lazy River
+    </a>
+    <a class="ap-nearby__chip" href="/attractions/barrel-blast/">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18L15 12L9 6"/>
+      </svg>
+      Barrel Blast
+    </a>
+    <a class="ap-nearby__chip" href="/attractions/flow-rider/">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18L15 12L9 6"/>
+      </svg>
+      FlowRider
+    </a>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     7. SAFETY REQUIREMENTS
+     ACF fields: safety_items (repeater), safety_cta_url, safety_cta_label
+     Keep tone informative, not alarming.
+     ════════════════════════════════════════════════════════════════════════ -->
+<section class="ap-safety-band" id="safety" aria-labelledby="safety-heading">
+  <div class="ap-safety-band__inner">
+
+    <div>
+      <div class="ap-safety-band__section-label">Know Before You Ride</div>
+      <h2 class="ap-safety-band__heading" id="safety-heading">Safety &amp; Restrictions</h2>
+
+      <div class="ap-safety-items" role="list">
+
+        <div class="ap-safety-item" role="listitem">
+          <div class="ap-safety-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <span>Minimum height 48&#8243;. Children under this height will not be permitted.</span>
+        </div>
+
+        <div class="ap-safety-item" role="listitem">
+          <div class="ap-safety-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+          </div>
+          <span>Not recommended for guests with heart, back, or neck conditions, or who are pregnant.</span>
+        </div>
+
+        <div class="ap-safety-item" role="listitem">
+          <div class="ap-safety-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 18C3 12 12 3 12 3s9 9 9 15a9 9 0 01-18 0z"/>
+            </svg>
+          </div>
+          <span>Life jackets available free of charge at the ride entrance for those who want them.</span>
+        </div>
+
+        <div class="ap-safety-item" role="listitem">
+          <div class="ap-safety-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+            </svg>
+          </div>
+          <span>Loose items must be secured or stored in a free locker before boarding.</span>
+        </div>
+
+        <div class="ap-safety-item" role="listitem">
+          <div class="ap-safety-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/>
+            </svg>
+          </div>
+          <span>Maximum weight limit of 300 lbs. Combined weight limit applies for dueling lanes.</span>
+        </div>
+
+        <div class="ap-safety-item" role="listitem">
+          <div class="ap-safety-item__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <span>Guests must position themselves per ride attendant instructions before launch.</span>
+        </div>
+
+      </div><!-- /.ap-safety-items -->
+    </div>
+
+    <div>
+      <a class="ap-safety-band__cta" href="/safety-restrictions/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        View All Safety Restrictions
+      </a>
+      <!-- ACF: href="<?php echo get_field('safety_cta_url') ?: '/safety-restrictions/'; ?>" -->
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     8. PHOTO GALLERY
+     Desktop: masonry-style grid | Mobile: swipe carousel
+     ACF field: gallery_images (gallery or repeater)
+     data-src on each .ap-gallery__item triggers lightbox on click.
+     ════════════════════════════════════════════════════════════════════════ -->
+<section class="ap-gallery-section" id="gallery" aria-labelledby="gallery-heading">
+  <div class="ap-gallery-section__inner">
+
+    <div class="ap-gallery-section__header ap-animate">
+      <div>
+        <div class="ap-section-label">See It in Action</div>
+        <h2 class="ap-section-heading" id="gallery-heading">Photo Gallery</h2>
+      </div>
+      <a class="ap-gallery__view-all" href="/media/">
+        View all photos
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 18L15 12L9 6"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Desktop grid (hidden on mobile via CSS) -->
+    <!-- ACF: loop gallery images; set src and data-src for lightbox -->
+    <div class="ap-gallery__grid" aria-label="Attraction photo gallery">
+
+      <div class="ap-gallery__item ap-animate" data-src="">
+        <img class="ap-gallery__img" src="./images/Duelin-Daltons.jpg" alt="Riders launching from the top of Tidal Wave Tower" loading="lazy" decoding="async" width="600" height="800"/>
+        <div class="ap-gallery__overlay" aria-hidden="true">
+          <div class="ap-gallery__overlay-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              <line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/>
+            </svg>
+          </div>
+        </div>
+        <div class="ap-gallery__caption">Summit launch — the moment before the drop</div>
+      </div>
+
+      <div class="ap-gallery__item ap-animate ap-animate--delay-1" data-src="">
+        <img class="ap-gallery__img" src="./images/Howdy-Hollow.jpg" alt="Aerial view of Tidal Wave Tower's spiral chute" loading="lazy" decoding="async" width="400" height="300"/>
+        <div class="ap-gallery__overlay" aria-hidden="true">
+          <div class="ap-gallery__overlay-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+        </div>
+        <div class="ap-gallery__caption">Aerial view of the spiral chute</div>
+      </div>
+
+      <div class="ap-gallery__item ap-animate ap-animate--delay-2" data-src="">
+        <img class="ap-gallery__img" src="./images/Lazy-T-River.webp" alt="Family watching riders from the splash pool below" loading="lazy" decoding="async" width="400" height="300"/>
+        <div class="ap-gallery__overlay" aria-hidden="true">
+          <div class="ap-gallery__overlay-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+        </div>
+        <div class="ap-gallery__caption">Family cheering from the splash pool</div>
+      </div>
+
+      <div class="ap-gallery__item ap-animate ap-animate--delay-3" data-src="">
+        <img class="ap-gallery__img" src="./images/lone-star-racers-houston.jpg" alt="POV shot from inside the enclosed chute" loading="lazy" decoding="async" width="400" height="300"/>
+        <div class="ap-gallery__overlay" aria-hidden="true">
+          <div class="ap-gallery__overlay-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+        </div>
+        <div class="ap-gallery__caption">POV: Inside the enclosed chute</div>
+      </div>
+
+      <div class="ap-gallery__item ap-animate ap-animate--delay-4" data-src="">
+        <img class="ap-gallery__img" src="./images/monster-storms.jpg" alt="Rider mid-air during the splash-down finale" loading="lazy" decoding="async" width="400" height="300"/>
+        <div class="ap-gallery__overlay" aria-hidden="true">
+          <div class="ap-gallery__overlay-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+        </div>
+        <div class="ap-gallery__caption">Splash-down finale — ten-foot wall of water</div>
+      </div>
+
+    </div><!-- /.ap-gallery__grid -->
+
+    <!-- Mobile swipe carousel -->
+    <div class="ap-gallery__scroll" aria-label="Swipe through attraction photos">
+      <div class="ap-gallery__scroll-item">
+        <img src="./images/Buckaroo-Bayou.jpg" alt="Riders launching from the top of Tidal Wave Tower" loading="lazy" decoding="async"/>
+      </div>
+      <div class="ap-gallery__scroll-item">
+        <img src="./images/Howdy-Hollow.jpg " alt="Aerial view of Tidal Wave Tower's spiral chute" loading="lazy" decoding="async"/>
+      </div>
+      <div class="ap-gallery__scroll-item">
+        <img src="./images/Lazy-T-River.webp" alt="Family watching riders from the splash pool below" loading="lazy" decoding="async"/>
+      </div>
+      <div class="ap-gallery__scroll-item">
+        <img src="./images/lone-star-racers-houston.jpg " alt="POV shot from inside the enclosed chute" loading="lazy" decoding="async"/>
+      </div>
+      <div class="ap-gallery__scroll-item">
+        <img src="./images/monster-storms.jpg" alt="Rider mid-air during the splash-down finale" loading="lazy" decoding="async"/>
+      </div>
+    </div>
+    <div class="ap-gallery__scroll-dots" role="tablist" aria-label="Gallery navigation dots"></div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     9. RELATED ATTRACTIONS
+     ACF field: related_attractions (relationship field, limit 3)
+     Link each card's href to the related attraction's permalink.
+     Thrill badge modifier: --high / --medium / --low
+     ════════════════════════════════════════════════════════════════════════ -->
+<section class="ap-related-section" aria-labelledby="related-heading">
+  <div class="ap-related-section__inner">
+
+    <div class="ap-related-section__header ap-animate">
+      <div class="ap-section-label">Keep the Fun Going</div>
+      <h2 class="ap-section-heading" id="related-heading">You Might Also Love</h2>
+      <p class="ap-section-sub">Similar thrills — or a totally different vibe. Something for everyone.</p>
+    </div>
+
+    <div class="ap-related-grid">
+
+      <!-- Related Card 1 -->
+      <!-- ACF: populate from related_attractions repeater/relationship -->
+      <a class="ap-related-card ap-animate" href="/attractions/barrel-blast/">
+        <div class="ap-related-card__img-wrap">
+          <img class="ap-related-card__img" src="./images/Buckaroo-Bayou.jpg" alt="Riders spinning through the Barrel Blast funnel slide" loading="lazy" decoding="async" width="600" height="338"/>
+          <span class="ap-related-card__thrill ap-related-card__thrill--high">High Thrill</span>
+        </div>
+        <div class="ap-related-card__body">
+          <h3 class="ap-related-card__title">Barrel Blast</h3>
+          <p class="ap-related-card__desc">Two riders spin through a giant funnel — centrifugal force does the rest. Prepare to scream.</p>
+          <div class="ap-related-card__meta">
+            <div class="ap-related-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="2" x2="12" y2="22"/><polyline points="17 7 12 2 7 7"/>
+              </svg>
+              42&#8243; min.
+            </div>
+            <div class="ap-related-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+              </svg>
+              2 Riders
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Related Card 2 -->
+      <a class="ap-related-card ap-animate ap-animate--delay-1" href="/attractions/flow-rider/">
+        <div class="ap-related-card__img-wrap">
+          <img class="ap-related-card__img" src="./images/Duelin-Daltons.jpg" alt="Guest surfing the FlowRider surf simulator" loading="lazy" decoding="async" width="600" height="338"/>
+          <span class="ap-related-card__thrill ap-related-card__thrill--medium">Medium Thrill</span>
+        </div>
+        <div class="ap-related-card__body">
+          <h3 class="ap-related-card__title">FlowRider</h3>
+          <p class="ap-related-card__desc">Shred an endless wave — stand up or drop knee. The crowd will be watching.</p>
+          <div class="ap-related-card__meta">
+            <div class="ap-related-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="2" x2="12" y2="22"/><polyline points="17 7 12 2 7 7"/>
+              </svg>
+              None
+            </div>
+            <div class="ap-related-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+              </svg>
+              Solo
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!-- Related Card 3 -->
+      <a class="ap-related-card ap-animate ap-animate--delay-2" href="/attractions/lazy-river/">
+        <div class="ap-related-card__img-wrap">
+          <img class="ap-related-card__img" src="./images/Howdy-Hollow.jpg" alt="Guests floating on tubes down the Typhoon Texas Lazy River" loading="lazy" decoding="async" width="600" height="338"/>
+          <span class="ap-related-card__thrill ap-related-card__thrill--low">Low Thrill</span>
+        </div>
+        <div class="ap-related-card__body">
+          <h3 class="ap-related-card__title">Lazy River</h3>
+          <p class="ap-related-card__desc">Take a breather. Float along 1,000 feet of twists, jets, and sun-soaked relaxation.</p>
+          <div class="ap-related-card__meta">
+            <div class="ap-related-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+              </svg>
+              All Ages
+            </div>
+            <div class="ap-related-card__meta-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+              </svg>
+              Groups
+            </div>
+          </div>
+        </div>
+      </a>
+
+    </div><!-- /.ap-related-grid -->
+  </div>
+</section>
+
+
+<!-- Wave: related → CTA -->
+<svg class="ap-wave-divider" viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true" style="background:var(--ap-bg);">
+  <path class="ap-wave-divider--dark" d="M0,28 C320,64 640,0 960,28 C1120,42 1320,10 1440,28 L1440,64 L0,64 Z"/>
+</svg>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     10. CTA BAND
+     Update hrefs to correct ticket, pass, map, and plan-your-visit URLs.
+     ════════════════════════════════════════════════════════════════════════ -->
+<section class="ap-cta-band" aria-labelledby="cta-heading">
+  <div class="ap-cta-band__inner">
+
+    <span class="ap-cta-band__eyebrow">Ready to Ride?</span>
+
+    <h2 class="ap-cta-band__heading" id="cta-heading">The Wave Is Waiting for You</h2>
+
+    <p class="ap-cta-band__sub">
+      Don't just read about it — feel it. Grab your tickets and make it a day your whole crew will talk about until next summer.
+    </p>
+
+    <div class="ap-cta-band__buttons">
+
+      <a class="ap-cta-btn ap-cta-btn--primary" href="/tickets/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/>
+          <path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/>
+          <path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/>
+        </svg>
+        Buy Day Tickets
+      </a>
+
+      <a class="ap-cta-btn ap-cta-btn--secondary" href="/season-passes/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+        Get a Season Pass
+      </a>
+
+      <a class="ap-cta-btn ap-cta-btn--ghost" href="/park-map/">View Park Map</a>
+      <a class="ap-cta-btn ap-cta-btn--ghost" href="/plan-your-visit/">Plan Your Visit</a>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     MAP MODAL — expanded park map
+     ════════════════════════════════════════════════════════════════════════ -->
+<div class="ap-modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Full park map">
+  <div class="ap-modal">
+    <div class="ap-modal__header">
+      <span class="ap-modal__title">Typhoon Texas Park Map</span>
+      <button class="ap-modal__close" aria-label="Close map">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="ap-modal__body">
+      <img
+        src="./images/Buckaroo-Bayou.jpg"
+        alt="Full Typhoon Texas park map"
+        width="900"
+        height="600"
+        loading="lazy"
+      />
+      <!-- ACF: src="<?php echo get_field('park_map_image_full') ?: get_field('park_map_image'); ?>" -->
+    </div>
+  </div>
+</div>
+
+
+</div><!-- /.attraction-page -->
+
+<script src="attraction-page.js"></script>
+</body>
+</html>
