@@ -11,6 +11,13 @@
   - Set thrill badge class: ap-thrill__badge--high/medium/low
   - Activate ap-audience__badge--active on matching ages.
   - Activate ap-persona-card--match on applicable personalities.
+  - RESPONSIVE IMAGES: every img below has a `sizes` attribute ready to
+    pair with a real `srcset`. When wiring an image to an ACF field
+    (return format: Image Array), build the srcset from $image['sizes']
+    instead of shipping one fixed file to every viewport — see
+    pmap_build_srcset() / rgallery_build_srcset() in
+    Website-Components/park-map/park-map.php and
+    Website-Components/photo-gallery/photo-gallery.php for the pattern.
   ============================================================
   ENQUEUE:  attraction-page.css  +  attraction-page.js
   ============================================================
@@ -103,9 +110,12 @@
       alt="Riders launching off the summit of Tidal Wave Tower at Typhoon Texas"
       width="1400"
       height="800"
+      sizes="100vw"
       fetchpriority="high"
     />
-    <!-- ACF: src="<?php echo get_field('hero_image'); ?>"  -->
+    <!-- ACF: src="<?php echo get_field('hero_image'); ?>" — build srcset from
+         the image array's sizes (see pmap_build_srcset() pattern) since this
+         is the LCP image and shouldn't ship a desktop-size file to mobile -->
     <!--
       OPTIONAL — video background (muted, autoplay, loop; hero image as poster):
       <video class="ap-hero__video" autoplay muted loop playsinline
@@ -299,6 +309,7 @@
         alt="Close-up of the spiral enclosed chute on Tidal Wave Tower at Typhoon Texas"
         width="600"
         height="450"
+        sizes="(max-width: 900px) 100vw, 50vw"
         loading="lazy"
         decoding="async"
       />
@@ -494,6 +505,7 @@
       alt="Typhoon Texas park map with Tidal Wave Tower location highlighted in the northwest Thrill Zone"
       width="1200"
       height="525"
+      sizes="100vw"
       loading="lazy"
       decoding="async"
     />
@@ -643,7 +655,8 @@
 
 <!-- ════════════════════════════════════════════════════════════════════════
      8. PHOTO GALLERY
-     Desktop: masonry-style grid | Mobile: swipe carousel
+     Single responsive grid — reflows column count via CSS at each
+     breakpoint instead of shipping separate desktop/mobile markup.
      ACF field: gallery_images (gallery or repeater)
      data-src on each .ap-gallery__item triggers lightbox on click.
      ════════════════════════════════════════════════════════════════════════ -->
@@ -663,12 +676,14 @@
       </a>
     </div>
 
-    <!-- Desktop grid (hidden on mobile via CSS) -->
+    <!-- Single grid — reflows columns via CSS media queries, same markup at every breakpoint -->
     <!-- ACF: loop gallery images; set src and data-src for lightbox -->
+    <!-- ACF: replace loading="lazy" with fetchpriority="high" + no lazy on the first item
+         only if this section can appear above the fold (it can't here — keep lazy). -->
     <div class="ap-gallery__grid" aria-label="Attraction photo gallery">
 
       <div class="ap-gallery__item ap-animate" data-src="">
-        <img class="ap-gallery__img" src="./images/Duelin-Daltons.jpg" alt="Riders launching from the top of Tidal Wave Tower" loading="lazy" decoding="async" width="600" height="800"/>
+        <img class="ap-gallery__img" src="./images/Duelin-Daltons.jpg" alt="Riders launching from the top of Tidal Wave Tower" loading="lazy" decoding="async" width="600" height="800" sizes="(max-width: 900px) 100vw, 45vw"/>
         <div class="ap-gallery__overlay" aria-hidden="true">
           <div class="ap-gallery__overlay-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -681,7 +696,7 @@
       </div>
 
       <div class="ap-gallery__item ap-animate ap-animate--delay-1" data-src="">
-        <img class="ap-gallery__img" src="./images/Howdy-Hollow.jpg" alt="Aerial view of Tidal Wave Tower's spiral chute" loading="lazy" decoding="async" width="400" height="300"/>
+        <img class="ap-gallery__img" src="./images/Howdy-Hollow.jpg" alt="Aerial view of Tidal Wave Tower's spiral chute" loading="lazy" decoding="async" width="400" height="300" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 27vw"/>
         <div class="ap-gallery__overlay" aria-hidden="true">
           <div class="ap-gallery__overlay-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -693,7 +708,7 @@
       </div>
 
       <div class="ap-gallery__item ap-animate ap-animate--delay-2" data-src="">
-        <img class="ap-gallery__img" src="./images/Lazy-T-River.webp" alt="Family watching riders from the splash pool below" loading="lazy" decoding="async" width="400" height="300"/>
+        <img class="ap-gallery__img" src="./images/Lazy-T-River.webp" alt="Family watching riders from the splash pool below" loading="lazy" decoding="async" width="400" height="300" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 27vw"/>
         <div class="ap-gallery__overlay" aria-hidden="true">
           <div class="ap-gallery__overlay-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -705,7 +720,7 @@
       </div>
 
       <div class="ap-gallery__item ap-animate ap-animate--delay-3" data-src="">
-        <img class="ap-gallery__img" src="./images/lone-star-racers-houston.jpg" alt="POV shot from inside the enclosed chute" loading="lazy" decoding="async" width="400" height="300"/>
+        <img class="ap-gallery__img" src="./images/lone-star-racers-houston.jpg" alt="POV shot from inside the enclosed chute" loading="lazy" decoding="async" width="400" height="300" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 27vw"/>
         <div class="ap-gallery__overlay" aria-hidden="true">
           <div class="ap-gallery__overlay-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -717,7 +732,7 @@
       </div>
 
       <div class="ap-gallery__item ap-animate ap-animate--delay-4" data-src="">
-        <img class="ap-gallery__img" src="./images/monster-storms.jpg" alt="Rider mid-air during the splash-down finale" loading="lazy" decoding="async" width="400" height="300"/>
+        <img class="ap-gallery__img" src="./images/monster-storms.jpg" alt="Rider mid-air during the splash-down finale" loading="lazy" decoding="async" width="400" height="300" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 27vw"/>
         <div class="ap-gallery__overlay" aria-hidden="true">
           <div class="ap-gallery__overlay-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -729,26 +744,8 @@
       </div>
 
     </div><!-- /.ap-gallery__grid -->
-
-    <!-- Mobile swipe carousel -->
-    <div class="ap-gallery__scroll" aria-label="Swipe through attraction photos">
-      <div class="ap-gallery__scroll-item">
-        <img src="./images/Buckaroo-Bayou.jpg" alt="Riders launching from the top of Tidal Wave Tower" loading="lazy" decoding="async"/>
-      </div>
-      <div class="ap-gallery__scroll-item">
-        <img src="./images/Howdy-Hollow.jpg " alt="Aerial view of Tidal Wave Tower's spiral chute" loading="lazy" decoding="async"/>
-      </div>
-      <div class="ap-gallery__scroll-item">
-        <img src="./images/Lazy-T-River.webp" alt="Family watching riders from the splash pool below" loading="lazy" decoding="async"/>
-      </div>
-      <div class="ap-gallery__scroll-item">
-        <img src="./images/lone-star-racers-houston.jpg " alt="POV shot from inside the enclosed chute" loading="lazy" decoding="async"/>
-      </div>
-      <div class="ap-gallery__scroll-item">
-        <img src="./images/monster-storms.jpg" alt="Rider mid-air during the splash-down finale" loading="lazy" decoding="async"/>
-      </div>
-    </div>
-    <div class="ap-gallery__scroll-dots" role="tablist" aria-label="Gallery navigation dots"></div>
+    <!-- Single grid reflows for mobile via CSS (see .ap-gallery__grid media queries) —
+         no separate mobile markup, so photos aren't shipped twice. -->
 
   </div>
 </section>
@@ -775,7 +772,7 @@
       <!-- ACF: populate from related_attractions repeater/relationship -->
       <a class="ap-related-card ap-animate" href="/attractions/barrel-blast/">
         <div class="ap-related-card__img-wrap">
-          <img class="ap-related-card__img" src="./images/Buckaroo-Bayou.jpg" alt="Riders spinning through the Barrel Blast funnel slide" loading="lazy" decoding="async" width="600" height="338"/>
+          <img class="ap-related-card__img" src="./images/Buckaroo-Bayou.jpg" alt="Riders spinning through the Barrel Blast funnel slide" loading="lazy" decoding="async" width="600" height="338" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"/>
           <span class="ap-related-card__thrill ap-related-card__thrill--high">High Thrill</span>
         </div>
         <div class="ap-related-card__body">
@@ -802,7 +799,7 @@
       <!-- Related Card 2 -->
       <a class="ap-related-card ap-animate ap-animate--delay-1" href="/attractions/flow-rider/">
         <div class="ap-related-card__img-wrap">
-          <img class="ap-related-card__img" src="./images/Duelin-Daltons.jpg" alt="Guest surfing the FlowRider surf simulator" loading="lazy" decoding="async" width="600" height="338"/>
+          <img class="ap-related-card__img" src="./images/Duelin-Daltons.jpg" alt="Guest surfing the FlowRider surf simulator" loading="lazy" decoding="async" width="600" height="338" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"/>
           <span class="ap-related-card__thrill ap-related-card__thrill--medium">Medium Thrill</span>
         </div>
         <div class="ap-related-card__body">
@@ -828,7 +825,7 @@
       <!-- Related Card 3 -->
       <a class="ap-related-card ap-animate ap-animate--delay-2" href="/attractions/lazy-river/">
         <div class="ap-related-card__img-wrap">
-          <img class="ap-related-card__img" src="./images/Howdy-Hollow.jpg" alt="Guests floating on tubes down the Typhoon Texas Lazy River" loading="lazy" decoding="async" width="600" height="338"/>
+          <img class="ap-related-card__img" src="./images/Howdy-Hollow.jpg" alt="Guests floating on tubes down the Typhoon Texas Lazy River" loading="lazy" decoding="async" width="600" height="338" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"/>
           <span class="ap-related-card__thrill ap-related-card__thrill--low">Low Thrill</span>
         </div>
         <div class="ap-related-card__body">
@@ -924,6 +921,7 @@
         alt="Full Typhoon Texas park map"
         width="900"
         height="600"
+        sizes="90vw"
         loading="lazy"
       />
       <!-- ACF: src="<?php echo get_field('park_map_image_full') ?: get_field('park_map_image'); ?>" -->

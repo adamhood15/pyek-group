@@ -32,7 +32,17 @@
     }
   };
 
-  window.addEventListener('scroll', onScroll, { passive: true });
+  // rAF-throttled: scroll fires far more often than the display can paint,
+  // so batch reads/writes to at most once per frame instead of every event.
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      onScroll();
+      scrollTicking = false;
+    });
+  }, { passive: true });
 
   /* ── Scroll-reveal animations ─────────────────────────────────────────── */
 
@@ -132,41 +142,6 @@
     document.addEventListener('keydown', function esc(e) {
       if (e.key === 'Escape') { dismiss(); document.removeEventListener('keydown', esc); }
     });
-  }
-
-  /* ── Gallery mobile dots ──────────────────────────────────────────────── */
-
-  const scrollTrack = document.querySelector('.ap-gallery__scroll');
-
-  if (scrollTrack) {
-    const items = scrollTrack.querySelectorAll('.ap-gallery__scroll-item');
-    const dotsContainer = document.querySelector('.ap-gallery__scroll-dots');
-
-    if (dotsContainer && items.length > 1) {
-      items.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'ap-gallery__scroll-dot' + (i === 0 ? ' ap-gallery__scroll-dot--active' : '');
-        dot.setAttribute('aria-label', `Photo ${i + 1}`);
-        dot.addEventListener('click', () => {
-          items[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
-        });
-        dotsContainer.appendChild(dot);
-      });
-
-      const io2 = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(e => {
-            const idx = Array.from(items).indexOf(e.target);
-            if (idx < 0) return;
-            dotsContainer.querySelectorAll('.ap-gallery__scroll-dot').forEach((d, i) => {
-              d.classList.toggle('ap-gallery__scroll-dot--active', i === idx);
-            });
-          });
-        },
-        { root: scrollTrack, threshold: 0.6 }
-      );
-      items.forEach(item => io2.observe(item));
-    }
   }
 
 })();

@@ -1,0 +1,391 @@
+/* ==========================================================================
+   Photo Gallery — styles (v2)
+   Paste into Oxygen's global stylesheet, or wrap in <style>...</style>
+   inside its own Code Block on the same page as photo-gallery.php.
+
+   --primary / --secondary come from the WordPress theme's global tokens.
+
+   The lightbox intentionally matches the park-map modal. Tokens below mirror
+   park-map.css's :root values under their own names, so neither component
+   depends on the other being enqueued first.
+   ========================================================================== */
+
+:root {
+	--rgallery-text-muted: #4b5563;
+	--rgallery-radius-lg:  25px;
+	--rgallery-shadow-lg:  0 24px 80px rgba(0, 0, 0, 0.40);
+	--rgallery-transition: 0.22s ease;
+	--rgallery-hairline:   #f4f9ff;
+	--rgallery-scrim:      10, 20, 60;
+}
+
+/* ── Shared scroll lock ─────────────────────────────────────────────────
+   Toggled by the reference-counted lock in photo-gallery.js (published on
+   window as PyekScrollLock so every modal component shares one counter).
+   Native <dialog> traps focus and inerts the background, but it does not
+   stop the page scrolling behind the modal. */
+
+html.pyek-scroll-locked,
+html.pyek-scroll-locked body {
+	overflow: hidden;
+}
+
+/* ── Grid ───────────────────────────────────────────────────────────────── */
+
+.rgallery {
+	max-width: 100%;
+}
+.rgallery__grid {
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr;
+	grid-template-rows: auto auto;
+	gap: 0.875rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	max-width: 100%;
+}
+.rgallery__item {
+	position: relative;
+	/* Grid items default to min-width:auto, which resolves to the <img>'s
+	   native pixel size and can force tracks wider than the container —
+	   this overrides that so the grid can't blow out past its parent. */
+	min-width: 0;
+}
+.rgallery__item:first-child {
+	grid-row: 1 / 3;
+	aspect-ratio: 3 / 4;
+}
+.rgallery__item:not(:first-child) {
+	aspect-ratio: 4 / 3;
+}
+
+/* The hero-plus-satellites layout above only tiles without holes from five
+   images up. Fewer than that needs its own column template. Scoped to the
+   desktop breakpoint because attribute selectors outweigh the plain-class
+   rules in the media queries below — media queries add no specificity. */
+@media (min-width: 901px) {
+	.rgallery__grid[data-rgallery-count="1"] {
+		grid-template-columns: 1fr;
+	}
+	.rgallery__grid[data-rgallery-count="1"] .rgallery__item:first-child {
+		grid-row: auto;
+		aspect-ratio: 16 / 9;
+	}
+
+	.rgallery__grid[data-rgallery-count="2"],
+	.rgallery__grid[data-rgallery-count="4"] {
+		grid-template-columns: 1fr 1fr;
+	}
+	.rgallery__grid[data-rgallery-count="2"] .rgallery__item:first-child,
+	.rgallery__grid[data-rgallery-count="4"] .rgallery__item:first-child {
+		grid-row: auto;
+		aspect-ratio: 4 / 3;
+	}
+
+	/* Hero in column one, the other two stacked beside it. */
+	.rgallery__grid[data-rgallery-count="3"] {
+		grid-template-columns: 2fr 1fr;
+	}
+}
+
+.rgallery__btn {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	border: 0;
+	border-radius: 0.6rem;
+	overflow: hidden;
+	cursor: zoom-in;
+	background: #eef3f5;
+}
+.rgallery__img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+	transition: transform 0.25s ease;
+}
+.rgallery__btn:hover .rgallery__img,
+.rgallery__btn:focus-visible .rgallery__img {
+	transform: scale(1.06);
+}
+.rgallery__btn:focus-visible {
+	outline: 3px solid var(--primary);
+	outline-offset: 2px;
+}
+
+/* ── Caption ─────────────────────────────────────────────────────────────
+   Sits outside the <button> (see photo-gallery.php): an aria-label on the
+   button suppresses its descendant text, so a caption nested inside it is
+   never announced. It's wired up with aria-describedby instead. */
+
+.rgallery__caption {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	/* Generous top padding keeps the text out of the transparent end of the
+	   gradient — white type over the top of a light photo was a 1.4.3 fail. */
+	padding: 2rem 0.875rem 0.6rem;
+	background: linear-gradient(
+		to top,
+		rgba(0, 0, 0, 0.92) 0%,
+		rgba(0, 0, 0, 0.78) 45%,
+		rgba(0, 0, 0, 0) 100%
+	);
+	border-radius: 0 0 0.6rem 0.6rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	line-height: 1.35;
+	color: #fff;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+	text-align: left;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.22s ease;
+}
+.rgallery__item:hover .rgallery__caption,
+.rgallery__btn:focus-visible ~ .rgallery__caption {
+	opacity: 1;
+}
+/* No hover to reveal it on, so don't hide it. */
+@media (hover: none) {
+	.rgallery__caption { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.rgallery__img,
+	.rgallery__caption { transition: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LIGHTBOX
+   Mirrors the park-map modal: tinted navy scrim, white card at 900px with a
+   25px radius, header bar with a title and an outline X, and the same
+   fade-and-scale entrance. The <dialog> stands in for .pmap-modal-backdrop —
+   native <dialog> gives us the focus trap, Escape and top-layer placement
+   that park-map.js has to hand-roll.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.rgallery-dialog {
+	box-sizing: border-box;
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	/* The UA stylesheet caps a modal <dialog> at calc(100% - 6px - 2em) and
+	   centres it with margin:auto — both fight the full-bleed scrim. */
+	max-width: none;
+	max-height: none;
+	margin: 0;
+	border: 0;
+	padding: 1.5rem;
+	background: transparent;
+	/* Lets an over-tall card scroll instead of being clipped off both ends of
+	   the viewport; the card's margin:auto keeps it centred while it does. */
+	overflow-y: auto;
+	overscroll-behavior: contain;
+}
+.rgallery-dialog[open] {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.rgallery-dialog *,
+.rgallery-dialog *::before,
+.rgallery-dialog *::after {
+	box-sizing: border-box;
+}
+
+/* Faded in via the --visible class rather than declared outright: <dialog>
+   goes display:none -> shown, so there is no painted "from" state for a
+   transition to start from until photo-gallery.js flips the class a frame in.
+
+   Ramped in 0.12s, matching park-map.css: a scrim that takes as long as the
+   card to reach full tint leaves the page behind clearly visible through the
+   half-formed modal, which reads as page content flashing on top of it. */
+.rgallery-dialog::backdrop {
+	background: rgba(var(--rgallery-scrim), 0);
+	transition: background-color 0.12s ease;
+}
+.rgallery-dialog--visible::backdrop {
+	background: rgba(var(--rgallery-scrim), 0.75);
+}
+
+.rgallery-modal {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 900px;
+	max-height: 100%;
+	margin: auto;
+	background: #ffffff;
+	border-radius: var(--rgallery-radius-lg);
+	box-shadow: var(--rgallery-shadow-lg);
+	overflow: hidden;
+	opacity: 0;
+	transform: scale(0.96) translateY(16px);
+	transition: transform 0.25s ease, opacity 0.2s ease;
+}
+.rgallery-dialog--visible .rgallery-modal {
+	opacity: 1;
+	transform: scale(1) translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.rgallery-dialog::backdrop,
+	.rgallery-modal,
+	.rgallery-modal__img,
+	.rgallery-modal__close,
+	.rgallery-modal__nav { transition: none; }
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+
+.rgallery-modal__header {
+	flex: 0 0 auto;   /* never shrinks when the body scrolls */
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1.25rem 1.5rem;
+	border-bottom: 1px solid var(--rgallery-hairline);
+}
+.rgallery-modal__title {
+	font-size: 1rem;
+	font-weight: 800;
+	color: var(--primary);
+}
+.rgallery-modal__header-end {
+	display: flex;
+	align-items: center;
+	gap: 0.9rem;
+}
+.rgallery-modal__count {
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	color: var(--rgallery-text-muted);
+	white-space: nowrap;
+	/* Stops the header jiggling as the counter ticks past single digits. */
+	font-variant-numeric: tabular-nums;
+}
+.rgallery-modal__close {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: var(--rgallery-text-muted);
+	padding: 0.25rem;
+	border-radius: 0.4rem;
+	display: flex;
+	align-items: center;
+	transition: color var(--rgallery-transition);
+}
+.rgallery-modal__close:hover,
+.rgallery-modal__close:focus-visible { color: var(--primary); }
+.rgallery-modal__close:focus-visible {
+	outline: 3px solid var(--primary);
+	outline-offset: 2px;
+}
+.rgallery-modal__close svg { width: 1.25rem; height: 1.25rem; }
+
+/* ── Body ────────────────────────────────────────────────────────────────── */
+
+.rgallery-modal__body {
+	position: relative;
+	flex: 1 1 auto;
+	min-height: min(45vh, 320px);
+	/* Shows through as letterboxing beside a portrait photo. park-map only
+	   ever holds one landscape map, so it can get away with a bare body. */
+	background: var(--rgallery-hairline);
+	overflow: hidden;
+}
+.rgallery-modal__img {
+	display: block;
+	width: 100%;
+	height: auto;
+	/* Room for the dialog padding, header and caption, so a tall photo can't
+	   push the card past the viewport. */
+	max-height: calc(100vh - 12rem);
+	max-height: calc(100dvh - 12rem);
+	object-fit: contain;
+	transition: opacity 0.18s ease;
+}
+/* No src until the dialog is first opened. */
+.rgallery-modal__img:not([src]) {
+	visibility: hidden;
+}
+.rgallery-modal--loading .rgallery-modal__img {
+	opacity: 0;
+}
+
+.rgallery-modal__nav {
+	/* 44x44px minimum touch target (WCAG 2.5.5) */
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 2.75rem;
+	height: 2.75rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	border-radius: 50%;
+	/* Same white / --secondary hairline / --primary icon treatment as
+	   .pmap__nearby-chip. */
+	background: #ffffff;
+	border: 1.5px solid var(--secondary);
+	color: var(--primary);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+	cursor: pointer;
+	transition: background var(--rgallery-transition), color var(--rgallery-transition);
+}
+.rgallery-modal__nav:hover,
+.rgallery-modal__nav:focus-visible {
+	background: var(--secondary);
+	color: var(--primary);
+}
+.rgallery-modal__nav:focus-visible {
+	outline: 3px solid var(--primary);
+	outline-offset: 2px;
+}
+.rgallery-modal__nav svg { width: 1.15rem; height: 1.15rem; }
+.rgallery-modal__nav--prev { left: 0.75rem; }
+.rgallery-modal__nav--next { right: 0.75rem; }
+
+/* ── Caption ─────────────────────────────────────────────────────────────── */
+
+.rgallery-modal__caption {
+	flex: 0 0 auto;
+	margin: 0;
+	padding: 0.9rem 1.5rem 1.1rem;
+	border-top: 1px solid var(--rgallery-hairline);
+	font-size: 0.85rem;
+	line-height: 1.5;
+	color: var(--rgallery-text-muted);
+}
+.rgallery-modal__caption:empty {
+	display: none;
+}
+
+/* ── Breakpoints ────────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+	.rgallery__grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+	.rgallery__item:first-child { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 9; }
+}
+
+@media (max-width: 640px) {
+	.rgallery__grid { grid-template-columns: 1fr; gap: 0.75rem; }
+	.rgallery__item:first-child { grid-column: auto; aspect-ratio: 4 / 3; }
+
+	.rgallery-dialog { padding: 0.875rem; }
+	.rgallery-modal__header { padding: 1rem 1.1rem; }
+	.rgallery-modal__caption { padding: 0.8rem 1.1rem 1rem; }
+	.rgallery-modal__nav--prev { left: 0.5rem; }
+	.rgallery-modal__nav--next { right: 0.5rem; }
+}

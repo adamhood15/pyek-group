@@ -1,0 +1,256 @@
+/* ==========================================================================
+   Park Map — styles (v2)
+   Paste into Oxygen's global stylesheet, or wrap in <style>...</style>
+   inside its own Code Block on the same page as park-map.php.
+
+   All v1 visual rules are unchanged. Every addition is marked "v2" and
+   only affects the closed state, overflow behaviour, or scroll locking.
+   ========================================================================== */
+
+:root {
+	--pmap-text-muted: #4b5563;
+	--pmap-radius-lg:  25px;
+	--pmap-shadow-lg:  3px 3px 16px rgba(0, 0, 0, 0.22);
+	--pmap-transition: 0.22s ease;
+}
+
+.pmap__frame {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 7;
+	border-radius: var(--pmap-radius-lg);
+	overflow: hidden;
+	border: 3px solid var(--secondary);
+	box-shadow: var(--pmap-shadow-lg);
+	background: #cce4f5;
+}
+.pmap__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.pmap__pin-wrap {
+	position: absolute;
+	transform: translate(-50%, -100%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.35));
+	z-index: 2;
+}
+
+.pmap__pin {
+	width: 13px;
+	height: 13px;
+	background: var(--secondary);
+	border: 2.5px solid var(--primary);
+	border-radius: 50%;
+	animation: pmap-pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pmap-pulse {
+	0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--secondary) 65%, transparent); }
+	55%      { box-shadow: 0 0 0 10px transparent; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.pmap__pin { animation: none; }
+}
+
+.pmap__pin-tip {
+	background: var(--primary);
+	color: #fff;
+	font-size: 0.70rem;
+	font-weight: 800;
+	letter-spacing: 0.04em;
+	padding: 0.3rem 0.75rem;
+	border-radius: 2rem;
+	white-space: nowrap;
+	margin-bottom: 4px;
+}
+
+/* ── Modal trigger ─────────────────────────────────────────────────────── */
+
+.pmap__expand {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	margin-top: 1rem;
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: var(--primary);
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+.pmap__expand svg { width: 1rem; height: 1rem; }
+.pmap__expand:focus-visible {
+	outline: 3px solid var(--primary);
+	outline-offset: 2px;
+}
+
+/* ── Nearby attractions ────────────────────────────────────────────────── */
+
+.pmap__nearby {
+	display: flex;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+	margin-top: 1.5rem;
+}
+.pmap__nearby-label {
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--pmap-text-muted);
+	align-self: center;
+	margin-right: 0.25rem;
+}
+.pmap__nearby-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.4rem 0.9rem;
+	border-radius: 2rem;
+	font-size: 0.82rem;
+	font-weight: 600;
+	background: #ffffff;
+	border: 1.5px solid var(--secondary);
+	color: var(--primary);
+	text-decoration: none;
+	transition: background var(--pmap-transition), color var(--pmap-transition);
+}
+.pmap__nearby-chip:hover,
+.pmap__nearby-chip:focus-visible {
+	background: var(--secondary);
+	color: var(--primary);
+}
+.pmap__nearby-chip:focus-visible {
+	outline: 3px solid var(--primary);
+	outline-offset: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MAP MODAL
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* v2 — page scroll lock. Applied as a class so it can't be clobbered by
+   another component writing body.style.overflow directly. */
+html.pmap-scroll-locked,
+html.pmap-scroll-locked body {
+	overflow: hidden;
+}
+
+.pmap-modal-backdrop {
+	position: fixed;
+	inset: 0;
+	/* Deliberately far above any realistic competing z-index (sticky
+	   headers, animated/positioned Oxygen sections, etc.) — this modal is
+	   moved to a direct child of <body> in JS specifically so it only
+	   has to out-rank other top-level page elements, not nested ones. */
+	z-index: 999999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1.5rem;
+	pointer-events: none;
+	/* v3 — the scrim animates its own background-color instead of the whole
+	   backdrop's opacity. Fading the parent faded the card with it, so for the
+	   first ~150ms the scrim was barely tinted and the page behind stayed
+	   plainly visible *through* the half-formed modal — which reads as a
+	   section of the page flashing on top of it. The scrim now reaches full
+	   tint in 0.12s and the card carries the longer motion. */
+	background: rgba(10, 20, 60, 0);
+	/* v2 — visibility, not just opacity: pointer-events:none stops the
+	   mouse but not the Tab key, so without this the close button inside a
+	   "closed" modal is still keyboard-focusable. It flips on immediately and
+	   off only once the card has finished animating out. */
+	visibility: hidden;
+	transition: background-color 0.12s ease, visibility 0.25s ease;
+	/* v2 — lets an over-tall modal scroll instead of being clipped off both
+	   ends of the viewport. */
+	overflow-y: auto;
+	overscroll-behavior: contain;
+}
+.pmap-modal-backdrop--open {
+	background: rgba(10, 20, 60, 0.75);
+	pointer-events: auto;
+	visibility: visible; /* v2 */
+}
+
+.pmap-modal {
+	background: #ffffff;
+	border-radius: var(--pmap-radius-lg);
+	max-width: 900px;
+	width: 100%;
+	overflow: hidden;
+	box-shadow: 0 24px 80px rgba(0, 0, 0, 0.40);
+	/* v3 — the card owns its own fade now that the backdrop no longer
+	   supplies one. */
+	opacity: 0;
+	transform: scale(0.96) translateY(16px);
+	transition: transform 0.25s ease, opacity 0.2s ease;
+	/* v2 — a portrait or square map used to grow taller than the viewport,
+	   putting the top of the image permanently out of reach. Cap the height
+	   and let the body scroll instead. margin:auto keeps it centred even
+	   when the backdrop is scrolling. */
+	max-height: 90vh;
+	max-height: 90dvh;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+}
+.pmap-modal-backdrop--open .pmap-modal { opacity: 1; transform: scale(1) translateY(0); }
+
+/* v2 */
+@media (prefers-reduced-motion: reduce) {
+	.pmap-modal-backdrop,
+	.pmap-modal { transition: none; }
+}
+
+.pmap-modal__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1.25rem 1.5rem;
+	border-bottom: 1px solid #f4f9ff;
+	flex: 0 0 auto; /* v2 — header never shrinks when the body scrolls */
+}
+.pmap-modal__title {
+	font-size: 1rem;
+	font-weight: 800;
+	color: var(--primary);
+}
+.pmap-modal__close {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: var(--pmap-text-muted);
+	padding: 0.25rem;
+	border-radius: 0.4rem;
+	display: flex;
+	align-items: center;
+	transition: color var(--pmap-transition);
+}
+.pmap-modal__close:hover,
+.pmap-modal__close:focus-visible { color: var(--primary); }
+.pmap-modal__close:focus-visible {
+	outline: 3px solid var(--primary);
+	outline-offset: 2px;
+}
+.pmap-modal__close svg { width: 1.25rem; height: 1.25rem; }
+
+.pmap-modal__body {
+	padding: 0;
+	/* v2 */
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	-webkit-overflow-scrolling: touch;
+	min-height: 0;
+}
+.pmap-modal__body img { display: block; width: 100%; height: auto; }
