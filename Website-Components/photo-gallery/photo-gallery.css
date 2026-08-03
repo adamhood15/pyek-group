@@ -1,34 +1,17 @@
 /* ==========================================================================
-   Photo Gallery — styles (v2)
-   Paste into Oxygen's global stylesheet, or wrap in <style>...</style>
-   inside its own Code Block on the same page as photo-gallery.php.
+   Photo Gallery — styles (v3)
+
+   Paste into Oxygen's global stylesheet, or wrap in <style>...</style> inside
+   its own Code Block on the same page as photo-gallery.php.
+
+   REQUIRES pyek-modal.css (../pyek-modal/), which now owns the scrim, the
+   white card, the header bar and the close button. Everything those rules used
+   to duplicate here has been deleted — what's left is the grid plus the parts
+   of the lightbox that are actually gallery-specific.
 
    --primary / --secondary come from the WordPress theme's global tokens.
-
-   The lightbox intentionally matches the park-map modal. Tokens below mirror
-   park-map.css's :root values under their own names, so neither component
-   depends on the other being enqueued first.
+   Visual output is unchanged.
    ========================================================================== */
-
-:root {
-	--rgallery-text-muted: #4b5563;
-	--rgallery-radius-lg:  25px;
-	--rgallery-shadow-lg:  0 24px 80px rgba(0, 0, 0, 0.40);
-	--rgallery-transition: 0.22s ease;
-	--rgallery-hairline:   #f4f9ff;
-	--rgallery-scrim:      10, 20, 60;
-}
-
-/* ── Shared scroll lock ─────────────────────────────────────────────────
-   Toggled by the reference-counted lock in photo-gallery.js (published on
-   window as PyekScrollLock so every modal component shares one counter).
-   Native <dialog> traps focus and inerts the background, but it does not
-   stop the page scrolling behind the modal. */
-
-html.pyek-scroll-locked,
-html.pyek-scroll-locked body {
-	overflow: hidden;
-}
 
 /* ── Grid ───────────────────────────────────────────────────────────────── */
 
@@ -117,7 +100,7 @@ html.pyek-scroll-locked body {
 	outline-offset: 2px;
 }
 
-/* ── Caption ─────────────────────────────────────────────────────────────
+/* ── Thumbnail caption ────────────────────────────────────────────────────
    Sits outside the <button> (see photo-gallery.php): an aria-label on the
    button suppresses its descendant text, so a caption nested inside it is
    never announced. It's wired up with aria-describedby instead. */
@@ -158,150 +141,31 @@ html.pyek-scroll-locked body {
 
 @media (prefers-reduced-motion: reduce) {
 	.rgallery__img,
-	.rgallery__caption { transition: none; }
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   LIGHTBOX
-   Mirrors the park-map modal: tinted navy scrim, white card at 900px with a
-   25px radius, header bar with a title and an outline X, and the same
-   fade-and-scale entrance. The <dialog> stands in for .pmap-modal-backdrop —
-   native <dialog> gives us the focus trap, Escape and top-layer placement
-   that park-map.js has to hand-roll.
-   ══════════════════════════════════════════════════════════════════════════ */
-
-.rgallery-dialog {
-	box-sizing: border-box;
-	position: fixed;
-	inset: 0;
-	width: 100%;
-	height: 100%;
-	/* The UA stylesheet caps a modal <dialog> at calc(100% - 6px - 2em) and
-	   centres it with margin:auto — both fight the full-bleed scrim. */
-	max-width: none;
-	max-height: none;
-	margin: 0;
-	border: 0;
-	padding: 1.5rem;
-	background: transparent;
-	/* Lets an over-tall card scroll instead of being clipped off both ends of
-	   the viewport; the card's margin:auto keeps it centred while it does. */
-	overflow-y: auto;
-	overscroll-behavior: contain;
-}
-.rgallery-dialog[open] {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.rgallery-dialog *,
-.rgallery-dialog *::before,
-.rgallery-dialog *::after {
-	box-sizing: border-box;
-}
-
-/* Faded in via the --visible class rather than declared outright: <dialog>
-   goes display:none -> shown, so there is no painted "from" state for a
-   transition to start from until photo-gallery.js flips the class a frame in.
-
-   Ramped in 0.12s, matching park-map.css: a scrim that takes as long as the
-   card to reach full tint leaves the page behind clearly visible through the
-   half-formed modal, which reads as page content flashing on top of it. */
-.rgallery-dialog::backdrop {
-	background: rgba(var(--rgallery-scrim), 0);
-	transition: background-color 0.12s ease;
-}
-.rgallery-dialog--visible::backdrop {
-	background: rgba(var(--rgallery-scrim), 0.75);
-}
-
-.rgallery-modal {
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	max-width: 900px;
-	max-height: 100%;
-	margin: auto;
-	background: #ffffff;
-	border-radius: var(--rgallery-radius-lg);
-	box-shadow: var(--rgallery-shadow-lg);
-	overflow: hidden;
-	opacity: 0;
-	transform: scale(0.96) translateY(16px);
-	transition: transform 0.25s ease, opacity 0.2s ease;
-}
-.rgallery-dialog--visible .rgallery-modal {
-	opacity: 1;
-	transform: scale(1) translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.rgallery-dialog::backdrop,
-	.rgallery-modal,
+	.rgallery__caption,
 	.rgallery-modal__img,
-	.rgallery-modal__close,
 	.rgallery-modal__nav { transition: none; }
 }
 
-/* ── Header ──────────────────────────────────────────────────────────────── */
+/* ══════════════════════════════════════════════════════════════════════════
+   LIGHTBOX CONTENTS
+   The scrim, card, header, title and close button come from pyek-modal.css.
+   ══════════════════════════════════════════════════════════════════════════ */
 
-.rgallery-modal__header {
-	flex: 0 0 auto;   /* never shrinks when the body scrolls */
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 1rem;
-	padding: 1.25rem 1.5rem;
-	border-bottom: 1px solid var(--rgallery-hairline);
-}
-.rgallery-modal__title {
-	font-size: 1rem;
-	font-weight: 800;
-	color: var(--primary);
-}
-.rgallery-modal__header-end {
-	display: flex;
-	align-items: center;
-	gap: 0.9rem;
-}
 .rgallery-modal__count {
 	font-size: 0.8rem;
 	font-weight: 700;
 	letter-spacing: 0.04em;
-	color: var(--rgallery-text-muted);
+	color: var(--pyek-modal-text-muted);
 	white-space: nowrap;
 	/* Stops the header jiggling as the counter ticks past single digits. */
 	font-variant-numeric: tabular-nums;
 }
-.rgallery-modal__close {
-	background: none;
-	border: none;
-	cursor: pointer;
-	color: var(--rgallery-text-muted);
-	padding: 0.25rem;
-	border-radius: 0.4rem;
-	display: flex;
-	align-items: center;
-	transition: color var(--rgallery-transition);
-}
-.rgallery-modal__close:hover,
-.rgallery-modal__close:focus-visible { color: var(--primary); }
-.rgallery-modal__close:focus-visible {
-	outline: 3px solid var(--primary);
-	outline-offset: 2px;
-}
-.rgallery-modal__close svg { width: 1.25rem; height: 1.25rem; }
-
-/* ── Body ────────────────────────────────────────────────────────────────── */
 
 .rgallery-modal__body {
 	position: relative;
-	flex: 1 1 auto;
 	min-height: min(45vh, 320px);
-	/* Shows through as letterboxing beside a portrait photo. park-map only
-	   ever holds one landscape map, so it can get away with a bare body. */
-	background: var(--rgallery-hairline);
+	/* Shows through as letterboxing beside a portrait photo. */
+	background: var(--pyek-modal-hairline);
 	overflow: hidden;
 }
 .rgallery-modal__img {
@@ -315,12 +179,13 @@ html.pyek-scroll-locked body {
 	object-fit: contain;
 	transition: opacity 0.18s ease;
 }
-/* No src until the dialog is first opened. */
+/* No src until a thumbnail is clicked. */
+.rgallery-modal__img:not([src]),
+.rgallery-modal__img.is-loading {
+	opacity: 0;
+}
 .rgallery-modal__img:not([src]) {
 	visibility: hidden;
-}
-.rgallery-modal--loading .rgallery-modal__img {
-	opacity: 0;
 }
 
 .rgallery-modal__nav {
@@ -342,7 +207,7 @@ html.pyek-scroll-locked body {
 	color: var(--primary);
 	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 	cursor: pointer;
-	transition: background var(--rgallery-transition), color var(--rgallery-transition);
+	transition: background var(--pyek-modal-fade), color var(--pyek-modal-fade);
 }
 .rgallery-modal__nav:hover,
 .rgallery-modal__nav:focus-visible {
@@ -357,16 +222,14 @@ html.pyek-scroll-locked body {
 .rgallery-modal__nav--prev { left: 0.75rem; }
 .rgallery-modal__nav--next { right: 0.75rem; }
 
-/* ── Caption ─────────────────────────────────────────────────────────────── */
-
 .rgallery-modal__caption {
 	flex: 0 0 auto;
 	margin: 0;
 	padding: 0.9rem 1.5rem 1.1rem;
-	border-top: 1px solid var(--rgallery-hairline);
+	border-top: 1px solid var(--pyek-modal-hairline);
 	font-size: 0.85rem;
 	line-height: 1.5;
-	color: var(--rgallery-text-muted);
+	color: var(--pyek-modal-text-muted);
 }
 .rgallery-modal__caption:empty {
 	display: none;
@@ -383,8 +246,6 @@ html.pyek-scroll-locked body {
 	.rgallery__grid { grid-template-columns: 1fr; gap: 0.75rem; }
 	.rgallery__item:first-child { grid-column: auto; aspect-ratio: 4 / 3; }
 
-	.rgallery-dialog { padding: 0.875rem; }
-	.rgallery-modal__header { padding: 1rem 1.1rem; }
 	.rgallery-modal__caption { padding: 0.8rem 1.1rem 1rem; }
 	.rgallery-modal__nav--prev { left: 0.5rem; }
 	.rgallery-modal__nav--next { right: 0.5rem; }

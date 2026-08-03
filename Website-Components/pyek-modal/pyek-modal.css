@@ -1,0 +1,203 @@
+/* ==========================================================================
+   PYEK Modal — shared lightbox shell
+
+   The white card, the navy scrim, the header bar and the close button that
+   park-map and photo-gallery both use. Each component now only styles what is
+   actually different about its own contents.
+
+   Paste into Oxygen's global stylesheet (preferred), or into its own Code
+   Block ONCE per page — above the components that use it.
+
+   Markup contract:
+     <dialog class="pyek-modal" id="…" aria-labelledby="…">
+       <div class="pyek-modal__card">
+         <div class="pyek-modal__header">
+           <span class="pyek-modal__title">…</span>
+           <div class="pyek-modal__header-end">
+             <button class="pyek-modal__close" data-modal-close …>…</button>
+           </div>
+         </div>
+         <div class="pyek-modal__body">…</div>
+       </div>
+     </dialog>
+
+   Entry and exit are pure CSS (@starting-style + transition-behavior:
+   allow-discrete). Browsers without that support show and hide instantly,
+   which is a downgrade in polish and nothing else.
+   ========================================================================== */
+
+:root {
+	--pyek-modal-scrim:      10, 20, 60;
+	--pyek-modal-radius:     25px;
+	--pyek-modal-shadow:     0 24px 80px rgba(0, 0, 0, 0.40);
+	--pyek-modal-hairline:   #f4f9ff;
+	--pyek-modal-text-muted: #4b5563;
+	--pyek-modal-fade:       0.22s ease;
+}
+
+/* ── Page scroll lock ─────────────────────────────────────────────────────
+   Toggled by pyek-modal.js. A modal <dialog> inerts the page behind it but
+   does not stop it scrolling. The padding replaces the width the vanishing
+   scrollbar leaves behind, so the page doesn't jump sideways on open. */
+
+html.pyek-scroll-locked,
+html.pyek-scroll-locked body {
+	overflow: hidden;
+}
+html.pyek-scroll-locked body {
+	padding-right: var(--pyek-scrollbar-width, 0px);
+}
+
+/* ── Scrim ────────────────────────────────────────────────────────────────
+   The <dialog> itself is the full-viewport scrim area; the white card sits
+   inside it. Being in the top layer, it cannot be clipped or z-index-trapped
+   by an ancestor with overflow / transform / filter — which is why nothing
+   here needs reparenting to <body> in JS. */
+
+dialog.pyek-modal {
+	box-sizing: border-box;
+	position: fixed;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	/* The UA stylesheet caps a modal <dialog> at calc(100% - 6px - 2em) and
+	   centres it with margin:auto — both fight the full-bleed scrim. */
+	max-width: none;
+	max-height: none;
+	margin: 0;
+	border: 0;
+	padding: 1.5rem;
+	background: transparent;
+	/* Lets an over-tall card scroll instead of being clipped off both ends of
+	   the viewport; the card's margin:auto keeps it centred while it does. */
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	/* Stated outright rather than left to the UA stylesheet. A theme or reset
+	   rule such as `dialog { display: block }` would otherwise leave a closed,
+	   invisible, full-viewport layer sitting over the page and swallowing
+	   every click behind it. */
+	display: none;
+	/* allow-discrete holds display/top-layer through the card's exit fade. */
+	transition: display 0.25s allow-discrete, overlay 0.25s allow-discrete;
+}
+dialog.pyek-modal[open] {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.pyek-modal *,
+.pyek-modal *::before,
+.pyek-modal *::after {
+	box-sizing: border-box;
+}
+
+/* Ramped in 0.12s while the card takes 0.25s: a scrim that darkens at the
+   card's pace leaves the page behind clearly visible through the half-formed
+   modal, which reads as page content flashing on top of it. */
+.pyek-modal::backdrop {
+	background: rgba(var(--pyek-modal-scrim), 0);
+	transition: background-color 0.12s ease,
+	            display 0.25s allow-discrete,
+	            overlay 0.25s allow-discrete;
+}
+.pyek-modal[open]::backdrop {
+	background: rgba(var(--pyek-modal-scrim), 0.75);
+}
+@starting-style {
+	.pyek-modal[open]::backdrop { background: rgba(var(--pyek-modal-scrim), 0); }
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────────
+   @starting-style is what makes the entrance animate at all: the dialog goes
+   display:none -> flex, and a transition cannot run from a state the browser
+   never painted. */
+
+.pyek-modal__card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 900px;
+	max-height: 100%;
+	margin: auto;
+	background: #ffffff;
+	border-radius: var(--pyek-modal-radius);
+	box-shadow: var(--pyek-modal-shadow);
+	overflow: hidden;
+	opacity: 0;
+	transform: scale(0.96) translateY(16px);
+	transition: opacity 0.2s ease, transform 0.25s ease;
+}
+.pyek-modal[open] .pyek-modal__card {
+	opacity: 1;
+	transform: none;
+}
+@starting-style {
+	.pyek-modal[open] .pyek-modal__card {
+		opacity: 0;
+		transform: scale(0.96) translateY(16px);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	dialog.pyek-modal,
+	.pyek-modal::backdrop,
+	.pyek-modal__card,
+	.pyek-modal__close { transition: none; }
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+
+.pyek-modal__header {
+	flex: 0 0 auto;   /* never shrinks when the body scrolls */
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1.25rem 1.5rem;
+	border-bottom: 1px solid var(--pyek-modal-hairline);
+}
+.pyek-modal__title {
+	font-size: 1rem;
+	font-weight: 800;
+	color: var(--primary);
+}
+.pyek-modal__header-end {
+	display: flex;
+	align-items: center;
+	gap: 0.9rem;
+}
+.pyek-modal__close {
+	display: flex;
+	align-items: center;
+	padding: 0.25rem;
+	border: none;
+	border-radius: 0.4rem;
+	background: none;
+	color: var(--pyek-modal-text-muted);
+	cursor: pointer;
+	transition: color var(--pyek-modal-fade);
+}
+.pyek-modal__close:hover,
+.pyek-modal__close:focus-visible { color: var(--primary); }
+.pyek-modal__close:focus-visible {
+	outline: 3px solid var(--primary);
+	outline-offset: 2px;
+}
+.pyek-modal__close svg { width: 1.25rem; height: 1.25rem; }
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+
+.pyek-modal__body {
+	flex: 1 1 auto;
+	min-height: 0;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	-webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+	dialog.pyek-modal      { padding: 0.875rem; }
+	.pyek-modal__header    { padding: 1rem 1.1rem; }
+}

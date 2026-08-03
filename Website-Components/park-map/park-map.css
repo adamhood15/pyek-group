@@ -1,10 +1,15 @@
 /* ==========================================================================
-   Park Map — styles (v2)
-   Paste into Oxygen's global stylesheet, or wrap in <style>...</style>
-   inside its own Code Block on the same page as park-map.php.
+   Park Map — styles (v3)
 
-   All v1 visual rules are unchanged. Every addition is marked "v2" and
-   only affects the closed state, overflow behaviour, or scroll locking.
+   Paste into Oxygen's global stylesheet, or wrap in <style>...</style> inside
+   its own Code Block on the same page as park-map.php.
+
+   REQUIRES pyek-modal.css (../pyek-modal/), which now owns the scrim, the
+   white card, the header bar and the close button. Everything those rules used
+   to duplicate here has been deleted — what's left is the map itself plus the
+   handful of rules that describe this modal's contents.
+
+   Visual output is unchanged.
    ========================================================================== */
 
 :root {
@@ -13,6 +18,8 @@
 	--pmap-shadow-lg:  3px 3px 16px rgba(0, 0, 0, 0.22);
 	--pmap-transition: 0.22s ease;
 }
+
+/* ── Map frame ─────────────────────────────────────────────────────────── */
 
 .pmap__frame {
 	position: relative;
@@ -31,6 +38,8 @@
 	object-fit: cover;
 	object-position: center;
 }
+
+/* ── Pin ───────────────────────────────────────────────────────────────── */
 
 .pmap__pin-wrap {
 	position: absolute;
@@ -135,122 +144,12 @@
 	outline-offset: 2px;
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   MAP MODAL
-   ══════════════════════════════════════════════════════════════════════════ */
+/* ── Modal contents ────────────────────────────────────────────────────────
+   The scrim, card, header and close button come from pyek-modal.css. */
 
-/* v2 — page scroll lock. Applied as a class so it can't be clobbered by
-   another component writing body.style.overflow directly. */
-html.pmap-scroll-locked,
-html.pmap-scroll-locked body {
-	overflow: hidden;
-}
-
-.pmap-modal-backdrop {
-	position: fixed;
-	inset: 0;
-	/* Deliberately far above any realistic competing z-index (sticky
-	   headers, animated/positioned Oxygen sections, etc.) — this modal is
-	   moved to a direct child of <body> in JS specifically so it only
-	   has to out-rank other top-level page elements, not nested ones. */
-	z-index: 999999;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 1.5rem;
-	pointer-events: none;
-	/* v3 — the scrim animates its own background-color instead of the whole
-	   backdrop's opacity. Fading the parent faded the card with it, so for the
-	   first ~150ms the scrim was barely tinted and the page behind stayed
-	   plainly visible *through* the half-formed modal — which reads as a
-	   section of the page flashing on top of it. The scrim now reaches full
-	   tint in 0.12s and the card carries the longer motion. */
-	background: rgba(10, 20, 60, 0);
-	/* v2 — visibility, not just opacity: pointer-events:none stops the
-	   mouse but not the Tab key, so without this the close button inside a
-	   "closed" modal is still keyboard-focusable. It flips on immediately and
-	   off only once the card has finished animating out. */
-	visibility: hidden;
-	transition: background-color 0.12s ease, visibility 0.25s ease;
-	/* v2 — lets an over-tall modal scroll instead of being clipped off both
-	   ends of the viewport. */
-	overflow-y: auto;
-	overscroll-behavior: contain;
-}
-.pmap-modal-backdrop--open {
-	background: rgba(10, 20, 60, 0.75);
-	pointer-events: auto;
-	visibility: visible; /* v2 */
-}
-
-.pmap-modal {
-	background: #ffffff;
-	border-radius: var(--pmap-radius-lg);
-	max-width: 900px;
+.pmap-modal__body { padding: 0; }
+.pmap-modal__img {
+	display: block;
 	width: 100%;
-	overflow: hidden;
-	box-shadow: 0 24px 80px rgba(0, 0, 0, 0.40);
-	/* v3 — the card owns its own fade now that the backdrop no longer
-	   supplies one. */
-	opacity: 0;
-	transform: scale(0.96) translateY(16px);
-	transition: transform 0.25s ease, opacity 0.2s ease;
-	/* v2 — a portrait or square map used to grow taller than the viewport,
-	   putting the top of the image permanently out of reach. Cap the height
-	   and let the body scroll instead. margin:auto keeps it centred even
-	   when the backdrop is scrolling. */
-	max-height: 90vh;
-	max-height: 90dvh;
-	display: flex;
-	flex-direction: column;
-	margin: auto;
+	height: auto;
 }
-.pmap-modal-backdrop--open .pmap-modal { opacity: 1; transform: scale(1) translateY(0); }
-
-/* v2 */
-@media (prefers-reduced-motion: reduce) {
-	.pmap-modal-backdrop,
-	.pmap-modal { transition: none; }
-}
-
-.pmap-modal__header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 1.25rem 1.5rem;
-	border-bottom: 1px solid #f4f9ff;
-	flex: 0 0 auto; /* v2 — header never shrinks when the body scrolls */
-}
-.pmap-modal__title {
-	font-size: 1rem;
-	font-weight: 800;
-	color: var(--primary);
-}
-.pmap-modal__close {
-	background: none;
-	border: none;
-	cursor: pointer;
-	color: var(--pmap-text-muted);
-	padding: 0.25rem;
-	border-radius: 0.4rem;
-	display: flex;
-	align-items: center;
-	transition: color var(--pmap-transition);
-}
-.pmap-modal__close:hover,
-.pmap-modal__close:focus-visible { color: var(--primary); }
-.pmap-modal__close:focus-visible {
-	outline: 3px solid var(--primary);
-	outline-offset: 2px;
-}
-.pmap-modal__close svg { width: 1.25rem; height: 1.25rem; }
-
-.pmap-modal__body {
-	padding: 0;
-	/* v2 */
-	overflow-y: auto;
-	overscroll-behavior: contain;
-	-webkit-overflow-scrolling: touch;
-	min-height: 0;
-}
-.pmap-modal__body img { display: block; width: 100%; height: auto; }
