@@ -141,14 +141,18 @@ $lightbox_sizes = '(max-width: 940px) 100vw, 900px';
 
 			$is_hero = ( 0 === $index );
 
-			/* The hero spans two rows / the full width on mobile; the satellites
-			   are a third of the grid at most. One shared `sizes` string can't
-			   describe both. Both values run slightly generous — the hero is a
-			   portrait crop on desktop, so `cover` needs more width than the
-			   cell's CSS width implies. */
+			/* The hero spans two rows on desktop and the full width at tablet;
+			   the satellites are a third of the grid at most. One shared `sizes`
+			   string can't describe both. Both values run slightly generous —
+			   the hero is a portrait crop on desktop, so `cover` needs more
+			   width than the cell's CSS width implies.
+
+			   Below 768px both become 78vw cells in the horizontal strip (see
+			   photo-gallery.css). Leaving that entry at 100vw would have every
+			   phone fetch a file about a third wider than it can display. */
 			$thumb_sizes = $is_hero
-				? '(max-width: 900px) 100vw, 60vw'
-				: '(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw';
+				? '(max-width: 767px) 78vw, (max-width: 900px) 100vw, 60vw'
+				: '(max-width: 767px) 78vw, (max-width: 900px) 50vw, 33vw';
 
 			/* width/height must describe the file in `src`, not the original,
 			   or the declared aspect ratio is wrong. */

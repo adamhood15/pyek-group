@@ -1,0 +1,365 @@
+/* ==========================================================================
+   Related Attractions (ap-related-card) — styles v1
+
+   Paste into Oxygen's global stylesheet, or wrap in <style>...</style> inside
+   its own Code Block on the same page as ap-related-card.php.
+
+   Rules are carried over from section 9 of
+   Webpages/attraction-page-template-branded/attraction-page.css, so the cards
+   look exactly as signed off. Every --ap-* token is read with a fallback, so
+   the component also stands on its own if that stylesheet isn't loaded.
+
+   SCOPE: .ap-related-grid is the outermost element the PHP emits. The section
+   padding, background, max-width and the heading block are Oxygen's, so the
+   .ap-related-section* and .ap-section-* rules from the template are
+   deliberately absent — styling them from here too is how two copies drift
+   apart.
+   ========================================================================== */
+
+/* ── Screen-reader-only text ───────────────────────────────────────────────
+   Supplies the words an icon or a colour can't: "Recommended age:" before the
+   age term, "Category:" before the pill. Clip-based, so the text stays in the
+   accessibility tree — display:none / visibility:hidden content is not
+   announced at all.
+
+   The thrill pill needs no counterpart: its text already reads "High Thrill". */
+
+.ap-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* ── Grid ─────────────────────────────────────────────────────────────────── */
+
+/* Combined left + right padding of the Oxygen section this block sits in.
+   Only used by the viewport ceiling below — set it to whatever the section
+   actually uses (20px each side = 2.5rem) and nothing else needs touching. */
+:root {
+	--ap-related-page-inset: 2.5rem;
+}
+
+.ap-related-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.5rem;
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+
+	/* Why a viewport ceiling and not just max-width:100% —
+	   a block element can only end up wider than its parent when that parent
+	   sizes itself from its content. An Oxygen Code Block does exactly that
+	   whenever the section's horizontal alignment is anything but full
+	   width/stretch: the wrapper becomes fit-content, measures the horizontal
+	   strip below at its full scroll width, and grows to match. Nothing scrolls;
+	   the whole section is pushed off-screen instead.
+
+	   max-width:100% cannot break that, because the 100% resolves against the
+	   very width being computed — and so does the cards' flex-basis, which is
+	   why compensating by subtracting more from the card only moved the problem
+	   around. 100vw is definite, so it settles the circularity: the grid can
+	   never exceed the screen, so the wrapper can't be stretched past it either.
+
+	   It only ever clamps in that broken case. Normally width:100% already
+	   resolves smaller than the ceiling, so this rule does nothing.
+
+	   The real cure is on the Oxygen side — set the section's content to full
+	   width, or the Code Block's width to 100%. This is the safety net. */
+	max-width: calc(100vw - var(--ap-related-page-inset, 2.5rem));
+}
+
+/* ── Empty-state fallback ─────────────────────────────────────────────────
+   Replaces the grid when no related attractions are found. .nz-button-blue is
+   a theme class and is deliberately NOT restyled here — only laid out. */
+
+.ap-related-fallback {
+	display: flex;
+	justify-content: center;
+}
+/* Additive safety net, scoped to this wrapper so it cannot affect the theme's
+   other .nz-button-blue instances. Harmless if the theme already has a focus
+   style; the only visible outcome of the theme lacking one is a keyboard user
+   losing track of where they are (WCAG 2.4.7). */
+.ap-related-fallback .nz-button-blue:focus-visible {
+	outline: 3px solid var(--ap-blue-dark, #234ea2);
+	outline-offset: 3px;
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────────── */
+
+.ap-related-card {
+	background: #ffffff;
+	border-radius: var(--ap-radius-lg, 25px);
+	overflow: hidden;
+	border: 2px solid transparent;
+	box-shadow: var(--ap-shadow, 2px 2px 10px rgba(0, 0, 0, 0.18));
+	text-decoration: none;
+	color: inherit;
+	display: flex;
+	flex-direction: column;
+	transition: border-color var(--ap-transition, 0.22s ease),
+	            transform var(--ap-transition, 0.22s ease),
+	            box-shadow var(--ap-transition, 0.22s ease);
+}
+.ap-related-card:hover,
+.ap-related-card:focus-visible {
+	border-color: var(--ap-blue, #6fdbff);
+	transform: translateY(-5px);
+	box-shadow: var(--ap-shadow-lg, 3px 3px 16px rgba(0, 0, 0, 0.22));
+}
+/* The template styled :hover only, which left keyboard users with no visible
+   focus indicator at all (WCAG 2.4.7). The border-colour change above is not
+   enough on its own — a 2px tint against white is well under 3:1. */
+.ap-related-card:focus-visible {
+	outline: 3px solid var(--ap-blue-dark, #234ea2);
+	outline-offset: 3px;
+}
+
+.ap-related-card__img-wrap {
+	position: relative;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: var(--ap-bg, #f4f9ff);
+}
+.ap-related-card__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.5s ease;
+}
+.ap-related-card:hover .ap-related-card__img,
+.ap-related-card:focus-visible .ap-related-card__img {
+	transform: scale(1.05);
+}
+
+/* ── Pills ────────────────────────────────────────────────────────────────
+   Two pills, one geometry. The thrill pill sits on the image; the category
+   pill sits in the meta row.
+
+   The two palettes are deliberately kept apart: thrill runs a warm
+   green→yellow→orange→red severity ramp, category uses cool brand hues. Give a
+   category a warm colour and it starts reading as a thrill level.
+
+   Every pair below is at least 4.5:1. At 0.68rem / 800 this is not WCAG "large
+   text", so 3:1 is not enough, and white text fails on any light background —
+   change a background and the paired text colour has to be rechecked. */
+
+.ap-related-card__thrill,
+.ap-related-card__category {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	font-size: 0.68rem;
+	font-weight: 800;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	padding: 0.25rem 0.65rem;
+	border-radius: 2rem;
+}
+
+/* Thrill — modifier is the thrill-level term slug. An unknown term falls
+   through to the base rule and gets the green, the same `|| colors.low`
+   default the original script used.
+     #22C55E  white 2.28:1 FAIL  ->  #052E16  6.54:1
+     #FACC15  white 1.53:1 FAIL  ->  #422006  9.52:1
+     #F97316  white 2.80:1 FAIL  ->  #431407  5.58:1
+     #DC2626  white 4.83:1 PASS  ->  #FFFFFF  4.83:1 */
+
+.ap-related-card__thrill {
+	position: absolute;
+	top: 0.75rem;
+	right: 0.75rem;
+	background: #22c55e;
+	color: #052e16;
+}
+.ap-related-card__thrill svg { width: 0.8rem; height: 0.8rem; }
+
+.ap-related-card__thrill--low      { background: #22c55e; color: #052e16; }
+.ap-related-card__thrill--moderate { background: #facc15; color: #422006; }
+.ap-related-card__thrill--high     { background: #f97316; color: #431407; }
+.ap-related-card__thrill--extreme  { background: #dc2626; color: #ffffff; }
+
+/* Category — modifier is the attraction-category term slug. A term with no
+   rule here keeps the neutral slate default, so a category added in the ACF UI
+   renders a readable pill rather than an unstyled one.
+
+   Rivers and Wave Pools take dark text: brand sky and cyan are far too light
+   for white. #FF1469 is the brand pink but only reaches 3.78:1 against white,
+   so Interactive Play Areas uses a darkened version of it.
+     interactive-play-areas  #D1004F + white   5.49:1
+     pools                   #0E7490 + white   5.36:1
+     rivers                  #6FDBFF + #08324F 8.39:1
+     splash-areas            #7C3AED + white   5.70:1
+     water-slides            #234EA2 + white   7.83:1
+     wave-pools              #06B6D4 + #04333D 5.59:1
+     (default)               #475569 + white   7.58:1 */
+
+.ap-related-card__category {
+	/* The row wraps; the pill itself must not break across lines. */
+	white-space: nowrap;
+	background: #475569;
+	color: #ffffff;
+}
+
+.ap-related-card__category--interactive-play-areas { background: #d1004f; color: #ffffff; }
+.ap-related-card__category--pools                  { background: #0e7490; color: #ffffff; }
+.ap-related-card__category--rivers                 { background: #6fdbff; color: #08324f; }
+.ap-related-card__category--splash-areas           { background: #7c3aed; color: #ffffff; }
+.ap-related-card__category--water-slides           { background: #234ea2; color: #ffffff; }
+.ap-related-card__category--wave-pools             { background: #06b6d4; color: #04333d; }
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+
+.ap-related-card__body {
+	padding: 1.25rem 1.4rem 1.6rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	flex: 1;
+}
+
+.ap-related-card__title {
+	font-family: var(--ap-font-body, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+	font-size: 1.1rem;
+	font-weight: 800;
+	color: var(--ap-blue-dark, #234ea2);
+	line-height: 1.25;
+	margin: 0;
+}
+
+.ap-related-card__desc {
+	font-size: 0.875rem;
+	color: var(--ap-text-muted, #4b5563);
+	line-height: 1.6;
+	margin: 0;
+}
+
+.ap-related-card__meta {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin-top: auto;
+	padding-top: 0.75rem;
+	border-top: 1px solid var(--ap-bg, #f4f9ff);
+}
+
+.ap-related-card__meta-item {
+	display: flex;
+	align-items: center;
+	gap: 0.3rem;
+	font-size: 0.78rem;
+	font-weight: 600;
+	color: var(--ap-text-muted, #4b5563);
+}
+.ap-related-card__meta-item svg {
+	width: 0.9rem;
+	height: 0.9rem;
+	flex-shrink: 0;
+}
+
+/* ── Motion ───────────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+	.ap-related-card,
+	.ap-related-card__img { transition: none; }
+	/* The lift and the zoom are decorative; the border and outline still carry
+	   hover and focus. */
+	.ap-related-card:hover,
+	.ap-related-card:focus-visible { transform: none; }
+	.ap-related-card:hover .ap-related-card__img,
+	.ap-related-card:focus-visible .ap-related-card__img { transform: none; }
+}
+
+/* ── Breakpoints ──────────────────────────────────────────────────────────── */
+
+/* 768–900px — two columns. */
+@media (max-width: 900px) {
+	.ap-related-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Below 768px — one horizontal strip ───────────────────────────────────
+   Same gesture as the photo gallery. The cell width is not the same, and that
+   is deliberate: the gallery's 78% cells are photos, where a cropped edge just
+   reads as "more to come", but a card clipped through its title or description
+   reads as broken. A card gets the full width of the strip instead, less a
+   fixed sliver. Stacked, three cards was most of a screen to scroll past on the
+   way to the footer.
+
+   Switching to flex makes grid-template-columns above inert, so it doesn't have
+   to be unwound. Keyboard access needs nothing extra: each card is an <a>, so
+   Tab walks the strip and the browser scrolls each card into view as it takes
+   focus — which is also why the container needs no tabindex.
+
+   The scrollbar is thinned rather than hidden: it is the only persistent cue
+   that there is more to see for anyone not using touch. */
+
+@media (max-width: 767px) {
+	.ap-related-grid {
+		display: flex;
+		gap: 1rem;
+		overflow-x: auto;
+		/* Stops a swipe that runs out of strip becoming a browser
+		   back-navigation or a scroll of the page behind it. */
+		overscroll-behavior-x: contain;
+		/* Snap points sit at each card's start and every card is narrower than
+		   the viewport, so where the browser scrolls to when a card takes focus
+		   is already the nearest snap point — snapping can't drag a focused card
+		   back out of view (WCAG 2.4.11). */
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+		/* A scroll container clips at its padding edge, so every side needs room
+		   or the card's shadow, its 5px lift and its focus outline get cut off.
+		     top/bottom  a lifted card's shadow reaches 18px above its resting
+		                 top and 14px below its bottom; the rest of the bottom
+		                 value is space for the scrollbar. (Setting overflow-x
+		                 alone leaves the computed overflow-y at `auto`, not
+		                 `visible`, so this is a real clip, not a stray
+		                 scrollbar.)
+		     left/right  the resting shadow is offset 2px with a 10px blur, so it
+		                 reaches 8px past the left edge and 12px past the right.
+		                 12px both sides contains it — hence 0.75rem rather than
+		                 the 3-5px the clipping looks like. */
+		padding: 1.25rem 0.75rem 1.5rem;
+		/* Pairs with padding-inline: the snapport is inset by the same amount, so
+		   a snapped card keeps its 12px of clearance instead of only the first
+		   one having it at scroll position zero. */
+		scroll-padding-inline: 0.75rem;
+	}
+
+	.ap-related-card {
+		/* One whole card, less a 3rem strip. 1rem of that is the gap, so 2rem of
+		   the next card shows — enough to signal the strip scrolls, without
+		   costing any of the current card.
+
+		   calc, not a percentage: the leftover then stays a fixed 3rem at every
+		   width. A percentage basis reserves proportionally, so it eats ~70px on
+		   a 320px phone (where space is tightest) and ~165px at 767px.
+
+		   This only holds because the grid now has a definite width — see the
+		   viewport ceiling on .ap-related-grid. Subtracting more here to make a
+		   card fit is treating the symptom: the 100% would still be resolving
+		   against a width the cards themselves determine. */
+		flex: 0 0 calc(100% - 3rem);
+		/* Flex items default to min-width:auto, which a long attraction title
+		   could push out past the basis above. */
+		min-width: 0;
+		scroll-snap-align: start;
+	}
+
+	/* A single related card has nothing to peek at, so the slice reserved for
+	   the next one would just be dead space. */
+	.ap-related-card:only-child {
+		flex-basis: 100%;
+	}
+}

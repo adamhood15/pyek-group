@@ -237,15 +237,77 @@
 
 /* ── Breakpoints ────────────────────────────────────────────────────────── */
 
+/* 768–900px — two columns with the hero across the top. */
 @media (max-width: 900px) {
 	.rgallery__grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
 	.rgallery__item:first-child { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 16 / 9; }
 }
 
-@media (max-width: 640px) {
-	.rgallery__grid { grid-template-columns: 1fr; gap: 0.75rem; }
-	.rgallery__item:first-child { grid-column: auto; aspect-ratio: 4 / 3; }
+/* ── Below 768px — one horizontal strip ───────────────────────────────────
+   Stacked into a column, a six-photo gallery was a screen and a half of
+   scrolling to get past. Swiping sideways keeps the whole set within reach and
+   leaves the rest of the page where the visitor expects it.
 
+   Switching to flex is deliberate: it makes every grid-template-* and
+   grid-row/column declaration above inert, so none of them has to be unwound
+   property by property.
+
+   Keyboard access comes for free — each cell is a <button>, so Tab walks the
+   strip and the browser scrolls each one into view as it gains focus. That is
+   also why the container needs no tabindex: a scroll region only requires one
+   when it holds nothing focusable.
+
+   The scrollbar is thinned rather than hidden. `scrollbar-width: none` is a
+   common carousel flourish, but it removes the one persistent cue that there
+   is more to see for anyone not using touch. */
+
+@media (max-width: 767px) {
+	.rgallery__grid {
+		display: flex;
+		gap: 0.75rem;
+		overflow-x: auto;
+		/* Stops a horizontal swipe that runs out of strip from turning into a
+		   browser back-navigation or a scroll of the page behind it. */
+		overscroll-behavior-x: contain;
+		/* Snap points sit at each cell's start, and every cell is narrower than
+		   the viewport, so the position the browser scrolls to when a cell takes
+		   focus is already the nearest snap point — snapping can't drag a
+		   focused cell back out of view (WCAG 2.4.11). */
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+		/* A scroll container clips at its padding edge. The bottom value keeps a
+		   visible scrollbar off the photos; the inline values are for the focus
+		   ring — .rgallery__btn draws a 3px outline at a 2px offset, so without
+		   them the first and last thumbnail lose part of their focus indicator
+		   (WCAG 2.4.7). */
+		padding: 0 0.5rem 0.5rem;
+		/* Pairs with padding-inline, so a snapped cell keeps the same clearance
+		   the first one has at scroll position zero. */
+		scroll-padding-inline: 0.5rem;
+	}
+
+	/* 78% leaves a slice of the next photo showing, which is what tells the
+	   visitor the strip scrolls at all. Both selectors are listed so the hero's
+	   3/4 portrait ratio is overridden along with everything else. */
+	.rgallery__item,
+	.rgallery__item:first-child {
+		flex: 0 0 78%;
+		aspect-ratio: 4 / 3;
+		scroll-snap-align: start;
+	}
+
+	/* A one-photo gallery has nothing to peek at, so the slice reserved for the
+	   next photo would just be dead space. Must stay below the rule above —
+	   both are two-class specificity, so source order decides. */
+	.rgallery__item:only-child {
+		flex-basis: 100%;
+	}
+}
+
+/* Modal tweaks stay on 640px so they line up with the shared shell's own
+   breakpoint in pyek-modal.css. */
+@media (max-width: 640px) {
 	.rgallery-modal__caption { padding: 0.8rem 1.1rem 1rem; }
 	.rgallery-modal__nav--prev { left: 0.5rem; }
 	.rgallery-modal__nav--next { right: 0.5rem; }

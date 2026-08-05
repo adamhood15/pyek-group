@@ -145,6 +145,19 @@
 		preloadPhoto(thumbButton, gallery && gallery.photo ? gallery.photo.sizes : "");
 	}
 
-	document.addEventListener("pointerover", warmHoveredPhoto, { passive: true });
+	document.addEventListener("pointerover", function (event) {
+		/* pointerover fires on touch as well, where there is no hover to warm:
+		   below 768px the grid is a swipe strip, so a touch that lands on a
+		   thumbnail is usually the start of a scroll past it. Warming there
+		   spends mobile data on a photo nobody opened. Excluding only "touch"
+		   rather than requiring "mouse" keeps a hover-capable stylus working,
+		   and keeps warming if a browser reports an empty pointerType.
+
+		   focusin needs no equivalent guard: a cancelled tap doesn't leave focus
+		   behind, and a tap that does complete fires the click that loads the
+		   same photo anyway. */
+		if (event.pointerType !== "touch") warmHoveredPhoto(event);
+	}, { passive: true });
+
 	document.addEventListener("focusin", warmHoveredPhoto);
 })();
