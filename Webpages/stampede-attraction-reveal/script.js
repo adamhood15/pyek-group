@@ -686,11 +686,11 @@ DOUBLE-T CLUB — Mailchimp signup (JSONP, never navigates away)
     submitBtn.classList.add("is-loading");
     submitLabel.textContent = "Submitting…";
 
-    // Mailchimp expects the raw digits (e.g. 4095944750), not the
-    // "(409) 594-4750" display format, so swap it in only for the
-    // request and restore the formatted value right after.
+    // Mailchimp expects E.164 international format (e.g. +14095944750),
+    // not the "(409) 594-4750" display format, so swap it in only for
+    // the request and restore the formatted value right after.
     var displayPhone = phone.value;
-    phone.value = digits(displayPhone);
+    phone.value = "+1" + digits(displayPhone);
 
     jsonpSubmit(function (data) {
       submitBtn.disabled = false;
