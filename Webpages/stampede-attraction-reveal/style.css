@@ -853,6 +853,80 @@ framing, so cross-fading between them never shifts the structure. */
     border: 0;
 }
 
+/* ============================================================
+SCROLL REVEAL — fade/slide-up the first time a section comes into
+view. Built on `animation` rather than `transition` so it never
+collides with an element's own hover transition (e.g. .gal__tile,
+.bay), and on IntersectionObserver + plain CSS — both have been
+supported in every evergreen browser (Chrome, Firefox, Safari,
+Edge) for years, no polyfill needed.
+============================================================ */
+@keyframes revealUp {
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.reveal-anim {
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+.reveal-anim.is-visible {
+    animation: revealUp 0.7s var(--ease) forwards;
+}
+
+.reveal-load {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: revealUp 0.8s var(--ease) forwards;
+    animation-delay: 0.1s;
+}
+
+.reveal-load--2 {
+    animation-delay: 0.28s;
+}
+
+.reveal-stagger>*:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.reveal-stagger>*:nth-child(2) {
+    animation-delay: 0.07s;
+}
+
+.reveal-stagger>*:nth-child(3) {
+    animation-delay: 0.14s;
+}
+
+.reveal-stagger>*:nth-child(4) {
+    animation-delay: 0.21s;
+}
+
+.reveal-stagger>*:nth-child(5) {
+    animation-delay: 0.28s;
+}
+
+.reveal-stagger>*:nth-child(6) {
+    animation-delay: 0.35s;
+}
+
+.reveal-stagger>*:nth-child(n+7) {
+    animation-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal-anim,
+    .reveal-load,
+    .reveal-load--2 {
+        opacity: 1;
+        transform: none;
+        animation: none;
+    }
+}
+
 /* ---------- small screens ---------- */
 @media (max-width: 899.98px) {
     .rs__stage {
@@ -1330,6 +1404,50 @@ GALLERY
     height: 15px;
     fill: var(--ink);
     margin-left: 2px;
+}
+
+.gal__tile--more img {
+    filter: blur(6px) brightness(0.65);
+    transform: scale(1.06);
+}
+
+.gal__tile--more:hover img {
+    transform: scale(1.09);
+}
+
+.gal__tile--more .gal__meta {
+    display: none;
+}
+
+.gal__more {
+    display: none;
+}
+
+.gal__tile--more .gal__more {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: #fff;
+    text-align: center;
+    background: rgba(20, 14, 6, 0.32);
+}
+
+.gal__more-count {
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
+
+.gal__more-label {
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
 }
 
 @media (prefers-reduced-motion: reduce) {

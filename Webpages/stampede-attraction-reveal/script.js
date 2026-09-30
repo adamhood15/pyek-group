@@ -360,8 +360,45 @@ GALLERY + LIGHTBOX
     opener = null;
   }
 
+  // Only the first handful of tiles ship visible; the rest sit behind
+  // `hidden` until the blurred "more" tile is clicked, so the grid never
+  // dumps the whole set on the visitor at once.
+  var moreTile = document.getElementById("galMoreTile");
+  var galLive = document.getElementById("galLive");
+  var overflowTiles = tiles.filter(function (t) {
+    return t.hasAttribute("hidden");
+  });
+  var overflowRevealed = false;
+
+  if (moreTile && overflowTiles.length) {
+    moreTile.classList.add("gal__tile--more");
+    var moreCount = moreTile.querySelector(".gal__more-count");
+    if (moreCount) moreCount.textContent = "+" + overflowTiles.length;
+  }
+
+  function revealOverflow() {
+    if (overflowRevealed) return;
+    overflowRevealed = true;
+    overflowTiles.forEach(function (t, i) {
+      t.removeAttribute("hidden");
+      // these were `hidden` at load, so the scroll-reveal observer never
+      // saw them come into view — fade them in directly instead, with a
+      // quick stagger of their own rather than the grid's scroll-in delay.
+      t.style.animationDelay = i * 0.05 + "s";
+      t.classList.add("is-visible");
+    });
+    moreTile.classList.remove("gal__tile--more");
+    if (galLive) {
+      galLive.textContent = overflowTiles.length + " more photos shown.";
+    }
+  }
+
   tiles.forEach(function (t, i) {
     t.addEventListener("click", function () {
+      if (t === moreTile && !overflowRevealed) {
+        revealOverflow();
+        return;
+      }
       open(i, t);
     });
   });
@@ -450,7 +487,7 @@ const PRESS = [
 
   PRESS.forEach(function (item) {
     var li = document.createElement("li");
-    li.className = "news__row";
+    li.className = "news__row reveal-anim";
 
     var inner = document.createElement(item.url ? "a" : "div");
     inner.className = "news__in";
@@ -715,5 +752,56 @@ DOUBLE-T CLUB — Mailchimp signup (JSONP, never navigates away)
     // the request URL is already built synchronously above, so it's
     // safe to put the formatted number back for display right away
     phone.value = displayPhone;
+  });
+})();
+
+/* ============================================================
+SCROLL REVEAL — fades/slides ".reveal-anim" elements up the first
+time they enter the viewport. IntersectionObserver has shipped in
+every evergreen browser for years, but this still degrades cleanly
+(everything just shows immediately) if it's ever missing.
+============================================================ */
+(function () {
+  var els = Array.prototype.slice.call(
+    document.querySelectorAll(".reveal-anim"),
+  );
+  if (!els.length) return;
+
+  // Once the fade/slide-up finishes, drop the classes that drive it so
+  // the animation's held end-state stops outranking each element's own
+  // hover rules (e.g. .gal__tile's hover lift) in the cascade.
+  function settle(el) {
+    el.addEventListener(
+      "animationend",
+      function () {
+        el.classList.remove("reveal-anim", "is-visible");
+        el.style.animationDelay = "";
+      },
+      { once: true },
+    );
+  }
+
+  els.forEach(settle);
+
+  if (!("IntersectionObserver" in window)) {
+    els.forEach(function (el) {
+      el.classList.add("is-visible");
+    });
+    return;
+  }
+
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+  );
+
+  els.forEach(function (el) {
+    observer.observe(el);
   });
 })();
