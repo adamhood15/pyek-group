@@ -1,0 +1,13 @@
+{
+  "campaign_key": "TTA-26-072-costume-contest-loser",
+  "campaign_name": "TTA-26-072 Costume Contest Results Loser",
+  "test_name": "Costume Contest Results - TTA - Loser",
+  "subject": "Typhoon's Halloween Costume Has Been Decided! 👀",
+  "preview_text": "You voted, we counted! See which costume Typhoon will be rocking.",
+  "from_name": "Typhoon Texas Austin",
+  "from_email": "doublet@typhoontexas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "TT",
+  "park": "austin",
+  "mailchimp_campaign_id": "6091c8b539"
+}

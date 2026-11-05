@@ -1,0 +1,12 @@
+{
+  "campaign_key": "dtl-26-034-thank-you-summer",
+  "campaign_name": "DTL-26-034 Thank You Summer",
+  "test_name": "Thank You Summer - DTL",
+  "subject": "Thanks for the Memories! ☀️",
+  "preview_text": "From our crew to yours, thanks for making this season one to remember.",
+  "from_name": "Daytona Lagoon",
+  "from_email": "lagoonclub@updates.daytonalagoon.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "DTL",
+  "mailchimp_campaign_id": "3de25e5f02"
+}

@@ -1,0 +1,12 @@
+{
+  "campaign_key": "DTL-26-033-costume-contest-winner",
+  "campaign_name": "DTL-26-033 Costume Contest Results Winner",
+  "test_name": "Costume Contest Results - DTL - Winner",
+  "subject": "🎃 You Picked the Winner! Here's Your Treat!",
+  "preview_text": "Your vote paid off! Enjoy $5 off your 2027 Season Pass. 🍬",
+  "from_name": "Daytona Lagoon",
+  "from_email": "lagoonclub@updates.daytonalagoon.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "DTL",
+  "mailchimp_campaign_id": "04a27e34cc"
+}

@@ -6,3 +6,12 @@ wp-config.php
 .SQL-QUERIES
 *.json
 *.mp4
+.env
+.eoa-results/
+
+# Tracked JSON (the *.json rule above ignores everything else)
+!package.json
+!package-lock.json
+!campaign.json
+!**/campaign.json
+node_modules/

@@ -1,0 +1,17 @@
+{
+  "name": "email-generator",
+  "version": "1.0.0",
+  "description": "Internal promotional email generation system",
+  "main": "build-email.js",
+  "scripts": {
+    "build": "node build-email.js",
+    "build:all": "./build-all.sh",
+    "build:valentines": "node build-email.js valentines-sale.json",
+    "clean": "rm -rf dist/*.html"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8",
+    "juice": "^10.0.0",
+    "html-minifier": "^4.0.0"
+  }
+}

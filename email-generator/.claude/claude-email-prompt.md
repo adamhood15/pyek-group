@@ -112,7 +112,7 @@ DO NOT:
 # UTM Rules
 
 Every CTA/button URL should include:
-- `utm_source=email`
+- `utm_source=mailchimp`
 - `utm_medium=email`
 - `utm_campaign={{UTM_CAMPAIGN}}`
 

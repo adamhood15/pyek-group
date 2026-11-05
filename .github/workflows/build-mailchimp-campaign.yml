@@ -1,0 +1,59 @@
+name: Build Mailchimp Campaign
+
+on:
+  workflow_dispatch:
+    inputs:
+      campaign:
+        description: "Campaign to build"
+        required: true
+        type: choice
+        options:
+          - 2026/CBV/CBV-26-078-Costume-Contest/winner
+          - 2026/CBV/CBV-26-078-Costume-Contest/loser
+          - 2026/TTA/TTA-26-072-Costume-Contest/winner
+          - 2026/TTA/TTA-26-072-Costume-Contest/loser
+          - 2026/TTH/TTH-26-080-Costume-Contest/winner
+          - 2026/TTH/TTH-26-080-Costume-Contest/loser
+          - 2026/DTL/DTL-26-033-Costume-Contest/winner
+          - 2026/DTL/DTL-26-033-Costume-Contest/loser
+      test_send:
+        description: "Test emails after updating draft: none, internal (first round), or approved (only after internal is approved)"
+        required: true
+        type: choice
+        options:
+          - none
+          - internal
+          - approved
+        default: none
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mailchimp-draft-${{ inputs.campaign }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - name: Create or update draft
+        env:
+          MAILCHIMP_API_KEY: ${{ secrets.MAILCHIMP_API_KEY }}
+          MAILCHIMP_AUDIENCE_CBV: ${{ vars.MAILCHIMP_AUDIENCE_CBV }}
+          MAILCHIMP_AUDIENCE_TT: ${{ vars.MAILCHIMP_AUDIENCE_TT }}
+          MAILCHIMP_AUDIENCE_DTL: ${{ vars.MAILCHIMP_AUDIENCE_DTL }}
+          CAMPAIGN_DIR: ${{ inputs.campaign }}
+          TEST_SEND: ${{ inputs.test_send }}
+        run: |
+          case "$TEST_SEND" in
+            internal) node workflow-automations/scripts/deploy-mailchimp.mjs "$CAMPAIGN_DIR" --test ;;
+            approved) node workflow-automations/scripts/deploy-mailchimp.mjs "$CAMPAIGN_DIR" --test-approved ;;
+            *) node workflow-automations/scripts/deploy-mailchimp.mjs "$CAMPAIGN_DIR" ;;
+          esac

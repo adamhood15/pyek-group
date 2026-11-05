@@ -1,0 +1,13 @@
+{
+  "campaign_key": "TTH-26-068-payment-plans-november",
+  "campaign_name": "TTH-26-068-Payment-Plans-November",
+  "test_name": "Payment Plans November - TTH",
+  "subject": "A Whole Summer Starts at $18 🌟",
+  "preview_text": "Five smaller payments. Unlimited Summer visits waiting for you.",
+  "from_name": "Typhoon Texas Houston",
+  "from_email": "doublet@typhoontexas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "TT",
+  "park": "houston",
+  "mailchimp_campaign_id": "e2ed13360e"
+}

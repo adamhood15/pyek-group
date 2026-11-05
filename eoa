@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Short wrapper for Email on Acid tests.
+#   ./eoa 078            test every email whose path contains "078"
+#   ./eoa path/to.html   test one file
+#   ./eoa clients|auth   list clients / check credentials
+# Extra flags pass through, e.g. ./eoa 078 --image-blocking --keep
+cd "$(dirname "$0")" || exit 1
+script="workflow-automations/email-on-acid/eoa.mjs"
+q="$1"; shift
+[ -z "$q" ] && { echo "Usage: ./eoa <name-fragment|file.html|clients|auth> [flags]"; exit 1; }
+case "$q" in
+  auth|clients) exec node "$script" "$q" "$@" ;;
+esac
+if [ -f "$q" ]; then files=("$q"); else
+  files=()
+  while IFS= read -r f; do files+=("$f"); done < <(find 20* -type f -name "*.html" -ipath "*$q*" 2>/dev/null | sort)
+fi
+[ ${#files[@]} -eq 0 ] && { echo "No emails match \"$q\""; exit 1; }
+rc=0
+for f in "${files[@]}"; do
+  echo "=== $f"
+  node "$script" test "$f" "$@" || rc=$?
+done
+exit $rc

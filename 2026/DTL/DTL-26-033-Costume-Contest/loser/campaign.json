@@ -1,0 +1,12 @@
+{
+  "campaign_key": "DTL-26-033-costume-contest-loser",
+  "campaign_name": "DTL-26-033 Costume Contest Results Loser",
+  "test_name": "Costume Contest Results - DTL - Loser",
+  "subject": "Sunny's Halloween Costume Has Been Decided! 👀",
+  "preview_text": "You voted, we counted! See which costume Sunny will be rocking.",
+  "from_name": "Daytona Lagoon",
+  "from_email": "lagoonclub@updates.daytonalagoon.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "DTL",
+  "mailchimp_campaign_id": "e1208bd1f3"
+}

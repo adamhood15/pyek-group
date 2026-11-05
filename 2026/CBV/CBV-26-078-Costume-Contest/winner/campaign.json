@@ -1,0 +1,12 @@
+{
+  "campaign_key": "CBV-26-078-costume-contest-winner",
+  "campaign_name": "CBV-26-078 Costume Contest Results Winner",
+  "test_name": "Costume Contest Results - CBV - Winner",
+  "subject": "🎃 You Picked the Winner! Here's Your Treat!",
+  "preview_text": "Your vote paid off! Enjoy $5 off your 2027 Season Pass. 🍬",
+  "from_name": "Cowabunga Vegas",
+  "from_email": "donotreply@cowabungavegas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "CBV",
+  "mailchimp_campaign_id": "c473cbc1c4"
+}

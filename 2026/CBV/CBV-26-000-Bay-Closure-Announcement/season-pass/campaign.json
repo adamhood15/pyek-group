@@ -1,0 +1,12 @@
+{
+  "campaign_key": "cbv-26-000-bay-closure-announcement-sp-oct26",
+  "campaign_name": "CBV-26-000-Bay-Closure-Announcement-SP-Oct26",
+  "test_name": "Bay Closure Announcement - CBV - Season Pass",
+  "subject": "Thank You for 12 Amazing Years",
+  "preview_text": "An important update about your 2027 Season Pass.",
+  "from_name": "Cowabunga Vegas",
+  "from_email": "donotreply@cowabungavegas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "CBV",
+  "mailchimp_campaign_id": "e05b802278"
+}

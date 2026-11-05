@@ -1,0 +1,12 @@
+{
+  "campaign_key": "CBV-26-078-costume-contest-loser",
+  "campaign_name": "CBV-26-078 Costume Contest Results Loser",
+  "test_name": "Costume Contest Results - CBV - Loser",
+  "subject": "Bunga's Halloween Costume Has Been Decided! 👀",
+  "preview_text": "You voted, we counted! See which costume Bunga will be rocking.",
+  "from_name": "Cowabunga Vegas",
+  "from_email": "donotreply@cowabungavegas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "CBV",
+  "mailchimp_campaign_id": "f569527a95"
+}

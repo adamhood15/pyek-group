@@ -1,0 +1,12 @@
+{
+  "campaign_key": "cbv-26-070-payment-plans-november",
+  "campaign_name": "CBV-26-070-Payment-Plans-November",
+  "test_name": "Payment Plans November - CBV",
+  "subject": "2027 Passes From Just $19.00/Month",
+  "preview_text": "Your 2027 Summer plans just got way more affordable.",
+  "from_name": "Cowabunga Vegas",
+  "from_email": "donotreply@cowabungavegas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "CBV",
+  "mailchimp_campaign_id": "ded3b2ca62"
+}

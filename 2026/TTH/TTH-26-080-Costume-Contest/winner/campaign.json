@@ -1,0 +1,13 @@
+{
+  "campaign_key": "TTH-26-080-costume-contest-winner",
+  "campaign_name": "TTH-26-080 Costume Contest Results Winner",
+  "test_name": "Costume Contest Results - TTH - Winner",
+  "subject": "🎃 You Picked the Winner! Here's Your Treat!",
+  "preview_text": "Your vote paid off! Enjoy $5 off your 2027 Season Pass. 🍬",
+  "from_name": "Typhoon Texas Houston",
+  "from_email": "doublet@typhoontexas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "TT",
+  "park": "houston",
+  "mailchimp_campaign_id": "4d2a73348b"
+}

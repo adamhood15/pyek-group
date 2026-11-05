@@ -1,0 +1,13 @@
+{
+  "campaign_key": "TTA-26-064-payment-plans-november",
+  "campaign_name": "TTA-26-064-Payment-Plans-November",
+  "test_name": "Payment Plans November - TTA",
+  "subject": "All That Summer for $15.00/Month? 😱",
+  "preview_text": "Unlimited Summer fun is closer than you think.",
+  "from_name": "Typhoon Texas Austin",
+  "from_email": "doublet@typhoontexas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "TT",
+  "park": "austin",
+  "mailchimp_campaign_id": "79242759be"
+}

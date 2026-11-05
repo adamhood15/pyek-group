@@ -1,0 +1,13 @@
+{
+  "campaign_key": "TTA-26-072-costume-contest-winner",
+  "campaign_name": "TTA-26-072 Costume Contest Results Winner",
+  "test_name": "Costume Contest Results - TTA - Winner",
+  "subject": "🎃 You Picked the Winner! Here's Your Treat!",
+  "preview_text": "Your vote paid off! Enjoy $5 off your 2027 Season Pass. 🍬",
+  "from_name": "Typhoon Texas Austin",
+  "from_email": "doublet@typhoontexas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "TT",
+  "park": "austin",
+  "mailchimp_campaign_id": "da24261156"
+}
