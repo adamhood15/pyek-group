@@ -1,0 +1,13 @@
+{
+  "campaign_key": "tta-26-072-thanksgiving-recipe",
+  "campaign_name": "TTA-26-072 Thanksgiving Recipe",
+  "test_name": "Thanksgiving Recipe - TTA",
+  "subject": "Typhoon's Got a Sweet Thanksgiving Secret! 🍂",
+  "preview_text": "Find out what Typhoon's whipping up for Thanksgiving morning.",
+  "from_name": "Typhoon Texas Austin",
+  "from_email": "doublet@typhoontexas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "TT",
+  "park": "austin",
+  "mailchimp_campaign_id": "76252fd6be"
+}

@@ -1,0 +1,12 @@
+{
+  "campaign_key": "cbv-26-078-thanksgiving-recipe",
+  "campaign_name": "CBV-26-078 Thanksgiving Recipe",
+  "test_name": "Thanksgiving Recipe - CBV",
+  "subject": "Bunga's Got a Sweet Thanksgiving Secret! 🍂",
+  "preview_text": "Find out what Bunga's whipping up for Thanksgiving morning.",
+  "from_name": "Cowabunga Vegas",
+  "from_email": "donotreply@cowabungavegas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "CBV",
+  "mailchimp_campaign_id": "c57febf2b2"
+}

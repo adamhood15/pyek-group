@@ -1,0 +1,12 @@
+{
+  "campaign_key": "dtl-26-033-thanksgiving-recipe",
+  "campaign_name": "DTL-26-033 Thanksgiving Recipe",
+  "test_name": "Thanksgiving Recipe - DTL",
+  "subject": "Sunny's Got a Sweet Thanksgiving Secret! 🍂",
+  "preview_text": "Find out what Sunny's whipping up for Thanksgiving morning.",
+  "from_name": "Daytona Lagoon",
+  "from_email": "lagoonclub@updates.daytonalagoon.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "DTL",
+  "mailchimp_campaign_id": "b1eb7325a5"
+}

@@ -1,0 +1,13 @@
+{
+  "campaign_key": "tta-26-025-pre-black-friday-sale",
+  "campaign_name": "TTA-26-025 Pre-Black Friday Sale",
+  "test_name": "Pre-Black Friday Sale - TTA",
+  "subject": "👀 Want First Dibs on Black Friday?!",
+  "preview_text": "Join our texts for early access to the deal.",
+  "from_name": "Typhoon Texas Austin",
+  "from_email": "doublet@typhoontexas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "TT",
+  "park": "austin",
+  "mailchimp_campaign_id": "599adba938"
+}

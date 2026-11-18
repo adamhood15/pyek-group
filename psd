@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# PSD export wrapper. See workflow-automations/psd-export/README.md
+#   ./psd setup | layers | render | slice | trim | compress | check
+cd "$(dirname "$0")" || exit 1
+dir="workflow-automations/psd-export"
+if [ "$1" = "setup" ]; then
+  python3 -m venv "$dir/.venv" && "$dir/.venv/bin/pip" install -r "$dir/requirements.txt"
+  exit $?
+fi
+[ -x "$dir/.venv/bin/python" ] || { echo "Run ./psd setup first"; exit 1; }
+exec "$dir/.venv/bin/python" -I "$dir/export.py" "$@"

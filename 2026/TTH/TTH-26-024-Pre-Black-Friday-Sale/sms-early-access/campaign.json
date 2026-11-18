@@ -1,0 +1,13 @@
+{
+  "campaign_key": "tth-26-024-pre-black-friday-sale",
+  "campaign_name": "TTH-26-024 Pre-Black Friday Sale",
+  "test_name": "Pre-Black Friday Sale - TTH",
+  "subject": "👀 Want First Dibs on Black Friday?!",
+  "preview_text": "Join our texts for early access to the deal.",
+  "from_name": "Typhoon Texas Houston",
+  "from_email": "doublet@typhoontexas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "TT",
+  "park": "houston",
+  "mailchimp_campaign_id": "23f24c1de3"
+}

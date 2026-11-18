@@ -1,0 +1,13 @@
+{
+  "campaign_key": "tth-26-080-thanksgiving-recipe",
+  "campaign_name": "TTH-26-080 Thanksgiving Recipe",
+  "test_name": "Thanksgiving Recipe - TTH",
+  "subject": "Typhoon's Got a Sweet Thanksgiving Secret! 🍂",
+  "preview_text": "Find out what Typhoon's whipping up for Thanksgiving morning.",
+  "from_name": "Typhoon Texas Houston",
+  "from_email": "doublet@typhoontexas.com",
+  "to_name": "*|FNAME|* *|LNAME|*",
+  "audience": "TT",
+  "park": "houston",
+  "mailchimp_campaign_id": "93e36454b7"
+}

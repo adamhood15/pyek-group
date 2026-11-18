@@ -15,3 +15,6 @@ wp-config.php
 !campaign.json
 !**/campaign.json
 node_modules/
+
+# PSD export venv
+workflow-automations/psd-export/.venv/
